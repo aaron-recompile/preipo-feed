@@ -11,3 +11,5 @@ Workflow: change cards on a branch → open a PR → validator runs on the previ
 Only publicly sourced facts. Never private placement material. Not investment advice.
 
 Deploys: pushing to `main` triggers a Vercel production build (validator first).
+
+Changes to `main` go through pull requests; the validator runs on every preview deploy.
