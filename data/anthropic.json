@@ -1,0 +1,202 @@
+{
+  "schema": "preipo-card/v2.2",
+  "company": "Anthropic",
+  "dataset": "financials",
+  "as_of": "2026-05-28/2026-09-28",
+  "currency": "USD",
+  "verification": "mixed",
+  "verification_scale": {
+    "primary": "company filing or company statement, checked directly",
+    "secondary": "major outlet reporting on a document it obtained",
+    "reported": "talks or plans per people familiar",
+    "derived": "computed by this feed; inherits the weakest grade and value_type of its inputs"
+  },
+  "value_types": {
+    "approx": "source says nearly/about",
+    "lower_bound": "source says more than/crossed; true value is larger in magnitude",
+    "exact": "figure as stated",
+    "derived": "computed by this feed from other metrics"
+  },
+  "metrics": [
+    {
+      "id": "revenue_fy2025",
+      "value": 4600000000.0,
+      "value_type": "approx",
+      "period": "FY2025",
+      "label": "Revenue (nearly)",
+      "yoy_multiple": 12,
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary",
+      "yoy_multiple_note": "shares this metric's source and verification"
+    },
+    {
+      "id": "run_rate_revenue_2026_05",
+      "value": 47000000000.0,
+      "value_type": "lower_bound",
+      "period": "May 2026",
+      "label": "Run-rate revenue (crossed), company statement at Series H. FY2025 revenue above is a full-year figure and is ~10x smaller; do not mix the two in multiples",
+      "source": "anthropic_series_h",
+      "verification": "primary"
+    },
+    {
+      "id": "opex_total_fy2025",
+      "value": 12650000000.0,
+      "value_type": "exact",
+      "period": "FY2025",
+      "label": "Total operating expenses; compute and infrastructure were more than half",
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary"
+    },
+    {
+      "id": "operating_loss_fy2025",
+      "value": -8000000000.0,
+      "value_type": "lower_bound",
+      "period": "FY2025",
+      "label": "Operating loss, more than; excludes writedowns of liabilities tied to prior fundraising",
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary"
+    },
+    {
+      "id": "net_loss_fy2025",
+      "value": -42000000000.0,
+      "value_type": "approx",
+      "period": "FY2025",
+      "label": "Net loss (near $42bn; includes a roughly $34bn accounting charge)",
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary"
+    },
+    {
+      "id": "net_loss_accounting_charge_fy2025",
+      "value": -34000000000.0,
+      "value_type": "approx",
+      "period": "FY2025",
+      "label": "Accounting charge included in net loss (roughly)",
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary"
+    },
+    {
+      "id": "compute_infra_spend_fy2025",
+      "value": 7330000000.0,
+      "value_type": "exact",
+      "period": "FY2025",
+      "label": "Compute and infrastructure spend",
+      "yoy_multiple": 3,
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary",
+      "yoy_multiple_note": "shares this metric's source and verification"
+    },
+    {
+      "id": "compute_infra_obligations",
+      "value": 518000000000.0,
+      "value_type": "exact",
+      "period": "future years",
+      "label": "Planned cloud, computing and infrastructure obligations",
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary"
+    },
+    {
+      "id": "cash_equiv_and_st_investments_ye2025",
+      "value": 20280000000.0,
+      "value_type": "exact",
+      "period": "2025-12-31",
+      "label": "Cash, cash equivalents and short-term investments",
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary"
+    },
+    {
+      "id": "top2_customer_revenue_share_fy2025",
+      "value": 0.25,
+      "value_type": "approx",
+      "unit": "fraction",
+      "period": "FY2025",
+      "label": "Share of revenue from two customers (nearly a quarter)",
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary"
+    },
+    {
+      "id": "compute_spend_per_revenue_dollar_fy2025",
+      "value": 1.59,
+      "value_type": "derived",
+      "period": "FY2025",
+      "formula": "compute_infra_spend_fy2025 / revenue_fy2025 = 7.33 / 4.6",
+      "inherits_from": [
+        "compute_infra_spend_fy2025",
+        "revenue_fy2025"
+      ],
+      "label": "Compute spend per revenue dollar (revenue is approx, so this is approx)",
+      "verification": "derived",
+      "unit": "USD of compute spend per USD of revenue"
+    },
+    {
+      "id": "compute_share_of_opex_fy2025",
+      "value": 0.579,
+      "value_type": "derived",
+      "unit": "fraction",
+      "period": "FY2025",
+      "formula": "compute_infra_spend_fy2025 / opex_total_fy2025 = 7.33 / 12.65",
+      "inherits_from": [
+        "compute_infra_spend_fy2025",
+        "opex_total_fy2025"
+      ],
+      "label": "Compute and infrastructure share of operating expenses",
+      "verification": "derived"
+    },
+    {
+      "id": "series_h_valuation_to_run_rate",
+      "value": 20.5,
+      "value_type": "derived",
+      "unit": "x",
+      "period": "May 2026",
+      "formula": "965e9 (Series H post-money, see /preipo/anthropic/ipo) / run_rate_revenue_2026_05",
+      "inherits_from": [
+        "run_rate_revenue_2026_05"
+      ],
+      "label": "Series H post-money / May run-rate revenue; run-rate is a lower bound so the true multiple is at most this",
+      "verification": "derived"
+    }
+  ],
+  "sources": {
+    "reuters_cnbc_20260928": {
+      "publisher": "Reuters (syndicated by CNBC)",
+      "date": "2026-09-28",
+      "type": "news report of IPO prospectus",
+      "url": "https://www.cnbc.com/2026/09/28/anthropics-ipo-prospectus-shows-sweeping-ai-vision-surging-costs-reuters.html"
+    },
+    "edgar_check_20261001": {
+      "publisher": "SEC EDGAR full-text search",
+      "date": "2026-10-01",
+      "type": "absence check: no public S-1/F-1 for Anthropic found",
+      "url": "https://efts.sec.gov/LATEST/search-index?q=%22Anthropic%22&forms=S-1,S-1/A,F-1&dateRange=custom&startdt=2026-06-01&enddt=2026-10-01"
+    },
+    "anthropic_series_h": {
+      "publisher": "Anthropic",
+      "date": "2026-05-28",
+      "type": "company announcement",
+      "url": "https://www.anthropic.com/news/series-h"
+    }
+  },
+  "changelog": [
+    {
+      "date": "2026-10-01",
+      "change": "v2 after buyer audit: per-metric source, verification and value_type; cash relabeled to include short-term investments; operating loss marked lower_bound; source URL added; added two-customer revenue share."
+    },
+    {
+      "date": "2026-10-01",
+      "change": "v2.1 after second buyer audit: net loss marked approx (source says near-$42bn); added ~$34bn accounting charge; 'derived' added to verification scale; ratio unit stated. Resource URLs now advertised as https."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "v2.2: added May 2026 run-rate revenue (>$47B, primary, anthropic.com) so buyers do not compute valuation multiples on FY2025 revenue alone; added FY2025 total opex ($12.65B) and compute share of opex; added Series H valuation / run-rate (at most 20.5x); link to IPO card."
+    }
+  ],
+  "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
+  "related": {
+    "ipo": "/preipo/anthropic/ipo"
+  },
+  "publisher": {
+    "service": "PreIPO Feed by Aaron Zhang",
+    "maker": "Aaron Zhang, independent developer",
+    "url": "https://farcaster.xyz/aaronzhang",
+    "feed": "https://preipo-feed.vercel.app/llms.txt"
+  }
+}

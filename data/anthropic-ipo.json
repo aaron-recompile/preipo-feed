@@ -1,0 +1,238 @@
+{
+  "schema": "preipo-card/v2.1",
+  "company": "Anthropic",
+  "dataset": "ipo",
+  "as_of": "2026-10-01",
+  "currency": "USD",
+  "verification": "mixed",
+  "ipo_status": "Draft S-1 confidentially submitted to the SEC on 2026-06-01. No public S-1 on SEC EDGAR as of 2026-10-01. Shares offered and price not set.",
+  "verification_scale": {
+    "primary": "company filing or company statement, checked directly",
+    "secondary": "major outlet reporting a company statement or document",
+    "reported": "plans or talks per people familiar",
+    "derived": "computed by this feed; inherits the weakest grade and value_type of its inputs"
+  },
+  "value_types": {
+    "approx": "source says about/roughly",
+    "lower_bound": "source says at least/more than/crossed",
+    "exact": "figure as stated",
+    "range_low": "low end of a reported range",
+    "range_high": "high end of a reported range",
+    "derived": "computed by this feed from other metrics"
+  },
+  "metrics": [
+    {
+      "id": "last_private_round_size_2026_05",
+      "value": 65000000000.0,
+      "value_type": "exact",
+      "period": "Series H, 2026-05-28",
+      "label": "Last private round size (Series H)",
+      "source": "anthropic_series_h",
+      "verification": "primary"
+    },
+    {
+      "id": "last_private_post_money_2026_05",
+      "value": 965000000000.0,
+      "value_type": "exact",
+      "period": "Series H, 2026-05-28",
+      "label": "Last private round post-money valuation",
+      "source": "anthropic_series_h",
+      "verification": "primary"
+    },
+    {
+      "id": "run_rate_revenue_2026_05",
+      "value": 47000000000.0,
+      "value_type": "lower_bound",
+      "period": "May 2026",
+      "label": "Run-rate revenue (crossed), company statement",
+      "source": "anthropic_series_h",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_valuation_target_low",
+      "value": 1800000000000.0,
+      "value_type": "range_low",
+      "period": "as of 2026-10-01",
+      "label": "IPO valuation prospective investors expect, low end",
+      "source": "bloomberg_via_pymnts_20261001",
+      "verification": "reported"
+    },
+    {
+      "id": "ipo_valuation_target_high",
+      "value": 2000000000000.0,
+      "value_type": "range_high",
+      "period": "as of 2026-10-01",
+      "label": "IPO valuation, high end ('more than $2 trillion' per Reuters 2026-09-28)",
+      "source": "bloomberg_via_pymnts_20261001",
+      "verification": "reported"
+    },
+    {
+      "id": "ipo_proceeds_target_max",
+      "value": 100000000000.0,
+      "value_type": "approx",
+      "period": "as of 2026-08-22",
+      "label": "Proceeds bankers told investors the IPO could raise (up to/around); reported when timing was still October",
+      "source": "nyt_via_aiweekly_20260822",
+      "verification": "reported"
+    },
+    {
+      "id": "run_rate_revenue_target_ye2026_low",
+      "value": 100000000000.0,
+      "value_type": "range_low",
+      "period": "end of 2026 (target)",
+      "label": "Run-rate revenue Anthropic told investors it could reach by year-end, low end",
+      "source": "nyt_via_aiweekly_20260822",
+      "verification": "reported"
+    },
+    {
+      "id": "run_rate_revenue_target_ye2026_high",
+      "value": 120000000000.0,
+      "value_type": "range_high",
+      "period": "end of 2026 (target)",
+      "label": "Same, high end",
+      "source": "nyt_via_aiweekly_20260822",
+      "verification": "reported"
+    },
+    {
+      "id": "ipo_step_up_vs_series_h",
+      "value": 1.07,
+      "value_type": "derived",
+      "unit": "fraction",
+      "formula": "ipo_valuation_target_high / last_private_post_money_2026_05 - 1",
+      "inherits_from": [
+        "ipo_valuation_target_high",
+        "last_private_post_money_2026_05"
+      ],
+      "label": "Step-up of IPO target (high) over Series H post-money",
+      "verification": "derived"
+    },
+    {
+      "id": "ipo_target_to_may_run_rate",
+      "value": 42.6,
+      "value_type": "derived",
+      "unit": "x",
+      "formula": "ipo_valuation_target_high / run_rate_revenue_2026_05",
+      "inherits_from": [
+        "ipo_valuation_target_high",
+        "run_rate_revenue_2026_05"
+      ],
+      "label": "IPO target (high) / May run-rate revenue; run-rate is a lower bound so the true multiple is at most this",
+      "verification": "derived"
+    }
+  ],
+  "underwriters": {
+    "names": [
+      "Morgan Stanley",
+      "Goldman Sachs",
+      "JPMorgan",
+      "Citigroup (added)"
+    ],
+    "note": "Morgan Stanley, Goldman Sachs and JPMorgan lead the book, Citigroup added",
+    "source": "nyt_via_aiweekly_20260822",
+    "verification": "reported"
+  },
+  "timeline": [
+    {
+      "date": "2026-05-28",
+      "event": "Series H: $65B at $965B post-money; run-rate revenue crossed $47B",
+      "source": "anthropic_series_h",
+      "verification": "primary"
+    },
+    {
+      "date": "2026-06-01",
+      "event": "Draft S-1 confidentially submitted to the SEC (Rule 135 notice)",
+      "source": "anthropic_confidential_s1",
+      "verification": "primary"
+    },
+    {
+      "date": "2026-08-22",
+      "event": "Bankers tell investors IPO could raise $100B+ near a $2T valuation, then targeted for October",
+      "source": "nyt_via_aiweekly_20260822",
+      "verification": "reported"
+    },
+    {
+      "date": "2026-09-18",
+      "event": "Anthropic planning to launch the IPO in November",
+      "source": "bloomberg_via_pymnts_20261001",
+      "verification": "reported",
+      "note": "WSJ report, as cited by PYMNTS"
+    },
+    {
+      "date": "2026-09-28",
+      "event": "Reuters obtains prospectus; debut likely after the November US midterm elections; valuation could exceed $2T",
+      "source": "reuters_cnbc_20260928",
+      "verification": "secondary"
+    },
+    {
+      "date": "2026-10-01",
+      "event": "Formal marketing could start as soon as the week of Nov 9, trading before Thanksgiving (Nov 26); timing could change",
+      "source": "bloomberg_via_pymnts_20261001",
+      "verification": "reported"
+    }
+  ],
+  "next_dates": [
+    {
+      "date": "2026-11-03",
+      "what": "US midterm elections (listing reported to follow)"
+    },
+    {
+      "date": "2026-11-09",
+      "what": "Earliest reported start of IPO marketing (week of)"
+    },
+    {
+      "date": "2026-11-26",
+      "what": "Thanksgiving; reported target to begin trading before"
+    }
+  ],
+  "sources": {
+    "anthropic_series_h": {
+      "publisher": "Anthropic",
+      "date": "2026-05-28",
+      "type": "company announcement",
+      "url": "https://www.anthropic.com/news/series-h"
+    },
+    "anthropic_confidential_s1": {
+      "publisher": "Anthropic",
+      "date": "2026-06-01",
+      "type": "company announcement (Rule 135)",
+      "url": "https://www.anthropic.com/news/confidential-draft-s1-sec"
+    },
+    "reuters_cnbc_20260928": {
+      "publisher": "Reuters (syndicated by CNBC)",
+      "date": "2026-09-28",
+      "type": "news report of prospectus",
+      "url": "https://www.cnbc.com/2026/09/28/anthropics-ipo-prospectus-shows-sweeping-ai-vision-surging-costs-reuters.html"
+    },
+    "bloomberg_via_pymnts_20261001": {
+      "publisher": "PYMNTS, citing Bloomberg (and WSJ for 09-18)",
+      "date": "2026-10-01",
+      "type": "news report citing unnamed sources",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-targets-pre-thanksgiving-ipo-at-2-trillion-valuation/"
+    },
+    "nyt_via_aiweekly_20260822": {
+      "publisher": "AI Weekly, citing The New York Times",
+      "date": "2026-08-22",
+      "type": "aggregator report of a news report; weakest source on this card",
+      "url": "https://aiweekly.co/alerts/nyt-anthropic-bankers-tell-investors-october-ipo-could-raise-100b-at-a-record"
+    },
+    "edgar_check_20261001": {
+      "publisher": "SEC EDGAR full-text search",
+      "date": "2026-10-01",
+      "type": "absence check: no public S-1/F-1 for Anthropic found",
+      "url": "https://efts.sec.gov/LATEST/search-index?q=%22Anthropic%22&forms=S-1,S-1/A,F-1&dateRange=custom&startdt=2026-06-01&enddt=2026-10-01"
+    }
+  },
+  "changelog": [
+    {
+      "date": "2026-10-06",
+      "change": "v1: IPO status, timeline, valuation range, proceeds, underwriters, run-rate revenue, derived multiples. Two primary sources from anthropic.com."
+    }
+  ],
+  "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
+  "publisher": {
+    "service": "PreIPO Feed by Aaron Zhang",
+    "maker": "Aaron Zhang, independent developer",
+    "url": "https://farcaster.xyz/aaronzhang",
+    "feed": "https://preipo-feed.vercel.app/llms.txt"
+  }
+}

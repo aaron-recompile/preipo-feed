@@ -1,0 +1,213 @@
+{
+  "schema": "preipo-card/v2.1",
+  "company": "OpenAI",
+  "dataset": "financials",
+  "as_of": "2026-09-29",
+  "currency": "USD",
+  "verification": "mixed",
+  "verification_scale": {
+    "primary": "company filing or company statement, checked directly",
+    "secondary": "major outlet reporting a company statement or document",
+    "reported": "talks or plans per people familiar",
+    "derived": "computed by this feed; inherits the weakest grade and value_type of its inputs"
+  },
+  "value_types": {
+    "approx": "source says about/roughly",
+    "lower_bound": "source says at least/more than",
+    "exact": "figure as stated",
+    "derived": "computed by this feed from other metrics"
+  },
+  "metrics": [
+    {
+      "id": "revenue_fy2025",
+      "value": 13100000000.0,
+      "value_type": "exact",
+      "period": "FY2025",
+      "label": "Revenue last year, as reported by the company",
+      "source": "quartz_20260331",
+      "verification": "secondary"
+    },
+    {
+      "id": "revenue_per_month_2026_03",
+      "value": 2000000000.0,
+      "value_type": "exact",
+      "period": "as of 2026-03-31",
+      "label": "Revenue per month, company statement",
+      "source": "quartz_20260331",
+      "verification": "secondary"
+    },
+    {
+      "id": "chatgpt_weekly_active_users_2026_03",
+      "value": 900000000.0,
+      "value_type": "lower_bound",
+      "unit": "users",
+      "period": "as of 2026-03-31",
+      "label": "ChatGPT weekly active users (more than)",
+      "source": "quartz_20260331",
+      "verification": "secondary"
+    },
+    {
+      "id": "chatgpt_subscribers_2026_03",
+      "value": 50000000.0,
+      "value_type": "lower_bound",
+      "unit": "subscribers",
+      "period": "as of 2026-03-31",
+      "label": "ChatGPT subscribers (more than)",
+      "source": "quartz_20260331",
+      "verification": "secondary"
+    },
+    {
+      "id": "last_round_committed_2026_03",
+      "value": 122000000000.0,
+      "value_type": "exact",
+      "period": "closed 2026-03-31",
+      "label": "Last funding round, committed capital",
+      "source": "quartz_20260331",
+      "verification": "secondary"
+    },
+    {
+      "id": "last_round_post_money_2026_03",
+      "value": 852000000000.0,
+      "value_type": "exact",
+      "period": "closed 2026-03-31",
+      "label": "Last funding round, post-money valuation",
+      "source": "quartz_20260331",
+      "verification": "secondary"
+    },
+    {
+      "id": "new_round_target_2026_09",
+      "value": 30000000000.0,
+      "value_type": "lower_bound",
+      "period": "in talks as of 2026-09-29",
+      "label": "New round size sought (at least); early-stage talks, terms could change",
+      "source": "quartz_20260929",
+      "verification": "reported"
+    },
+    {
+      "id": "new_round_valuation_2026_09",
+      "value": 1400000000000.0,
+      "value_type": "approx",
+      "period": "in talks as of 2026-09-29",
+      "label": "Valuation sought for new round (around), per Bloomberg sources",
+      "source": "quartz_20260929",
+      "verification": "reported"
+    },
+    {
+      "id": "softbank_hy_bond_2026_09",
+      "value": 11100000000.0,
+      "value_type": "exact",
+      "period": "2026-09-24",
+      "label": "SoftBank high-yield bond sale funding its OpenAI commitment",
+      "source": "reuters_thestar_20260924",
+      "verification": "secondary"
+    },
+    {
+      "id": "softbank_hy_bond_top_coupon",
+      "value": 0.0975,
+      "value_type": "exact",
+      "unit": "annual rate",
+      "period": "7.5-year USD tranche",
+      "label": "Coupon on longest USD tranche",
+      "source": "reuters_thestar_20260924",
+      "verification": "secondary"
+    },
+    {
+      "id": "softbank_total_commitment",
+      "value": 64600000000.0,
+      "value_type": "exact",
+      "period": "2026-09-24",
+      "label": "SoftBank cumulative commitment to OpenAI",
+      "source": "reuters_thestar_20260924",
+      "verification": "secondary"
+    },
+    {
+      "id": "softbank_stake",
+      "value": 0.13,
+      "value_type": "approx",
+      "unit": "fraction",
+      "period": "2026-09-24",
+      "label": "SoftBank ownership once commitment completes (roughly)",
+      "source": "reuters_thestar_20260924",
+      "verification": "secondary"
+    },
+    {
+      "id": "revenue_run_rate_annualized_2026_03",
+      "value": 24000000000.0,
+      "value_type": "derived",
+      "period": "as of 2026-03-31",
+      "formula": "revenue_per_month_2026_03 * 12",
+      "inherits_from": [
+        "revenue_per_month_2026_03"
+      ],
+      "label": "Annualized revenue run-rate",
+      "verification": "derived"
+    },
+    {
+      "id": "new_round_valuation_to_run_rate",
+      "value": 58.3,
+      "value_type": "derived",
+      "unit": "x",
+      "formula": "new_round_valuation_2026_09 / revenue_run_rate_annualized_2026_03",
+      "inherits_from": [
+        "new_round_valuation_2026_09",
+        "revenue_run_rate_annualized_2026_03"
+      ],
+      "label": "Sought valuation / March run-rate (reported-grade input, approx)",
+      "verification": "derived"
+    },
+    {
+      "id": "valuation_step_up_vs_last_round",
+      "value": 0.643,
+      "value_type": "derived",
+      "unit": "fraction",
+      "formula": "new_round_valuation_2026_09 / last_round_post_money_2026_03 - 1",
+      "inherits_from": [
+        "new_round_valuation_2026_09",
+        "last_round_post_money_2026_03"
+      ],
+      "label": "Step-up of sought valuation over March post-money",
+      "verification": "derived"
+    }
+  ],
+  "events": [
+    {
+      "date": "2026-09-29",
+      "text": "Round framed as runway while a public listing is deferred; CEO said the company is stepping back from a public offering this year.",
+      "source": "quartz_20260929",
+      "verification": "secondary"
+    }
+  ],
+  "sources": {
+    "quartz_20260331": {
+      "publisher": "Quartz (via Yahoo Finance), citing OpenAI and CNBC",
+      "date": "2026-03-31",
+      "type": "news report of company statement",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/openai-closes-122-billion-funding-010940572.html"
+    },
+    "quartz_20260929": {
+      "publisher": "Quartz (via Yahoo Finance), citing Bloomberg",
+      "date": "2026-09-29",
+      "type": "news report of talks per unnamed sources",
+      "url": "https://finance.yahoo.com/technology/ai/articles/openai-targets-30-billion-funding-185008998.html"
+    },
+    "reuters_thestar_20260924": {
+      "publisher": "Reuters (via The Star)",
+      "date": "2026-09-24",
+      "type": "news report citing a bond filing",
+      "url": "https://www.thestar.com.my/business/business-news/2026/09/24/softbank-raises-us111bil-in-world039s-biggest-high-yield-corporate-bond-sale"
+    }
+  },
+  "changelog": [
+    {
+      "date": "2026-10-01",
+      "change": "v2.1: dataset renamed funding -> financials; added FY2025 revenue, monthly revenue, users, subscribers, March round; every metric has source URL, grade, value_type; removed unsourced 'IPO in 2027'; added SoftBank commitment and stake; derived run-rate multiple and step-up."
+    }
+  ],
+  "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
+  "publisher": {
+    "service": "PreIPO Feed by Aaron Zhang",
+    "maker": "Aaron Zhang, independent developer",
+    "url": "https://farcaster.xyz/aaronzhang",
+    "feed": "https://preipo-feed.vercel.app/llms.txt"
+  }
+}
