@@ -35,6 +35,11 @@ const PRODUCTS = [
     description:
       "Anthropic IPO data as JSON: filing status (confidential draft S-1), expected timing and listing window, target valuation range, expected proceeds, lead underwriters, last private round (Series H) size and valuation, run-rate revenue, valuation multiples, dated timeline. Each item has its own source URL and verification grade.",
   },
+  {
+    card: load("openai-ipo.json"), price: "0.01", tags: ["openai", "ipo", "pre-ipo", "valuation", "funding", "timeline", "underwriters", "sam-altman", "chatgpt", "ai"],
+    description:
+      "OpenAI IPO data as JSON: confidential S-1 filing status and announcement date, reported 2027 listing expectations, Sam Altman ruling out a 2026 IPO, latest verified private funding round committed capital and post-money valuation, banks reported working on filing preparation (not confirmed underwriting mandates), and dated timeline. Each factual item has a source reference and verification grade; uncertain dates and unverified figures are omitted.",
+  },
 ].map((p) => ({ ...p, path: `/preipo/${p.card.company.toLowerCase()}/${p.card.dataset}` }));
 
 // Facilitator: CDP when keys are present (required for Bazaar), else the public x402.org one (local testnet dev only).
