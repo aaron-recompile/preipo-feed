@@ -1,0 +1,156 @@
+{
+  "schema": "preipo-card/v2.1",
+  "company": "OpenAI",
+  "dataset": "ipo",
+  "as_of": "2026-10-06",
+  "currency": "USD",
+  "verification": "mixed",
+  "ipo_status": "OpenAI announced on 2026-06-08 that it had recently submitted a confidential draft S-1 to the SEC. The exact submission date was not disclosed in the announcement. A confidential submission is not a public prospectus or a commitment to list.",
+  "ipo_status_source": "openai_confidential_s1",
+  "ipo_status_verification": "primary",
+  "verification_scale": {
+    "primary": "company filing or company statement, checked directly",
+    "secondary": "major outlet reporting a company statement or document",
+    "reported": "plans or talks per people familiar",
+    "derived": "computed by this feed; inherits the weakest grade and value_type of its inputs"
+  },
+  "value_types": {
+    "approx": "source says about/roughly",
+    "lower_bound": "source says at least/more than/crossed",
+    "exact": "figure as stated",
+    "range_low": "low end of a reported range",
+    "range_high": "high end of a reported range",
+    "derived": "computed by this feed from other metrics"
+  },
+  "metrics": [
+    {
+      "id": "last_private_round_size_2026_03",
+      "value": 122000000000,
+      "value_type": "exact",
+      "period": "Round closed 2026-03-31",
+      "label": "Latest verified closed private round: committed capital (not cash received)",
+      "source": "openai_round_20260331",
+      "verification": "primary"
+    },
+    {
+      "id": "last_private_post_money_2026_03",
+      "value": 852000000000,
+      "value_type": "exact",
+      "period": "Round closed 2026-03-31",
+      "label": "Latest verified closed private round post-money valuation; not an IPO valuation",
+      "source": "openai_round_20260331",
+      "verification": "primary"
+    }
+  ],
+  "ipo_timing": {
+    "expected_window": "2027 was the CFO’s reported expectation in August; no firm listing date verified. In September, the CEO ruled out 2026 without committing to a 2027 listing.",
+    "source": "cnbc_timing_20260819",
+    "verification": "reported",
+    "latest_update_source": "fortune_altman_20260912",
+    "latest_update_verification": "secondary",
+    "note": "The earlier possibility of listing sooner than 2027 is superseded by Altman’s subsequent public remarks excluding 2026."
+  },
+  "ceo_timing_statement": {
+    "speaker": "Sam Altman",
+    "interview_date": "2026-09-11",
+    "published_date": "2026-09-12",
+    "quote": "I would say not 2026.",
+    "summary": "Altman said listing would wait until the business and company were ready, considering societal readiness for the technology and safety. He did not promise a listing in 2027.",
+    "source": "fortune_altman_20260912",
+    "verification": "secondary"
+  },
+  "underwriters": {
+    "names": [
+      "Goldman Sachs",
+      "Morgan Stanley"
+    ],
+    "note": "Reported banks working on preparation of the confidential filing, not verified lead underwriters or a finalized syndicate. CNBC attributed these roles to a person familiar; both banks declined comment.",
+    "source": "cnbc_banks_20260520",
+    "verification": "reported"
+  },
+  "timeline": [
+    {
+      "date": "2026-03-31",
+      "event": "Closed private funding round with $122B in committed capital at $852B post-money valuation.",
+      "source": "openai_round_20260331",
+      "verification": "primary"
+    },
+    {
+      "date": "2026-05-20",
+      "event": "CNBC reported preparations for a confidential filing with Goldman Sachs and Morgan Stanley. This was a plan, not confirmation of submission.",
+      "source": "cnbc_banks_20260520",
+      "verification": "reported"
+    },
+    {
+      "date": "2026-06-08",
+      "event": "OpenAI publicly announced it had recently submitted a confidential S-1 and had not decided listing timing. This date is the announcement date, not a verified submission date.",
+      "source": "openai_confidential_s1",
+      "verification": "primary",
+      "corroborating_source": "cnbc_filing_20260608"
+    },
+    {
+      "date": "2026-08-19",
+      "event": "CNBC reported CFO Sarah Friar told employees OpenAI would be public in 2027, potentially sooner if business continued to inflect; a reported expectation, not a fixed listing date.",
+      "source": "cnbc_timing_20260819",
+      "verification": "reported"
+    },
+    {
+      "date": "2026-09-12",
+      "event": "Fortune published its September 11 interview: Altman ruled out a 2026 IPO, citing safety and readiness; no firm 2027 commitment.",
+      "source": "fortune_altman_20260912",
+      "verification": "secondary"
+    }
+  ],
+  "next_dates": [],
+  "sources": {
+    "openai_round_20260331": {
+      "publisher": "OpenAI",
+      "date": "2026-03-31",
+      "type": "company announcement; committed capital, not cash received",
+      "url": "https://openai.com/index/accelerating-the-next-phase-ai/"
+    },
+    "openai_confidential_s1": {
+      "publisher": "OpenAI",
+      "date": "2026-06-08",
+      "type": "company announcement (Rule 135); announcement date corroborated by contemporaneous CNBC report, exact submission date not disclosed",
+      "url": "https://openai.com/index/openai-submits-confidential-s-1/"
+    },
+    "cnbc_filing_20260608": {
+      "publisher": "CNBC",
+      "date": "2026-06-08",
+      "type": "original reporting of company announcement",
+      "url": "https://www.cnbc.com/2026/06/08/openai-confidentially-files-for-ipo-prepping-wall-street-for-ai-debut.html"
+    },
+    "cnbc_banks_20260520": {
+      "publisher": "CNBC",
+      "date": "2026-05-20",
+      "type": "original reporting citing a person familiar; preparatory bank roles, not confirmed underwriting mandates",
+      "url": "https://www.cnbc.com/2026/05/20/openai-ipo-filing.html"
+    },
+    "cnbc_timing_20260819": {
+      "publisher": "CNBC",
+      "date": "2026-08-19",
+      "type": "original reporting of internal CFO comments per two unnamed sources",
+      "url": "https://www.cnbc.com/2026/08/19/open-ai-ipo-timing-2027-friar.html"
+    },
+    "fortune_altman_20260912": {
+      "publisher": "Fortune",
+      "date": "2026-09-12",
+      "type": "original report of Fortune interview with Sam Altman on 2026-09-11",
+      "url": "https://fortune.com/2026/09/12/sam-altman-openai-ipo-delay-ill-advised-moment-safety-concerns/"
+    }
+  },
+  "changelog": [
+    {
+      "date": "2026-10-06",
+      "change": "v1: Added source-checked confidential filing status, announcement-versus-submission date distinction, reported timing, CEO remarks, latest verified closed private round and preparatory banks. Unverified new-round figures and final underwriting mandates omitted; gaps documented in PR."
+    }
+  ],
+  "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
+  "publisher": {
+    "service": "PreIPO Feed by Aaron Zhang",
+    "maker": "Aaron Zhang, independent developer",
+    "url": "https://farcaster.xyz/aaronzhang",
+    "feed": "https://preipo-feed.vercel.app/llms.txt"
+  }
+}
