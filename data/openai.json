@@ -2,7 +2,7 @@
   "schema": "preipo-card/v2.1",
   "company": "OpenAI",
   "dataset": "financials",
-  "as_of": "2026-09-29",
+  "as_of": "2026-10-06",
   "currency": "USD",
   "verification": "mixed",
   "verification_scale": {
@@ -20,7 +20,7 @@
   "metrics": [
     {
       "id": "revenue_fy2025",
-      "value": 13100000000.0,
+      "value": 13100000000,
       "value_type": "exact",
       "period": "FY2025",
       "label": "Revenue last year, as reported by the company",
@@ -29,7 +29,7 @@
     },
     {
       "id": "revenue_per_month_2026_03",
-      "value": 2000000000.0,
+      "value": 2000000000,
       "value_type": "exact",
       "period": "as of 2026-03-31",
       "label": "Revenue per month, company statement",
@@ -38,7 +38,7 @@
     },
     {
       "id": "chatgpt_weekly_active_users_2026_03",
-      "value": 900000000.0,
+      "value": 900000000,
       "value_type": "lower_bound",
       "unit": "users",
       "period": "as of 2026-03-31",
@@ -48,7 +48,7 @@
     },
     {
       "id": "chatgpt_subscribers_2026_03",
-      "value": 50000000.0,
+      "value": 50000000,
       "value_type": "lower_bound",
       "unit": "subscribers",
       "period": "as of 2026-03-31",
@@ -58,7 +58,7 @@
     },
     {
       "id": "last_round_committed_2026_03",
-      "value": 122000000000.0,
+      "value": 122000000000,
       "value_type": "exact",
       "period": "closed 2026-03-31",
       "label": "Last funding round, committed capital",
@@ -67,7 +67,7 @@
     },
     {
       "id": "last_round_post_money_2026_03",
-      "value": 852000000000.0,
+      "value": 852000000000,
       "value_type": "exact",
       "period": "closed 2026-03-31",
       "label": "Last funding round, post-money valuation",
@@ -76,7 +76,7 @@
     },
     {
       "id": "new_round_target_2026_09",
-      "value": 30000000000.0,
+      "value": 30000000000,
       "value_type": "lower_bound",
       "period": "in talks as of 2026-09-29",
       "label": "New round size sought (at least); early-stage talks, terms could change",
@@ -85,7 +85,7 @@
     },
     {
       "id": "new_round_valuation_2026_09",
-      "value": 1400000000000.0,
+      "value": 1400000000000,
       "value_type": "approx",
       "period": "in talks as of 2026-09-29",
       "label": "Valuation sought for new round (around), per Bloomberg sources",
@@ -94,7 +94,7 @@
     },
     {
       "id": "softbank_hy_bond_2026_09",
-      "value": 11100000000.0,
+      "value": 11100000000,
       "value_type": "exact",
       "period": "2026-09-24",
       "label": "SoftBank high-yield bond sale funding its OpenAI commitment",
@@ -113,7 +113,7 @@
     },
     {
       "id": "softbank_total_commitment",
-      "value": 64600000000.0,
+      "value": 64600000000,
       "value_type": "exact",
       "period": "2026-09-24",
       "label": "SoftBank cumulative commitment to OpenAI",
@@ -132,7 +132,7 @@
     },
     {
       "id": "revenue_run_rate_annualized_2026_03",
-      "value": 24000000000.0,
+      "value": 24000000000,
       "value_type": "derived",
       "period": "as of 2026-03-31",
       "formula": "revenue_per_month_2026_03 * 12",
@@ -167,6 +167,28 @@
       ],
       "label": "Step-up of sought valuation over March post-money",
       "verification": "derived"
+    },
+    {
+      "id": "revenue_run_rate_annualized_reported_2026_08",
+      "value": 40000000000,
+      "value_type": "lower_bound",
+      "period": "Current performance reported 2026-08-13; measurement month not specified in accessible original text",
+      "label": "Annualized revenue run-rate (more than $40B), per Bloomberg sources; not recognized full-year revenue or a full-year forecast",
+      "source": "bloomberg_run_rate_20260813",
+      "verification": "reported",
+      "measurement_basis": "annualized revenue run-rate",
+      "is_forecast": false
+    },
+    {
+      "id": "advertising_revenue_run_rate_annualized_2026_08",
+      "value": 1000000000,
+      "value_type": "exact",
+      "period": "As announced 2026-08-31",
+      "label": "ChatGPT Ads annualized revenue run-rate; not advertising revenue recognized during a full year",
+      "source": "openai_ads_20260831",
+      "verification": "primary",
+      "measurement_basis": "annualized revenue run-rate",
+      "is_forecast": false
     }
   ],
   "events": [
@@ -195,12 +217,28 @@
       "date": "2026-09-24",
       "type": "news report citing a bond filing",
       "url": "https://www.thestar.com.my/business/business-news/2026/09/24/softbank-raises-us111bil-in-world039s-biggest-high-yield-corporate-bond-sale"
+    },
+    "bloomberg_run_rate_20260813": {
+      "publisher": "Bloomberg",
+      "date": "2026-08-13",
+      "type": "original reporting citing people familiar; publicly accessible opening paragraphs checked directly; July measurement date not established by accessible text",
+      "url": "https://www.bloomberg.com/news/articles/2026-08-13/openai-s-revenue-run-rate-tops-40-billion-ahead-of-ipo"
+    },
+    "openai_ads_20260831": {
+      "publisher": "OpenAI",
+      "date": "2026-08-31",
+      "type": "company announcement checked directly; publication date corroborated by dated news index",
+      "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/"
     }
   },
   "changelog": [
     {
       "date": "2026-10-01",
       "change": "v2.1: dataset renamed funding -> financials; added FY2025 revenue, monthly revenue, users, subscribers, March round; every metric has source URL, grade, value_type; removed unsourced 'IPO in 2027'; added SoftBank commitment and stake; derived run-rate multiple and step-up."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Added directly checked OpenAI advertising annualized revenue run-rate and Bloomberg-reported company annualized revenue lower bound. Kept quarterly/FY revenue separate from run rates; did not infer July measurement date from the August report. Requested quarterly revenue, enterprise mix, margin, inference-cost forecasts and cumulative FCF forecast omitted where original-source wording could not be verified; gaps detailed in PR. Existing historical metrics and derived March-basis multiples unchanged and not re-audited."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",

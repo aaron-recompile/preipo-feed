@@ -40,6 +40,24 @@
       "label": "Latest verified closed private round post-money valuation; not an IPO valuation",
       "source": "openai_round_20260331",
       "verification": "primary"
+    },
+    {
+      "id": "employee_secondary_sale_size_2026_08",
+      "value": 7000000000,
+      "value_type": "approx",
+      "period": "Completion reported 2026-08-10",
+      "label": "Roughly $7B of current/former employee shares sold in company-funded tender offer; secondary liquidity, not new capital raised",
+      "source": "bloomberg_tender_20260810",
+      "verification": "reported"
+    },
+    {
+      "id": "employee_secondary_sale_valuation_2026_08",
+      "value": 852000000000,
+      "value_type": "exact",
+      "period": "Tender offer completion reported 2026-08-10",
+      "label": "Company valuation used for employee tender offer; not an IPO valuation or a new primary financing round",
+      "source": "bloomberg_tender_20260810",
+      "verification": "reported"
     }
   ],
   "ipo_timing": {
@@ -76,6 +94,12 @@
       "verification": "primary"
     },
     {
+      "date": "2026-05-18",
+      "event": "Advisory federal jury found Musk’s lawsuit untimely under the statute of limitations. Judge Yvonne Gonzalez Rogers adopted the finding and dismissed his claims. This is not a finding resolving the underlying allegations on their merits; Musk said he would appeal. Subsequent appellate status not established here.",
+      "source": "guardian_verdict_20260518",
+      "verification": "secondary"
+    },
+    {
       "date": "2026-05-20",
       "event": "CNBC reported preparations for a confidential filing with Goldman Sachs and Morgan Stanley. This was a plan, not confirmation of submission.",
       "source": "cnbc_banks_20260520",
@@ -87,6 +111,12 @@
       "source": "openai_confidential_s1",
       "verification": "primary",
       "corroborating_source": "cnbc_filing_20260608"
+    },
+    {
+      "date": "2026-08-10",
+      "event": "Bloomberg reported completion of a company-funded tender offer for roughly $7B of current and former employee shares at an $852B company valuation. Secondary liquidity, not proceeds of a new fundraising round. Exact closing date not disclosed in the accessible original.",
+      "source": "bloomberg_tender_20260810",
+      "verification": "reported"
     },
     {
       "date": "2026-08-19",
@@ -138,12 +168,28 @@
       "date": "2026-09-12",
       "type": "original report of Fortune interview with Sam Altman on 2026-09-11",
       "url": "https://fortune.com/2026/09/12/sam-altman-openai-ipo-delay-ill-advised-moment-safety-concerns/"
+    },
+    "bloomberg_tender_20260810": {
+      "publisher": "Bloomberg",
+      "date": "2026-08-10",
+      "type": "original reporting citing people familiar; publicly accessible opening paragraphs checked directly",
+      "url": "https://www.bloomberg.com/news/articles/2026-08-10/openai-buys-back-7-billion-of-employee-shares-in-tender-offer"
+    },
+    "guardian_verdict_20260518": {
+      "publisher": "The Guardian",
+      "date": "2026-05-18",
+      "type": "original courtroom reporting of advisory jury verdict and judge dismissal; not a court filing or a merits exoneration",
+      "url": "https://www.theguardian.com/technology/2026/may/18/sam-altman-trial-victory-elon-musk-openai"
     }
   },
   "changelog": [
     {
       "date": "2026-10-06",
       "change": "v1: Added source-checked confidential filing status, announcement-versus-submission date distinction, reported timing, CEO remarks, latest verified closed private round and preparatory banks. Unverified new-round figures and final underwriting mandates omitted; gaps documented in PR."
+    },
+    {
+      "date": "2026-10-06",
+      "change": "Added original Bloomberg reporting of employee tender size and valuation, separately from primary financing, and original Guardian reporting of May 18 time-bar verdict and judicial dismissal. Government 5% equity proposal and first investor-relations-head appointment omitted because the exact requested claims could not be verified from accessible originals; gaps detailed in PR. No listing-timing change or new route."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
