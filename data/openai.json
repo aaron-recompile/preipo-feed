@@ -2,7 +2,7 @@
   "schema": "preipo-card/v2.1",
   "company": "OpenAI",
   "dataset": "financials",
-  "as_of": "2026-10-06",
+  "as_of": "2026-10-08",
   "currency": "USD",
   "verification": "mixed",
   "verification_scale": {
@@ -61,9 +61,9 @@
       "value": 122000000000,
       "value_type": "exact",
       "period": "closed 2026-03-31",
-      "label": "Last funding round, committed capital",
-      "source": "quartz_20260331",
-      "verification": "secondary"
+      "label": "Last funding round, committed capital (not cash received)",
+      "source": "openai_round_20260331",
+      "verification": "primary"
     },
     {
       "id": "last_round_post_money_2026_03",
@@ -71,8 +71,8 @@
       "value_type": "exact",
       "period": "closed 2026-03-31",
       "label": "Last funding round, post-money valuation",
-      "source": "quartz_20260331",
-      "verification": "secondary"
+      "source": "openai_round_20260331",
+      "verification": "primary"
     },
     {
       "id": "new_round_target_2026_09",
@@ -229,6 +229,12 @@
       "date": "2026-08-31",
       "type": "company announcement checked directly; publication date corroborated by dated news index",
       "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/"
+    },
+    "openai_round_20260331": {
+      "publisher": "OpenAI",
+      "date": "2026-03-31",
+      "type": "company announcement; committed capital, not cash received",
+      "url": "https://openai.com/index/accelerating-the-next-phase-ai/"
     }
   },
   "changelog": [
@@ -239,6 +245,10 @@
     {
       "date": "2026-10-06",
       "change": "Added directly checked OpenAI advertising annualized revenue run-rate and Bloomberg-reported company annualized revenue lower bound. Kept quarterly/FY revenue separate from run rates; did not infer July measurement date from the August report. Requested quarterly revenue, enterprise mix, margin, inference-cost forecasts and cumulative FCF forecast omitted where original-source wording could not be verified; gaps detailed in PR. Existing historical metrics and derived March-basis multiples unchanged and not re-audited."
+    },
+    {
+      "date": "2026-10-08",
+      "change": "Upgraded March committed capital ($122B) and post-money valuation ($852B) from secondary Quartz reporting to the directly checked OpenAI announcement, aligning financials with the IPO card. Values and IDs unchanged; committed capital is not cash received. Compute commitment total, latest cash balance and IPO target valuation remain omitted: accessible original wording was not verified in this review; research limitations detailed in PR."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
