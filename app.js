@@ -85,6 +85,45 @@ const fundingRounds = () => ({
 const FUNDING_PATH = "/preipo/funding-rounds";
 const FUNDING_DESC = "AI lab funding rounds and valuations as JSON (OpenAI, Anthropic): round size, post-money valuation, rounds in talks, employee tender offers, IPO valuation targets, strategic investor commitments. Each row keeps its source URL, verification grade (primary/secondary/reported) and value type.";
 
+// Derived premium route: OpenAI vs Anthropic side by side, built only from the verified cards.
+const metric = (company, id) => {
+  for (const p of PRODUCTS.filter((x) => x.card.company === company)) {
+    const m = p.card.metrics.find((x) => x.id === id);
+    if (m) return { value: m.value, value_type: m.value_type, period: m.period, verification: m.verification, label: m.label,
+      source: m.source ? p.card.sources[m.source] : undefined, from_card: p.path };
+  }
+  return null;
+};
+const ratio = (num, den, note) => (num && den ? { value: Math.round((num.value / den.value) * 10) / 10, unit: "x",
+  value_type: "derived", note, inputs: [num, den].map((x) => x.from_card) } : null);
+const compareLabs = () => {
+  const side = (company, ids) => Object.fromEntries(Object.entries(ids).map(([k, id]) => [k, id ? metric(company, id) : null]));
+  const openai = side("OpenAI", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "revenue_run_rate_annualized_reported_2026_08",
+    last_private_post_money: "last_private_post_money_2026_03", last_private_round_size: "last_private_round_size_2026_03",
+    ipo_valuation_target_high: null, compute_obligations: null, cash_and_investments_ye2025: null });
+  const anthropic = side("Anthropic", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "run_rate_revenue_2026_05",
+    last_private_post_money: "last_private_post_money_2026_05", last_private_round_size: "last_private_round_size_2026_05",
+    ipo_valuation_target_high: "ipo_valuation_target_high", compute_obligations: "compute_infra_obligations",
+    cash_and_investments_ye2025: "cash_equiv_and_st_investments_ye2025" });
+  const card = (path) => PRODUCTS.find((p) => p.path === path)?.card;
+  return {
+    dataset: "openai-vs-anthropic", generated_at: new Date().toISOString(),
+    method: "side-by-side view built only from this feed's verified cards; every value keeps its own source, grade and value type",
+    openai, anthropic,
+    derived: {
+      openai_post_money_to_run_rate: ratio(openai.last_private_post_money, openai.latest_run_rate, "run-rate is a lower bound, so the true multiple is at most this"),
+      anthropic_post_money_to_run_rate: ratio(anthropic.last_private_post_money, anthropic.latest_run_rate, "run-rate is a lower bound, so the true multiple is at most this"),
+    },
+    ipo_status: { openai: card("/preipo/openai/ipo")?.ipo_status ?? null, anthropic: card("/preipo/anthropic/ipo")?.ipo_status ?? null },
+    gaps: Object.entries({ openai, anthropic }).flatMap(([co, s]) => Object.entries(s).filter(([, v]) => !v).map(([k]) => `${co}.${k}: no verified public figure yet`)),
+    caveat: "Companies report revenue and run-rate on their own definitions and dates; compare periods and value types before drawing conclusions.",
+    publisher: PRODUCTS[0].card.publisher,
+    disclaimer: "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
+  };
+};
+const COMPARE_PATH = "/preipo/compare/openai-anthropic";
+const COMPARE_DESC = "OpenAI vs Anthropic side by side as JSON: full-year revenue, latest revenue run-rate, last private round and post-money valuation, IPO status and valuation target, compute obligations, cash, and valuation-to-run-rate multiples. Every value keeps its source URL, verification grade and value type; gaps are listed.";
+
 const server = new x402ResourceServer(new RetryingFacilitatorClient(facilitatorConfig));
 for (const n of NETWORKS) server.register(n, new ExactEvmScheme());
 server.registerExtension(bazaarResourceServerExtension);
@@ -128,6 +167,13 @@ routes[`GET ${FUNDING_PATH}`] = {
   extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "ai-lab-funding-rounds", companies: [{ company: "Anthropic", rows: [{ id: "last_private_post_money_2026_05", value: 965e9, verification: "primary" }] }] } } }) },
 };
 
+routes[`GET ${COMPARE_PATH}`] = {
+  accepts: NETWORKS.map((network) => ({ scheme: "exact", price: "$0.05", network, payTo: PAY_TO })),
+  description: COMPARE_DESC, mimeType: "application/json", serviceName: SERVICE_NAME,
+  tags: ["openai", "anthropic", "comparison", "valuation", "revenue"], iconUrl: "https://preipo-feed.vercel.app/icon.svg",
+  extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "openai-vs-anthropic", derived: { anthropic_post_money_to_run_rate: { value: 20.5, unit: "x" } } } } }) },
+};
+
 const catalog = () => PRODUCTS.map((p) => ({
   path: p.path, company: p.card.company, dataset: p.card.dataset, as_of: p.card.as_of,
   verification: p.card.verification, metric_ids: p.card.metrics.map((m) => m.id), price_usdc: p.price,
@@ -138,7 +184,7 @@ app.set("trust proxy", true); // Vercel terminates TLS; use X-Forwarded-Proto so
 
 // HEAD on a paid route would fall through to the GET handler and return 200 (no body), so HEAD-only checkers
 // think the route is free. Answer 402 instead.
-const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH]);
+const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH, COMPARE_PATH]);
 app.use((req, res, next) => (req.method === "HEAD" && PAID_PATHS.has(req.path) ? res.status(402).end() : next()));
 
 // ---- Discovery files for agents and crawlers ("AI SEO"). All generated from PRODUCTS so they never drift. ----
@@ -171,6 +217,7 @@ app.get("/.well-known/x402", (req, res) => {
         networks: NETWORKS, tags: p.tags, as_of: p.card.as_of, verification: p.card.verification, metricIds: p.card.metrics.map((m) => m.id),
       })),
       { resource: `${o}${FUNDING_PATH}`, method: "GET", description: FUNDING_DESC, priceUsd: 0.01, free: false, networks: NETWORKS, tags: ["ai-lab", "funding-round", "valuation", "pre-ipo", "openai"] },
+      { resource: `${o}${COMPARE_PATH}`, method: "GET", description: COMPARE_DESC, priceUsd: 0.05, free: false, networks: NETWORKS, tags: ["openai", "anthropic", "comparison", "valuation", "revenue"] },
     ],
     related_services: OTHERS,
   });
@@ -252,6 +299,7 @@ Networks: ${NETWORKS.join(", ")} (USDC). Pay to ${PAY_TO}.
 - approx (source says about/nearly), lower_bound (more than/at least), exact (as stated), derived (computed here)
 
 - [AI lab funding rounds](${o}${FUNDING_PATH}): 0.01 USDC. Rounds and valuations collected from the cards above, each row with its source.
+- [OpenAI vs Anthropic](${o}${COMPARE_PATH}): 0.05 USDC. Side-by-side revenue, run-rate, valuation, IPO status and multiples; gaps listed.
 
 ## More from this developer
 ${OTHERS.map((r) => `- [${r.name}](${r.url}/llms.txt): ${r.what}`).join("\n")}
@@ -277,7 +325,8 @@ app.get("/agents.json", (req, res) => {
       id: `${p.card.company.toLowerCase()}_${p.card.dataset}`,
       description: p.description,
       method: "GET", url: `${o}${p.path}`, priceUsd: Number(p.price), tags: p.tags,
-    })).concat([{ id: "ai_lab_funding_rounds", description: FUNDING_DESC, method: "GET", url: `${o}${FUNDING_PATH}`, priceUsd: 0.01 }]),
+    })).concat([{ id: "ai_lab_funding_rounds", description: FUNDING_DESC, method: "GET", url: `${o}${FUNDING_PATH}`, priceUsd: 0.01 },
+      { id: "openai_vs_anthropic", description: COMPARE_DESC, method: "GET", url: `${o}${COMPARE_PATH}`, priceUsd: 0.05 }]),
     docs: { llms: `${o}/llms.txt`, openapi: `${o}/openapi.json`, x402: `${o}/.well-known/x402` },
     related_services: OTHERS,
   });
@@ -300,13 +349,14 @@ app.get("/", (req, res) =>
     pay: { protocol: "x402", asset: "USDC", networks: NETWORKS },
     catalog: "/preipo/catalog",
     discovery: ["/llms.txt", "/.well-known/x402", "/openapi.json", "/agents.json"],
-    paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }],
+    paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }, { path: COMPARE_PATH, price_usdc: "0.05" }],
     more_from_this_developer: OTHERS,
   }),
 );
 app.get("/preipo/catalog", (req, res) => res.send(catalog()));
 for (const p of PRODUCTS) app.get(p.path, (req, res) => res.send(p.card));
 app.get(FUNDING_PATH, (req, res) => res.send(fundingRounds()));
+app.get(COMPARE_PATH, (req, res) => res.send(compareLabs()));
 
 export default app;
 if (!process.env.VERCEL) app.listen(4023, () => console.log("http://localhost:4023/"));
