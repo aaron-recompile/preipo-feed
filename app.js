@@ -7,6 +7,8 @@ import { ExactEvmScheme } from "@x402/evm/exact/server";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/extensions/bazaar";
 import { facilitator } from "@coinbase/x402"; // reads CDP_API_KEY_ID / CDP_API_KEY_SECRET
+import { RELATED } from "./lib/related.js";
+const OTHERS = RELATED.filter((r) => !r.url.includes("preipo-feed"));
 
 const PAY_TO = "0x4b5887B6E399C2E104becd01f7c406229c15891d";
 const MAKER = {
@@ -63,6 +65,26 @@ class RetryingFacilitatorClient extends HTTPFacilitatorClient {
   }
 }
 
+// Derived route: funding rounds and valuations collected from the verified cards above.
+// No new figures: every row keeps its original source, verification grade and value type.
+const ROUND = /round|post_money|secondary_sale|tender|stake|total_commitment|valuation_target/;
+const fundingRounds = () => ({
+  dataset: "ai-lab-funding-rounds",
+  generated_at: new Date().toISOString(),
+  method: "collected from this feed's company cards; see each row's source",
+  companies: [...new Set(PRODUCTS.map((p) => p.card.company))].map((company) => ({
+    company,
+    rows: PRODUCTS.filter((p) => p.card.company === company).flatMap((p) => p.card.metrics
+      .filter((m) => ROUND.test(m.id) && m.value_type !== "derived")
+      .map((m) => ({ id: m.id, value: m.value, value_type: m.value_type, unit: m.unit || "USD", period: m.period, label: m.label,
+        verification: m.verification, source: p.card.sources[m.source], from_card: p.path }))),
+  })),
+  publisher: PRODUCTS[0].card.publisher,
+  disclaimer: "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
+});
+const FUNDING_PATH = "/preipo/funding-rounds";
+const FUNDING_DESC = "AI lab funding rounds and valuations as JSON (OpenAI, Anthropic): round size, post-money valuation, rounds in talks, employee tender offers, IPO valuation targets, strategic investor commitments. Each row keeps its source URL, verification grade (primary/secondary/reported) and value type.";
+
 const server = new x402ResourceServer(new RetryingFacilitatorClient(facilitatorConfig));
 for (const n of NETWORKS) server.register(n, new ExactEvmScheme());
 server.registerExtension(bazaarResourceServerExtension);
@@ -99,6 +121,13 @@ for (const p of PRODUCTS) {
   };
 }
 
+routes[`GET ${FUNDING_PATH}`] = {
+  accepts: NETWORKS.map((network) => ({ scheme: "exact", price: "$0.01", network, payTo: PAY_TO })),
+  description: FUNDING_DESC, mimeType: "application/json", serviceName: SERVICE_NAME,
+  tags: ["ai-lab", "funding-round", "valuation", "pre-ipo", "openai"], iconUrl: "https://preipo-feed.vercel.app/icon.svg",
+  extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "ai-lab-funding-rounds", companies: [{ company: "Anthropic", rows: [{ id: "last_private_post_money_2026_05", value: 965e9, verification: "primary" }] }] } } }) },
+};
+
 const catalog = () => PRODUCTS.map((p) => ({
   path: p.path, company: p.card.company, dataset: p.card.dataset, as_of: p.card.as_of,
   verification: p.card.verification, metric_ids: p.card.metrics.map((m) => m.id), price_usdc: p.price,
@@ -109,7 +138,7 @@ app.set("trust proxy", true); // Vercel terminates TLS; use X-Forwarded-Proto so
 
 // HEAD on a paid route would fall through to the GET handler and return 200 (no body), so HEAD-only checkers
 // think the route is free. Answer 402 instead.
-const PAID_PATHS = new Set(PRODUCTS.map((p) => p.path));
+const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH]);
 app.use((req, res, next) => (req.method === "HEAD" && PAID_PATHS.has(req.path) ? res.status(402).end() : next()));
 
 // ---- Discovery files for agents and crawlers ("AI SEO"). All generated from PRODUCTS so they never drift. ----
@@ -141,7 +170,9 @@ app.get("/.well-known/x402", (req, res) => {
         resource: `${o}${p.path}`, method: "GET", description: p.description, priceUsd: Number(p.price), free: false,
         networks: NETWORKS, tags: p.tags, as_of: p.card.as_of, verification: p.card.verification, metricIds: p.card.metrics.map((m) => m.id),
       })),
+      { resource: `${o}${FUNDING_PATH}`, method: "GET", description: FUNDING_DESC, priceUsd: 0.01, free: false, networks: NETWORKS, tags: ["ai-lab", "funding-round", "valuation", "pre-ipo", "openai"] },
     ],
+    related_services: OTHERS,
   });
 });
 
@@ -220,6 +251,11 @@ Networks: ${NETWORKS.join(", ")} (USDC). Pay to ${PAY_TO}.
 ## Value types
 - approx (source says about/nearly), lower_bound (more than/at least), exact (as stated), derived (computed here)
 
+- [AI lab funding rounds](${o}${FUNDING_PATH}): 0.01 USDC. Rounds and valuations collected from the cards above, each row with its source.
+
+## More from this developer
+${OTHERS.map((r) => `- [${r.name}](${r.url}/llms.txt): ${r.what}`).join("\n")}
+
 ## Machine-readable
 - [x402 manifest](${o}/.well-known/x402)
 - [OpenAPI](${o}/openapi.json)
@@ -241,8 +277,9 @@ app.get("/agents.json", (req, res) => {
       id: `${p.card.company.toLowerCase()}_${p.card.dataset}`,
       description: p.description,
       method: "GET", url: `${o}${p.path}`, priceUsd: Number(p.price), tags: p.tags,
-    })),
+    })).concat([{ id: "ai_lab_funding_rounds", description: FUNDING_DESC, method: "GET", url: `${o}${FUNDING_PATH}`, priceUsd: 0.01 }]),
     docs: { llms: `${o}/llms.txt`, openapi: `${o}/openapi.json`, x402: `${o}/.well-known/x402` },
+    related_services: OTHERS,
   });
 });
 
@@ -263,11 +300,13 @@ app.get("/", (req, res) =>
     pay: { protocol: "x402", asset: "USDC", networks: NETWORKS },
     catalog: "/preipo/catalog",
     discovery: ["/llms.txt", "/.well-known/x402", "/openapi.json", "/agents.json"],
-    paid: catalog().map(({ path, price_usdc }) => ({ path, price_usdc })),
+    paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }],
+    more_from_this_developer: OTHERS,
   }),
 );
 app.get("/preipo/catalog", (req, res) => res.send(catalog()));
 for (const p of PRODUCTS) app.get(p.path, (req, res) => res.send(p.card));
+app.get(FUNDING_PATH, (req, res) => res.send(fundingRounds()));
 
 export default app;
 if (!process.env.VERCEL) app.listen(4023, () => console.log("http://localhost:4023/"));
