@@ -129,6 +129,13 @@ const ONCHAIN_PATH = "/preipo/onchain-vs-private";
 const ONCHAIN_DESC = "On-chain pre-IPO perps vs private valuation, live: OpenAI and Anthropic perpetuals on Hyperliquid HIP-3 (EntropyIO io:OAI, io:ANTH) converted to implied company valuation, set against the last private round post-money and the IPO valuation target. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
 const ONCHAIN_TAGS = ["pre-ipo", "hyperliquid", "valuation", "perps", "anthropic"];
 
+// Descriptive, fixed-cutoff HIP-3 study; not a live signal or raw-archive product.
+const WEEKEND = load("hip3-weekend-v0.json");
+const WEEKEND_SAMPLE = load("hip3-weekend-sample.json");
+const WEEKEND_PATH = "/hip3/weekend-scorecard";
+const WEEKEND_SAMPLE_PATH = "/hip3/weekend-scorecard/sample";
+const WEEKEND_DESC = "HIP-3 weekend scorecard v0: one October 10-12 2026 weekend, scheduled pricing regimes, sampled oracle boundary change, Monday daily-bar anchors, settled funding verification and weekly open/closed funding coverage. Missing evidence stays null. Not investment advice or an accuracy claim.";
+
 const server = new x402ResourceServer(new RetryingFacilitatorClient(facilitatorConfig));
 for (const n of NETWORKS) server.register(n, new ExactEvmScheme());
 server.registerExtension(bazaarResourceServerExtension);
@@ -199,6 +206,13 @@ const sample = () => ({
   publisher: PRODUCTS[0].card.publisher,
 });
 
+routes["GET " + WEEKEND_PATH] = {
+  accepts: NETWORKS.map((network) => ({ scheme: "exact", price: "$0.01", network, payTo: PAY_TO })),
+  description: WEEKEND_DESC, mimeType: "application/json", serviceName: SERVICE_NAME,
+  tags: ["hip3", "weekend", "funding", "oracle", "coverage"],
+  extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: WEEKEND.dataset, as_of: WEEKEND.as_of, independent_weekends: 1, missing_evidence_policy: "null plus reason" } } }) },
+};
+
 const catalog = () => PRODUCTS.map((p) => ({
   path: p.path, company: p.card.company, dataset: p.card.dataset, as_of: p.card.as_of,
   verification: p.card.verification, metric_ids: p.card.metrics.map((m) => m.id), price_usdc: p.price,
@@ -209,7 +223,7 @@ app.set("trust proxy", true); // Vercel terminates TLS; use X-Forwarded-Proto so
 
 // HEAD on a paid route would fall through to the GET handler and return 200 (no body), so HEAD-only checkers
 // think the route is free. Answer 402 instead.
-const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH, COMPARE_PATH, ONCHAIN_PATH]);
+const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH, COMPARE_PATH, ONCHAIN_PATH, WEEKEND_PATH]);
 app.use((req, res, next) => (req.method === "HEAD" && PAID_PATHS.has(req.path) ? res.status(402).end() : next()));
 
 // ---- Discovery files for agents and crawlers ("AI SEO"). All generated from PRODUCTS so they never drift. ----
@@ -236,6 +250,8 @@ app.get("/.well-known/x402", (req, res) => {
     rails: NETWORKS.map((network) => ({ rail: "x402", version: 2, scheme: "exact", network, asset: "USDC", how: howToPay })),
     payTo: PAY_TO,
     resources: [
+      { resource: o + WEEKEND_SAMPLE_PATH, method: "GET", description: "Free CRCL weekend sample; same fixed cutoff and null policy as full scorecard.", priceUsd: 0, free: true },
+      { resource: o + WEEKEND_PATH, method: "GET", description: WEEKEND_DESC, priceUsd: 0.01, free: false, networks: NETWORKS },
       { resource: `${o}/preipo/catalog`, method: "GET", description: "Free catalog: companies, datasets, as_of dates, verification grades, metric ids, prices.", priceUsd: 0, free: true },
       { resource: `${o}/preipo/sample`, method: "GET", description: "Free sample: two real metrics per card with source, grade and value type, plus funding-round rows.", priceUsd: 0, free: true },
       ...PRODUCTS.map((p) => ({
@@ -274,6 +290,10 @@ app.get("/openapi.json", (req, res) => {
       "/preipo/catalog": { get: { summary: "Free catalog", responses: { 200: { description: "List of datasets with as_of, verification and price." } } } },
       "/preipo/sample": { get: { summary: "Free sample", responses: { 200: { description: "Two real metrics per card with source, grade and value type." } } } },
       ...paid,
+      [WEEKEND_SAMPLE_PATH]: { get: { summary: "Free HIP-3 CRCL weekend sample", responses: { 200: { description: "One-asset descriptive scorecard sample with explicit missing evidence." } } } },
+      [WEEKEND_PATH]: { get: { summary: "HIP-3 weekend scorecard", description: WEEKEND_DESC,
+        "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.01, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
+        responses: { 200: { description: "Ten correlated assets, one weekend; fixed-cutoff evidence and funding coverage." }, 402: { description: "Payment required." } } } },
       [ONCHAIN_PATH]: { get: { summary: "On-chain pre-IPO perps vs private valuation", description: ONCHAIN_DESC, tags: ONCHAIN_TAGS,
         "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.02, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
         responses: { 200: { description: "Live perp-implied valuation vs private anchors." }, 402: { description: "Payment required." } } } },
@@ -313,6 +333,8 @@ ${SERVICE.maker} Contact: ${MAKER.url}
 - Cards are versioned; a changelog records every correction.
 
 ## Endpoints
+- [HIP-3 weekend sample](${o}${WEEKEND_SAMPLE_PATH}): free; CRCL with explicit gaps.
+- [HIP-3 weekend scorecard](${o}${WEEKEND_PATH}): 0.01 USDC; ONE WEEKEND, not a trading signal.
 - [Catalog](${o}/preipo/catalog): free. Companies, datasets, as_of, verification, metric ids, prices.
 - [Sample](${o}/preipo/sample): free. Two real metrics per card, each with source URL, grade and value type; judge the data before paying.
 ${PRODUCTS.map((p) => `- [${p.card.company} ${p.card.dataset}](${o}${p.path}): ${p.price} USDC per call. as_of ${p.card.as_of}. ${p.card.metrics.length} metrics.`).join("\n")}
@@ -358,7 +380,9 @@ app.get("/agents.json", (req, res) => {
       id: `${p.card.company.toLowerCase()}_${p.card.dataset}`,
       description: p.description,
       method: "GET", url: `${o}${p.path}`, priceUsd: Number(p.price), tags: p.tags,
-    })).concat([{ id: "ai_lab_funding_rounds", description: FUNDING_DESC, method: "GET", url: `${o}${FUNDING_PATH}`, priceUsd: 0.01 },
+    })).concat([{ id: "hip3_weekend_scorecard", description: WEEKEND_DESC, method: "GET", url: o + WEEKEND_PATH, priceUsd: 0.01 },
+      { id: "hip3_weekend_sample", description: "Free CRCL weekend sample", method: "GET", url: o + WEEKEND_SAMPLE_PATH, priceUsd: 0 },
+      { id: "ai_lab_funding_rounds", description: FUNDING_DESC, method: "GET", url: `${o}${FUNDING_PATH}`, priceUsd: 0.01 },
       { id: "openai_vs_anthropic", description: COMPARE_DESC, method: "GET", url: `${o}${COMPARE_PATH}`, priceUsd: 0.05 },
       { id: "onchain_preipo_vs_private", description: ONCHAIN_DESC, method: "GET", url: `${o}${ONCHAIN_PATH}`, priceUsd: 0.02 }]),
     docs: { llms: `${o}/llms.txt`, openapi: `${o}/openapi.json`, x402: `${o}/.well-known/x402` },
@@ -373,6 +397,7 @@ app.get("/icon.svg", (req, res) =>
 app.get("/robots.txt", (req, res) =>
   res.type("text/plain").send(`User-agent: *\nAllow: /\n\n# Agents: start at ${origin(req)}/llms.txt or ${origin(req)}/.well-known/x402\n`),
 );
+app.get(WEEKEND_SAMPLE_PATH, (req, res) => res.send(WEEKEND_SAMPLE));
 app.use(paymentMiddleware(routes, server));
 
 app.get("/", (req, res) =>
@@ -382,15 +407,16 @@ app.get("/", (req, res) =>
     what: "Fundamentals of private AI companies (revenue, costs, compute, cash, funding) as JSON. Each figure carries as_of, source and a verification grade, plus a live on-chain pre-IPO perp vs private valuation view. Not advice.",
     pay: { protocol: "x402", asset: "USDC", networks: NETWORKS },
     catalog: "/preipo/catalog",
-    free: ["/preipo/catalog", "/preipo/sample"],
+    free: ["/preipo/catalog", "/preipo/sample", WEEKEND_SAMPLE_PATH],
     discovery: ["/llms.txt", "/.well-known/x402", "/openapi.json", "/agents.json"],
-    paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }, { path: COMPARE_PATH, price_usdc: "0.05" }, { path: ONCHAIN_PATH, price_usdc: "0.02" }],
+    paid: [{ path: WEEKEND_PATH, price_usdc: "0.01" }, ...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }, { path: COMPARE_PATH, price_usdc: "0.05" }, { path: ONCHAIN_PATH, price_usdc: "0.02" }],
     more_from_this_developer: OTHERS,
   }),
 );
 app.get("/preipo/catalog", (req, res) => res.send(catalog()));
 app.get("/preipo/sample", (req, res) => res.send(sample()));
 for (const p of PRODUCTS) app.get(p.path, (req, res) => res.send(p.card));
+app.get(WEEKEND_PATH, (req, res) => res.send(WEEKEND));
 app.get(FUNDING_PATH, (req, res) => res.send(fundingRounds()));
 app.get(COMPARE_PATH, (req, res) => res.send(compareLabs()));
 app.get(ONCHAIN_PATH, async (req, res) => {
