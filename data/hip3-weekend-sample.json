@@ -1,0 +1,1651 @@
+{
+  "schema_version": "hip3-weekend-scorecard-v0",
+  "as_of_utc": "2026-10-12T23:00:00Z",
+  "sample_count": 1,
+  "sample_label": "ONE WEEKEND, October 10\u201312 2026, with October 9 Friday references",
+  "asset_count": 1,
+  "scope": "Descriptive price observations only; not a strategy evaluation, accuracy study, profit estimate or investment advice.",
+  "selection": {
+    "received_at": "2026-10-11T15:17:44.995+00:00",
+    "rule": "top10 openInterest*markPx USD; OI is not an orderbook liquidity measure",
+    "bias": "Selected after Friday observations; ten correlated stocks are not ten independent events."
+  },
+  "timestamp_policy": "Actual context receipt determines Sunday/Monday boundary membership. Legacy Friday request-start timestamps support coarse diagnostics only, not verified precise receipt. Later receipts excluded.",
+  "regimes_utc": {
+    "A": [
+      "2026-10-09T20:00:00Z",
+      "2026-10-10T00:00:00Z"
+    ],
+    "B": [
+      "2026-10-10T00:00:00Z",
+      "2026-10-12T00:05:00Z"
+    ],
+    "C": [
+      "2026-10-12T00:05:00Z",
+      "2026-10-12T13:30:00Z"
+    ]
+  },
+  "tolerances_seconds": {
+    "Friday": 300,
+    "Sunday_and_Monday": 20
+  },
+  "regime_note": "Scheduled regimes; not proof of source activation. No Friday-frozen claim.",
+  "oracle_rule_versions": [
+    {
+      "source": "https://docs.trade.xyz/perpetuals/changelog/equities-internal-session-hours.md",
+      "received_at": "2026-10-11T15:18:27.350+00:00",
+      "sha256": "424a6b0eb0e8d7fe6b195daa6ff5d2412b3a583185b4ca0ff4959d3215e5d090",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L1",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-27.350+00-00-424a6b0eb0e8.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/changelog/funding-rate-formula-updates.md",
+      "received_at": "2026-10-11T15:18:27.645+00:00",
+      "sha256": "72eadaaa793bb3e2327f3585bcb14efa15dd38c0c1d8dca0fd949e90f69fed96",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L2",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-27.645+00-00-72eadaaa793b.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/changelog/oracle-time-constant-updates.md",
+      "received_at": "2026-10-11T15:18:27.911+00:00",
+      "sha256": "bb3c50a8cf7919897986b9c8b8856f36e38af01b3aa658b6f0a5c02bae9254fb",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L3",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-27.911+00-00-bb3c50a8cf79.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics.md",
+      "received_at": "2026-10-11T15:18:28.032+00:00",
+      "sha256": "1ec4b255a4209bf028407ab63acf99cb30a483014353ca4b6d8581d7ac942fc1",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L4",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-28.032+00-00-1ec4b255a420.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/discovery-bounds.md",
+      "received_at": "2026-10-11T15:18:28.274+00:00",
+      "sha256": "121552b356e4b68dd88812974d788558d7d4350d68b36d880c7784ff1c807db6",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L5",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-28.274+00-00-121552b356e4.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/external-price.md",
+      "received_at": "2026-10-11T15:18:28.579+00:00",
+      "sha256": "af1d11808b6784884a038f7f91a83d18db929ff554682f06dc95fdb81213b510",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L6",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-28.579+00-00-af1d11808b67.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/fees.md",
+      "received_at": "2026-10-11T15:18:28.835+00:00",
+      "sha256": "8f64933dbd0c92d1b91760dd8f9b33e2b727e6c3dbbecc4855ae9948528529c9",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L7",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-28.835+00-00-8f64933dbd0c.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/mark-price.md",
+      "received_at": "2026-10-11T15:18:29.099+00:00",
+      "sha256": "d2ca70cda9160f40e66324882d1a082930ee12f8cf67398cbf52bc28bc1f55fb",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L8",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-29.099+00-00-d2ca70cda916.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/oracle-price.md",
+      "received_at": "2026-10-11T15:18:29.315+00:00",
+      "sha256": "5d6b6bbb5912d81c5e45a797262974372ddbafdcbaeebd93a319598c10abf074",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L9",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-29.315+00-00-5d6b6bbb5912.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/specifications-and-schedules.md",
+      "received_at": "2026-10-11T15:18:29.433+00:00",
+      "sha256": "b227552e565dc73cc7d65c94eaa102b06fce54c1c428a268fa52fdbcfa4a5528",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L10",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-29.433+00-00-b227552e565d.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/specifications-and-schedules/holiday-closures.md",
+      "received_at": "2026-10-11T15:18:29.704+00:00",
+      "sha256": "580c75a1f7a5d0826f24a6f01beb3201df3428aa04f8e93a70e1df555a77c8b1",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L11",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-29.704+00-00-580c75a1f7a5.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/specifications-and-schedules/specification-index.md",
+      "received_at": "2026-10-11T15:18:29.861+00:00",
+      "sha256": "964c727cdb4cc3c7288c4ea0ee6d6bb3996159c020e4027539fa7569c729bbd9",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L12",
+      "file_pointer": "oracle-rules/2026-10-11T15-18-29.861+00-00-964c727cdb4c.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/changelog/equities-internal-session-hours.md",
+      "received_at": "2026-10-12T11:00:02.533+00:00",
+      "sha256": "424a6b0eb0e8d7fe6b195daa6ff5d2412b3a583185b4ca0ff4959d3215e5d090",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L13",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-02.533+00-00-424a6b0eb0e8.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/changelog/funding-rate-formula-updates.md",
+      "received_at": "2026-10-12T11:00:02.789+00:00",
+      "sha256": "72eadaaa793bb3e2327f3585bcb14efa15dd38c0c1d8dca0fd949e90f69fed96",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L14",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-02.789+00-00-72eadaaa793b.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/changelog/oracle-time-constant-updates.md",
+      "received_at": "2026-10-12T11:00:03.113+00:00",
+      "sha256": "bb3c50a8cf7919897986b9c8b8856f36e38af01b3aa658b6f0a5c02bae9254fb",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L15",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-03.113+00-00-bb3c50a8cf79.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics.md",
+      "received_at": "2026-10-12T11:00:03.264+00:00",
+      "sha256": "1ec4b255a4209bf028407ab63acf99cb30a483014353ca4b6d8581d7ac942fc1",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L16",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-03.264+00-00-1ec4b255a420.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/discovery-bounds.md",
+      "received_at": "2026-10-12T11:00:03.620+00:00",
+      "sha256": "121552b356e4b68dd88812974d788558d7d4350d68b36d880c7784ff1c807db6",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L17",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-03.620+00-00-121552b356e4.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/external-price.md",
+      "received_at": "2026-10-12T11:00:03.867+00:00",
+      "sha256": "af1d11808b6784884a038f7f91a83d18db929ff554682f06dc95fdb81213b510",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L18",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-03.867+00-00-af1d11808b67.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/fees.md",
+      "received_at": "2026-10-12T11:00:04.168+00:00",
+      "sha256": "8f64933dbd0c92d1b91760dd8f9b33e2b727e6c3dbbecc4855ae9948528529c9",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L19",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-04.168+00-00-8f64933dbd0c.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/mark-price.md",
+      "received_at": "2026-10-12T11:00:04.299+00:00",
+      "sha256": "d2ca70cda9160f40e66324882d1a082930ee12f8cf67398cbf52bc28bc1f55fb",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L20",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-04.299+00-00-d2ca70cda916.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/mechanics/oracle-price.md",
+      "received_at": "2026-10-12T11:00:04.430+00:00",
+      "sha256": "5d6b6bbb5912d81c5e45a797262974372ddbafdcbaeebd93a319598c10abf074",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L21",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-04.430+00-00-5d6b6bbb5912.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/specifications-and-schedules.md",
+      "received_at": "2026-10-12T11:00:04.571+00:00",
+      "sha256": "b227552e565dc73cc7d65c94eaa102b06fce54c1c428a268fa52fdbcfa4a5528",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L22",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-04.571+00-00-b227552e565d.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/specifications-and-schedules/holiday-closures.md",
+      "received_at": "2026-10-12T11:00:04.838+00:00",
+      "sha256": "580c75a1f7a5d0826f24a6f01beb3201df3428aa04f8e93a70e1df555a77c8b1",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L23",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-04.838+00-00-580c75a1f7a5.txt",
+      "hash_verified": true
+    },
+    {
+      "source": "https://docs.trade.xyz/perpetuals/specifications-and-schedules/specification-index.md",
+      "received_at": "2026-10-12T11:00:05.032+00:00",
+      "sha256": "964c727cdb4cc3c7288c4ea0ee6d6bb3996159c020e4027539fa7569c729bbd9",
+      "changed": false,
+      "last_modified": null,
+      "source_pointer": "oracle-rules/versions.jsonl#L24",
+      "file_pointer": "oracle-rules/2026-10-12T11-00-05.032+00-00-964c727cdb4c.txt",
+      "hash_verified": true
+    }
+  ],
+  "oracle_rule_note": "October 11 and 12 documentation hashes match; later retrieval does not establish exact Friday availability. Use October 11 versions for Sunday descriptive context.",
+  "assets": [
+    {
+      "asset": "xyz:CRCL",
+      "ticker": "CRCL",
+      "units": {
+        "quote": "USD per one referenced share",
+        "fx_conversion_required": false,
+        "unit_evidence": "CRCL references 1 share of Circle Internet Group, Inc. Class A common stock (NYSE: CRCL), quoted in USD. Circle provides stablecoin and digital-asset payment infrastructure, including USDC.",
+        "source": "https://docs.trade.xyz/perpetuals/specifications-and-schedules/specification-index.md",
+        "source_pointer": "events/l4-universe.jsonl#L1",
+        "corporate_action_equivalence_verified": false,
+        "corporate_action_reason": "No verified corporate-action/adjustment continuity record in the inspected anchor/unit archive."
+      },
+      "A_mid_change": {
+        "value": 0.002872034889905395,
+        "unit": "simple_decimal_return",
+        "start": {
+          "value": 84.609,
+          "price_type": "midPx",
+          "source": "https://api.hyperliquid.xyz/info",
+          "source_pointer": "hip3/2026-10-09.jsonl#L43698",
+          "line_sha256": "e155131985b7909175fa9675190d3c77eb55b9bd615c63ba7c42e87be9be0dbf",
+          "observed_time": "2026-10-09T20:00:00+00:00",
+          "received_at": null,
+          "legacy_received_at_label": "2026-10-09T20:00:00+00:00",
+          "actual_receipt_verified": false,
+          "exchange_time": null,
+          "exchange_time_reason": "metaAndAssetCtxs does not supply exchange time",
+          "boundary_offset_seconds": 0.0,
+          "coarse_anchor": true,
+          "timing_note": "Request-start timestamp only; coarse descriptive diagnostic, exact availability unverified."
+        },
+        "end": {
+          "value": 84.852,
+          "price_type": "midPx",
+          "source": "https://api.hyperliquid.xyz/info",
+          "source_pointer": "hip3/2026-10-09.jsonl#L52252",
+          "line_sha256": "043abbf7453f0c69f9211a040aaf61c5333723e13b493ed9a17e740f928d7d07",
+          "observed_time": "2026-10-09T23:55:00+00:00",
+          "received_at": null,
+          "legacy_received_at_label": "2026-10-09T23:55:00+00:00",
+          "actual_receipt_verified": false,
+          "exchange_time": null,
+          "exchange_time_reason": "metaAndAssetCtxs does not supply exchange time",
+          "boundary_offset_seconds": -300.0,
+          "coarse_anchor": true,
+          "timing_note": "Request-start timestamp only; coarse descriptive diagnostic, exact availability unverified."
+        },
+        "reason": null
+      },
+      "B_mid_change": {
+        "value": 0.020368231217143373,
+        "unit": "simple_decimal_return",
+        "start": {
+          "value": 84.838,
+          "price_type": "midPx",
+          "source": "https://api.hyperliquid.xyz/info",
+          "source_pointer": "hip3/2026-10-10.jsonl#L19",
+          "line_sha256": "385ce2abfdbc26d05c46c1b78567d14d41191af4fae2101448b17a7e5288c64b",
+          "observed_time": "2026-10-10T00:00:00+00:00",
+          "received_at": null,
+          "legacy_received_at_label": "2026-10-10T00:00:00+00:00",
+          "actual_receipt_verified": false,
+          "exchange_time": null,
+          "exchange_time_reason": "metaAndAssetCtxs does not supply exchange time",
+          "boundary_offset_seconds": 0.0,
+          "coarse_anchor": true,
+          "timing_note": "Request-start timestamp only; coarse descriptive diagnostic, exact availability unverified."
+        },
+        "end": {
+          "value": 86.566,
+          "price_type": "midPx",
+          "source": "https://api.hyperliquid.xyz/info",
+          "source_pointer": "burst/2026-10-12.jsonl#L191",
+          "line_sha256": "c4f88d18dea4d1d87c2fd8d549a148c14c105ddfb6a007200254a6b85f9be298",
+          "observed_time": "2026-10-12T00:04:51.172000+00:00",
+          "received_at": "2026-10-12T00:04:51.172+00:00",
+          "legacy_received_at_label": null,
+          "actual_receipt_verified": true,
+          "exchange_time": null,
+          "exchange_time_reason": "metaAndAssetCtxs does not supply exchange time",
+          "boundary_offset_seconds": -8.82800006866455,
+          "coarse_anchor": false,
+          "timing_note": "Context response receipt; not later L2 response or exchange tick."
+        },
+        "reason": null
+      },
+      "C_mid_change": {
+        "value": -0.02669902912621358,
+        "unit": "simple_decimal_return",
+        "start": {
+          "value": 86.52,
+          "price_type": "midPx",
+          "source": "https://api.hyperliquid.xyz/info",
+          "source_pointer": "burst/2026-10-12.jsonl#L201",
+          "line_sha256": "e8fab6771db5bec8be6389abf6bcefb569769e7c6244cd2a92d22a5a2eca256a",
+          "observed_time": "2026-10-12T00:05:06.115000+00:00",
+          "received_at": "2026-10-12T00:05:06.115+00:00",
+          "legacy_received_at_label": null,
+          "actual_receipt_verified": true,
+          "exchange_time": null,
+          "exchange_time_reason": "metaAndAssetCtxs does not supply exchange time",
+          "boundary_offset_seconds": 6.115000009536743,
+          "coarse_anchor": false,
+          "timing_note": "Context response receipt; not later L2 response or exchange tick."
+        },
+        "end": {
+          "value": 84.21,
+          "price_type": "midPx",
+          "source": "https://api.hyperliquid.xyz/info",
+          "source_pointer": "burst/2026-10-12.jsonl#L1301",
+          "line_sha256": "60e11ee8e48d09b8652aa33c1d4e703785765888c2e8e36e025d576baab0de59",
+          "observed_time": "2026-10-12T13:29:50.698000+00:00",
+          "received_at": "2026-10-12T13:29:50.698+00:00",
+          "legacy_received_at_label": null,
+          "actual_receipt_verified": true,
+          "exchange_time": null,
+          "exchange_time_reason": "metaAndAssetCtxs does not supply exchange time",
+          "boundary_offset_seconds": -9.302000045776367,
+          "coarse_anchor": false,
+          "timing_note": "Context response receipt; not later L2 response or exchange tick."
+        },
+        "reason": null
+      },
+      "answer1_oracle_jump_observed": {
+        "value": -1.1544144809638723e-05,
+        "unit": "simple_decimal_return",
+        "start": {
+          "value": 86.624,
+          "price_type": "oraclePx",
+          "source": "https://api.hyperliquid.xyz/info",
+          "source_pointer": "burst/2026-10-12.jsonl#L191",
+          "line_sha256": "c4f88d18dea4d1d87c2fd8d549a148c14c105ddfb6a007200254a6b85f9be298",
+          "observed_time": "2026-10-12T00:04:51.172000+00:00",
+          "received_at": "2026-10-12T00:04:51.172+00:00",
+          "legacy_received_at_label": null,
+          "actual_receipt_verified": true,
+          "exchange_time": null,
+          "exchange_time_reason": "metaAndAssetCtxs does not supply exchange time",
+          "boundary_offset_seconds": -8.82800006866455,
+          "coarse_anchor": false,
+          "timing_note": "Context response receipt; not later L2 response or exchange tick."
+        },
+        "end": {
+          "value": 86.623,
+          "price_type": "oraclePx",
+          "source": "https://api.hyperliquid.xyz/info",
+          "source_pointer": "burst/2026-10-12.jsonl#L201",
+          "line_sha256": "e8fab6771db5bec8be6389abf6bcefb569769e7c6244cd2a92d22a5a2eca256a",
+          "observed_time": "2026-10-12T00:05:06.115000+00:00",
+          "received_at": "2026-10-12T00:05:06.115+00:00",
+          "legacy_received_at_label": null,
+          "actual_receipt_verified": true,
+          "exchange_time": null,
+          "exchange_time_reason": "metaAndAssetCtxs does not supply exchange time",
+          "boundary_offset_seconds": 6.115000009536743,
+          "coarse_anchor": false,
+          "timing_note": "Context response receipt; not later L2 response or exchange tick."
+        },
+        "reason": null,
+        "exact_first_tick_jump": null,
+        "source_switch_verified": false,
+        "bracket_seconds": 14.943000078201294
+      },
+      "answer2_open_gap": {
+        "value": null,
+        "reason": "Target Monday 2026-10-12 daily Open absent from every accepted Nasdaq response; never substitute prior-day Open or Monday mark.",
+        "price_type": "daily_bar_proxy",
+        "auction_price_verified": false
+      },
+      "answers_between_change": {
+        "value": null,
+        "reason": "Target Monday 2026-10-12 daily Open absent from every accepted Nasdaq response; never substitute prior-day Open or Monday mark.",
+        "price_types": [
+          "Sunday post-boundary sampled oracle",
+          "Monday Nasdaq daily Open"
+        ]
+      },
+      "nasdaq_anchor": {
+        "ticker": "CRCL",
+        "source": "https://api.nasdaq.com/api/quote/CRCL/historical?assetclass=stocks&limit=15&fromdate=2026-10-02&todate=2026-10-12",
+        "received_at": "2026-10-12T20:10:04.262+00:00",
+        "exchange_time": null,
+        "C0": "$84.51",
+        "O1": null,
+        "C0_date": "2026-10-09",
+        "O1_date": "2026-10-12",
+        "C0_reason": null,
+        "O1_reason": "target Monday daily bar not yet returned; retry after close, never substitute prior day",
+        "daily_bars": [
+          {
+            "date": "10/09/2026",
+            "close": "$84.51",
+            "volume": "13,017,430",
+            "open": "$82.14",
+            "high": "$87.60",
+            "low": "$80.4001"
+          },
+          {
+            "date": "10/08/2026",
+            "close": "$80.84",
+            "volume": "9,934,607",
+            "open": "$79.92",
+            "high": "$81.46",
+            "low": "$78.88"
+          },
+          {
+            "date": "10/07/2026",
+            "close": "$80.84",
+            "volume": "8,920,176",
+            "open": "$80.65",
+            "high": "$81.37",
+            "low": "$79.5501"
+          },
+          {
+            "date": "10/06/2026",
+            "close": "$84.13",
+            "volume": "7,337,879",
+            "open": "$83.80",
+            "high": "$86.74",
+            "low": "$83.1118"
+          },
+          {
+            "date": "10/05/2026",
+            "close": "$83.30",
+            "volume": "9,517,767",
+            "open": "$83.175",
+            "high": "$85.48",
+            "low": "$82.041"
+          },
+          {
+            "date": "10/02/2026",
+            "close": "$81.25",
+            "volume": "14,423,940",
+            "open": "$85.78",
+            "high": "$88.40",
+            "low": "$80.14"
+          }
+        ],
+        "source_pointer": "anchor/2026-10-12.jsonl#L11",
+        "line_sha256": "85aef1a3f1ea41a79033c2c146ff13466646eb8fa9f003cbd7144172b927669f"
+      },
+      "sunday_pre_depth": {
+        "source_pointer": "burst/2026-10-12.jsonl#L191",
+        "source": "https://api.hyperliquid.xyz/info",
+        "received_at": "2026-10-12T00:04:51.494+00:00",
+        "exchange_time_ms": 1791763490719,
+        "context_received_at": "2026-10-12T00:04:51.172+00:00",
+        "context_to_depth_receipt_seconds": 0.32200002670288086,
+        "quote_type": "indicative",
+        "levels_limit_per_side": 5,
+        "bids": [
+          {
+            "px": "86.563",
+            "sz": "19.361",
+            "n": 1
+          },
+          {
+            "px": "86.553",
+            "sz": "3.134",
+            "n": 1
+          },
+          {
+            "px": "86.551",
+            "sz": "2.124",
+            "n": 1
+          },
+          {
+            "px": "86.549",
+            "sz": "8.77",
+            "n": 1
+          },
+          {
+            "px": "86.548",
+            "sz": "11.325",
+            "n": 1
+          }
+        ],
+        "asks": [
+          {
+            "px": "86.57",
+            "sz": "17.679",
+            "n": 2
+          },
+          {
+            "px": "86.571",
+            "sz": "8.761",
+            "n": 1
+          },
+          {
+            "px": "86.577",
+            "sz": "11.55",
+            "n": 1
+          },
+          {
+            "px": "86.578",
+            "sz": "8.77",
+            "n": 1
+          },
+          {
+            "px": "86.584",
+            "sz": "3.35",
+            "n": 1
+          }
+        ],
+        "bid_top5_notional_usd": 3870.228499,
+        "ask_top5_notional_usd": 4338.229370999999,
+        "note": "Top five levels only, sampled separately from context; not a size-specific executable quote or simulated fill."
+      },
+      "sunday_post_depth": {
+        "source_pointer": "burst/2026-10-12.jsonl#L201",
+        "source": "https://api.hyperliquid.xyz/info",
+        "received_at": "2026-10-12T00:05:06.304+00:00",
+        "exchange_time_ms": 1791763505410,
+        "context_received_at": "2026-10-12T00:05:06.115+00:00",
+        "context_to_depth_receipt_seconds": 0.18899989128112793,
+        "quote_type": "indicative",
+        "levels_limit_per_side": 5,
+        "bids": [
+          {
+            "px": "86.519",
+            "sz": "2.776",
+            "n": 1
+          },
+          {
+            "px": "86.514",
+            "sz": "8.817",
+            "n": 1
+          },
+          {
+            "px": "86.513",
+            "sz": "16.348",
+            "n": 2
+          },
+          {
+            "px": "86.509",
+            "sz": "37.644",
+            "n": 4
+          },
+          {
+            "px": "86.506",
+            "sz": "8.818",
+            "n": 1
+          }
+        ],
+        "asks": [
+          {
+            "px": "86.528",
+            "sz": "76.441",
+            "n": 2
+          },
+          {
+            "px": "86.529",
+            "sz": "7.757",
+            "n": 1
+          },
+          {
+            "px": "86.535",
+            "sz": "11.556",
+            "n": 1
+          },
+          {
+            "px": "86.536",
+            "sz": "7.7",
+            "n": 1
+          },
+          {
+            "px": "86.537",
+            "sz": "11.556",
+            "n": 1
+          }
+        ],
+        "bid_top5_notional_usd": 6436.63991,
+        "ask_top5_notional_usd": 9951.839533,
+        "note": "Top five levels only, sampled separately from context; not a size-specific executable quote or simulated fill."
+      },
+      "hist_weekend_premium_ref": null,
+      "hist_weekend_premium_ref_reason": "User-supplied reference lacks public provenance/publication clearance; intentionally omitted.",
+      "funding_paid_closed_window": null,
+      "funding_paid_closed_window_reason": "21 settlement hours absent from pre-cutoff fundingHistory archive; full realized window unverified. No postcutoff receipts admitted.",
+      "funding_estimated_closed_window": 0.0011360965,
+      "funding": {
+        "asset": "xyz:CRCL",
+        "funding_paid_closed_window": null,
+        "funding_paid_reason": "21 settlement hours absent from pre-cutoff fundingHistory archive; full realized window unverified. No postcutoff receipts admitted.",
+        "settled_observed_count": 44,
+        "settled_missing_count": 21,
+        "settled_observed_partial_sum": 0.0003287661,
+        "funding_estimated_closed_window": 0.0011360965,
+        "snapshot_observed_partial_sum": 0.0011360965,
+        "snapshot_missing_count": 0,
+        "matched_reconciliation": {
+          "hours": 44,
+          "snapshot_sum": 0.0002989204,
+          "settled_sum": 0.0003287661,
+          "settled_minus_snapshot": 2.9845699999999998e-05
+        },
+        "regimes": {
+          "A": {
+            "expected": 4,
+            "settled_observed": 4,
+            "settled_missing": 0,
+            "settled_partial_sum": 6.86006e-05
+          },
+          "B": {
+            "expected": 48,
+            "settled_observed": 40,
+            "settled_missing": 8,
+            "settled_partial_sum": 0.0002601655
+          },
+          "C": {
+            "expected": 13,
+            "settled_observed": 0,
+            "settled_missing": 13,
+            "settled_partial_sum": 0
+          }
+        },
+        "weekly": {
+          "open": {
+            "scheduled_seconds": 117000.0,
+            "observed_seconds": 23400.0,
+            "rate_seconds_sum": 0.29126093999999997,
+            "missing_seconds": 93600.0,
+            "time_weighted_mean_hourly_rate": 1.2447048717948717e-05,
+            "observed_rate_integral": 8.090581666666666e-05
+          },
+          "closed": {
+            "scheduled_seconds": 487800.0,
+            "observed_seconds": 273768.0,
+            "rate_seconds_sum": 4.853561273300011,
+            "missing_seconds": 214032.0,
+            "time_weighted_mean_hourly_rate": 1.7728738469434014e-05,
+            "observed_rate_integral": 0.0013482114648055586
+          }
+        },
+        "hours": [
+          {
+            "settlement_hour": "2026-10-09T21:00:00+00:00",
+            "regime": "A",
+            "snapshot_labeled_received_at": "2026-10-09T20:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 1.90651e-05,
+            "settled": {
+              "funding_rate": 2.01889e-05,
+              "raw_time_ms": 1791579600041,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-09T22:00:00+00:00",
+            "regime": "A",
+            "snapshot_labeled_received_at": "2026-10-09T21:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 9.5842e-06,
+            "settled": {
+              "funding_rate": 6.7749e-06,
+              "raw_time_ms": 1791583200052,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-09T23:00:00+00:00",
+            "regime": "A",
+            "snapshot_labeled_received_at": "2026-10-09T22:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 7.7914e-06,
+            "settled": {
+              "funding_rate": 1.02574e-05,
+              "raw_time_ms": 1791586800053,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T00:00:00+00:00",
+            "regime": "A",
+            "snapshot_labeled_received_at": "2026-10-09T23:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 3.21694e-05,
+            "settled": {
+              "funding_rate": 3.13794e-05,
+              "raw_time_ms": 1791590400001,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T01:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T00:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 2.93564e-05,
+            "settled": {
+              "funding_rate": 2.91137e-05,
+              "raw_time_ms": 1791594000030,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T02:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T01:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 6.25e-06,
+            "settled": {
+              "funding_rate": 9.0254e-06,
+              "raw_time_ms": 1791597600042,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T03:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T02:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 8.19962e-05,
+            "settled": {
+              "funding_rate": 7.78492e-05,
+              "raw_time_ms": 1791601200065,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T04:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T03:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -3.96042e-05,
+            "settled": {
+              "funding_rate": -3.56341e-05,
+              "raw_time_ms": 1791604800012,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T05:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T04:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 3.21884e-05,
+            "settled": {
+              "funding_rate": 3.54395e-05,
+              "raw_time_ms": 1791608400008,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T06:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T05:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 4.2148e-05,
+            "settled": {
+              "funding_rate": 4.1647e-05,
+              "raw_time_ms": 1791612000016,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T07:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T06:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 1.08916e-05,
+            "settled": {
+              "funding_rate": 6.25e-06,
+              "raw_time_ms": 1791615600031,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T08:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T07:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -1.80231e-05,
+            "settled": {
+              "funding_rate": -1.2753e-05,
+              "raw_time_ms": 1791619200008,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T09:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T08:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 2.62651e-05,
+            "settled": {
+              "funding_rate": 2.58534e-05,
+              "raw_time_ms": 1791622800012,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T10:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T09:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 3.17431e-05,
+            "settled": {
+              "funding_rate": 3.46118e-05,
+              "raw_time_ms": 1791626400048,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T11:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T10:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -2.37237e-05,
+            "settled": {
+              "funding_rate": -2.10124e-05,
+              "raw_time_ms": 1791630000076,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T12:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T11:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -7.131e-07,
+            "settled": {
+              "funding_rate": 3.1431e-06,
+              "raw_time_ms": 1791633600025,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T13:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T12:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 1.28436e-05,
+            "settled": {
+              "funding_rate": 8.4802e-06,
+              "raw_time_ms": 1791637200000,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T14:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T13:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 2.84812e-05,
+            "settled": {
+              "funding_rate": 3.03968e-05,
+              "raw_time_ms": 1791640800002,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T15:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T14:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 1.21363e-05,
+            "settled": {
+              "funding_rate": 1.25857e-05,
+              "raw_time_ms": 1791644400053,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T16:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T15:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 3.04405e-05,
+            "settled": {
+              "funding_rate": 2.8693e-05,
+              "raw_time_ms": 1791648000053,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T17:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T16:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 6.6509e-06,
+            "settled": {
+              "funding_rate": 6.25e-06,
+              "raw_time_ms": 1791651600025,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T18:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T17:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 6.25e-06,
+            "settled": {
+              "funding_rate": 6.25e-06,
+              "raw_time_ms": 1791655200034,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T19:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T18:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -2.18946e-05,
+            "settled": {
+              "funding_rate": -2.16247e-05,
+              "raw_time_ms": 1791658800041,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T20:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T19:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 9.9076e-06,
+            "settled": {
+              "funding_rate": 1.13306e-05,
+              "raw_time_ms": 1791662400060,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T21:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T20:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 5.7515e-06,
+            "settled": {
+              "funding_rate": 4.4863e-06,
+              "raw_time_ms": 1791666000062,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T22:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T21:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 1.32832e-05,
+            "settled": {
+              "funding_rate": 1.35885e-05,
+              "raw_time_ms": 1791669600018,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-10T23:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T22:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -4.6479e-06,
+            "settled": {
+              "funding_rate": -3.3794e-06,
+              "raw_time_ms": 1791673200053,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T00:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-10T23:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 6.25e-06,
+            "settled": {
+              "funding_rate": 6.25e-06,
+              "raw_time_ms": 1791676800076,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T01:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T00:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -3.64416e-05,
+            "settled": {
+              "funding_rate": -3.41077e-05,
+              "raw_time_ms": 1791680400025,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T02:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T01:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 1.45487e-05,
+            "settled": {
+              "funding_rate": 1.36005e-05,
+              "raw_time_ms": 1791684000065,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T03:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T02:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 2.76435e-05,
+            "settled": {
+              "funding_rate": 3.13106e-05,
+              "raw_time_ms": 1791687600010,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T04:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T03:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -4.0308e-05,
+            "settled": {
+              "funding_rate": -5.75619e-05,
+              "raw_time_ms": 1791691200017,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T05:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T04:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -7.30937e-05,
+            "settled": {
+              "funding_rate": -6.42185e-05,
+              "raw_time_ms": 1791694800004,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T06:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T05:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 6.25e-06,
+            "settled": {
+              "funding_rate": 6.25e-06,
+              "raw_time_ms": 1791698400065,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T07:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T06:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 6.25e-06,
+            "settled": {
+              "funding_rate": 6.25e-06,
+              "raw_time_ms": 1791702000000,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T08:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T07:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 4.89927e-05,
+            "settled": {
+              "funding_rate": 4.71244e-05,
+              "raw_time_ms": 1791705600025,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T09:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T08:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 1.45959e-05,
+            "settled": {
+              "funding_rate": 1.50227e-05,
+              "raw_time_ms": 1791709200062,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T10:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T09:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 6.25e-06,
+            "settled": {
+              "funding_rate": 6.25e-06,
+              "raw_time_ms": 1791712800033,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T11:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T10:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -5.84664e-05,
+            "settled": {
+              "funding_rate": -6.27083e-05,
+              "raw_time_ms": 1791716400045,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T12:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T11:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -1.20068e-05,
+            "settled": {
+              "funding_rate": -3.9284e-06,
+              "raw_time_ms": 1791720000079,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T13:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T12:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 1.28041e-05,
+            "settled": {
+              "funding_rate": 1.00152e-05,
+              "raw_time_ms": 1791723600000,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T14:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T13:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 2.9812e-06,
+            "settled": {
+              "funding_rate": 8.681e-07,
+              "raw_time_ms": 1791727200020,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T15:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T14:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -1.04137e-05,
+            "settled": {
+              "funding_rate": -3.9423e-06,
+              "raw_time_ms": 1791730800027,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T16:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T15:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 3.64974e-05,
+            "settled": {
+              "funding_rate": 5.31005e-05,
+              "raw_time_ms": 1791734400000,
+              "received_at": "2026-10-11T16:45:47.285+00:00",
+              "source_file": "archive:s6/settled-funding-source-20261011T164547Z.json"
+            }
+          },
+          {
+            "settlement_hour": "2026-10-11T17:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T16:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 0.0001599571,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-11T18:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T17:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 4.70148e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-11T19:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T18:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -2.05268e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-11T20:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T19:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 2.36745e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-11T21:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T20:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 6.25e-06,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-11T22:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T21:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": -6.1442e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-11T23:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T22:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 2.62864e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T00:00:00+00:00",
+            "regime": "B",
+            "snapshot_labeled_received_at": "2026-10-11T23:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 3.60279e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T01:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T00:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 3.89844e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T02:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T01:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 3.39861e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T03:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T02:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 5.26555e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T04:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T03:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 5.43804e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T05:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T04:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 5.56868e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T06:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T05:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 4.76725e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T07:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T06:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 4.84057e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T08:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T07:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 5.19931e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T09:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T08:55:01+00:00",
+            "snapshot_age_seconds": 299.0,
+            "snapshot_rate": 3.25238e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T10:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T09:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 4.9056e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T11:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T10:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 5.51935e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T12:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T11:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 4.9446e-05,
+            "settled": null
+          },
+          {
+            "settlement_hour": "2026-10-12T13:00:00+00:00",
+            "regime": "C",
+            "snapshot_labeled_received_at": "2026-10-12T12:55:00+00:00",
+            "snapshot_age_seconds": 300.0,
+            "snapshot_rate": 4.99504e-05,
+            "settled": null
+          }
+        ],
+        "hist_weekend_premium_ref": null,
+        "hist_reference_reason": "Private user-supplied reference; no public provenance or publication clearance."
+      }
+    }
+  ],
+  "denominators": {
+    "A_mid_change": {
+      "nonnull": 1,
+      "total": 1
+    },
+    "B_mid_change": {
+      "nonnull": 1,
+      "total": 1
+    },
+    "C_mid_change": {
+      "nonnull": 1,
+      "total": 1
+    },
+    "answer1_oracle_jump_observed": {
+      "nonnull": 1,
+      "total": 1
+    },
+    "answer2_open_gap": {
+      "nonnull": 0,
+      "total": 1
+    },
+    "answers_between_change": {
+      "nonnull": 0,
+      "total": 1
+    }
+  },
+  "funding_methodology": {
+    "schema": "L4-funding-v0",
+    "as_of": "2026-10-12T23:00:00Z",
+    "sample_count_weekends": 1,
+    "status": "partial realized funding; full snapshot estimates descriptive only",
+    "acquisition_cutoff": "2026-10-12T23:00:00Z",
+    "closed_window": {
+      "start_exclusive": "2026-10-09T20:00:00+00:00",
+      "end_inclusive": "2026-10-12T13:30:00+00:00",
+      "clock_hours": 65.5,
+      "settlement_labels": 65,
+      "regime_counts": [
+        4,
+        48,
+        13
+      ]
+    },
+    "units": "Decimal hourly rate; sum = USD per constant oracle-valued USD1 notional; positive long pays. No second division by8. Not account cashflow.",
+    "timing_caveat": "Snapshot received_at is request-start, not true response receipt; no precision/no-lookahead availability certification. Estimator uses labeled strict pre-hour age<=360s. All selected snapshots precede acquisition cutoff by >9 hours.",
+    "weekly_method": "Deduplicate asset/timestamp; conflicting duplicates become missing. Carry nonnull rate to min(next observation,t+300s); split at regular-equity boundaries. Mean=sum(rate*observed seconds)/observed seconds; observed_rate_integral=sum(rate*seconds)/3600 is not settled funding.",
+    "weekly_window": {
+      "start": "2026-10-05T07:00:00+00:00",
+      "end_exclusive": "2026-10-12T07:00:00+00:00",
+      "sessions_utc": [
+        [
+          "2026-10-05T13:30:00+00:00",
+          "2026-10-05T20:00:00+00:00"
+        ],
+        [
+          "2026-10-06T13:30:00+00:00",
+          "2026-10-06T20:00:00+00:00"
+        ],
+        [
+          "2026-10-07T13:30:00+00:00",
+          "2026-10-07T20:00:00+00:00"
+        ],
+        [
+          "2026-10-08T13:30:00+00:00",
+          "2026-10-08T20:00:00+00:00"
+        ],
+        [
+          "2026-10-09T13:30:00+00:00",
+          "2026-10-09T20:00:00+00:00"
+        ]
+      ],
+      "open_scheduled_seconds": 117000.0,
+      "closed_scheduled_seconds": 487800.0,
+      "timezone": "America/New_York",
+      "utc_offset_hours": -4,
+      "dst_transition_in_window": false,
+      "calendar_source": "https://www.nasdaq.com/market-activity/stock-market-holiday-schedule",
+      "calendar_received_at": "2026-10-11T23:01:37.455Z",
+      "calendar_note": "Oct5-9 five regular 09:30-16:00 ET sessions; no holidays/early close. Oct12 regular equity day despite federal holiday, outside weekly window. Premarket/after-hours are closed relative to regular equities only."
+    },
+    "source_urls": [
+      "https://api.hyperliquid.xyz/info",
+      "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding",
+      "https://docs.trade.xyz/perpetuals/changelog/funding-rate-formula-updates.md",
+      "https://www.nasdaq.com/market-activity/stock-market-holiday-schedule"
+    ],
+    "excluded_initial_settlements": [
+      {
+        "asset": "xyz:CRCL",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:SPCX",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:MU",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:SNDK",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:NVDA",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:CBRS",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:GOOGL",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:INTC",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:META",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      },
+      {
+        "asset": "xyz:MSTR",
+        "raw_time_ms": 1791576000042,
+        "reason": "Friday16 settlement excluded despite late milliseconds"
+      }
+    ],
+    "duplicate_observations": 0,
+    "conflicting_duplicates": 0,
+    "limitations": [
+      "First week partial collection; missing time not zero.",
+      "ONE WEEKEND; correlated assets, post-Friday universe selection, no population accuracy or executable-profit claim.",
+      "Snapshot rates differ from premium-averaged settled rates.",
+      "No historical annual contribution minus 8760-hour funding APR comparison.",
+      "Official HL funding documentation checked after cutoff (23:01:59Z), so that new receipt is not v0 evidence. Precutoff XYZ formula version supports hourly baseline consistency; partial history sums are reported archive values, not a fully verified payment field."
+    ]
+  },
+  "company": "HIP3",
+  "dataset": "weekend-scorecard-sample-v0",
+  "as_of": "2026-10-12T23:00:00Z",
+  "independent_weekends": 1,
+  "verification": "derived",
+  "metrics": [],
+  "sources": {
+    "0": {
+      "url": "https://api.hyperliquid.xyz/info",
+      "publisher": "Hyperliquid",
+      "date": "2026-10-12",
+      "type": "public original source; archived evidence with per-observation clocks"
+    },
+    "1": {
+      "url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/funding",
+      "publisher": "Hyperliquid",
+      "date": "2026-10-12",
+      "type": "public original source; archived evidence with per-observation clocks"
+    },
+    "2": {
+      "url": "https://docs.trade.xyz/perpetuals/changelog/funding-rate-formula-updates.md",
+      "publisher": "XYZ",
+      "date": "2026-10-12",
+      "type": "public original source; archived evidence with per-observation clocks"
+    },
+    "3": {
+      "url": "https://www.nasdaq.com/market-activity/stock-market-holiday-schedule",
+      "publisher": "Nasdaq",
+      "date": "2026-10-12",
+      "type": "public original source; archived evidence with per-observation clocks"
+    }
+  },
+  "changelog": [
+    {
+      "date": "2026-10-12",
+      "change": "First descriptive one-weekend scorecard; frozen evidence cutoff 23:00 UTC, explicit nulls and coverage. No population accuracy claim."
+    }
+  ],
+  "disclaimer": "Descriptive public observations. Not investment advice, executable profit, strategy evaluation or a live signal.",
+  "publisher": {
+    "name": "PreIPO Feed",
+    "url": "https://preipo-feed.vercel.app"
+  },
+  "metric_schema_note": "Numeric metrics array intentionally empty: structured assets retain null plus reason rather than coercing missing observations into zero.",
+  "sample_scope": "Free CRCL subset; same methodology/cutoff as ten-asset paid route."
+}
