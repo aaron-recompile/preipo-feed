@@ -363,7 +363,7 @@
     "feed": "https://preipo-feed.vercel.app/llms.txt"
   },
   "notes": [
-    "Run-Rate Revenue as defined in the S-1: consumption-based fees for the trailing 28-day period multiplied by 13, plus aggregate monthly subscription fees multiplied by 12. The S-1 run-rate figure as of 2026-10-31 is blank in the initial filing; this card does not fill it from press reports.",
+    "Run-Rate Revenue as defined in the S-1: consumption-based fees for the trailing 28-day period multiplied by 13, plus the monthly fees of all active subscriptions as of the measurement date multiplied by 12. The S-1 run-rate figure as of 2026-10-31 is blank in the initial filing; this card does not fill it from press reports.",
     "Most of the FY2025 and H1 2026 net loss is a non-cash change in fair value of convertible notes, derivative liabilities and SAFEs, not operating cash burn: H1 2026 operating loss was $0.69B against a net loss of $80.7B."
   ]
 }
