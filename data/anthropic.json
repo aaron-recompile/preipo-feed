@@ -79,7 +79,7 @@
       "value_type": "exact",
       "period": "FY2025",
       "label": "Compute and infrastructure expense",
-      "yoy_multiple": 3,
+      "yoy_multiple": 2.9,
       "source": "sec_s1_20261026",
       "verification": "primary"
     },
@@ -88,28 +88,29 @@
       "value": 518000000000.0,
       "value_type": "exact",
       "period": "future years",
-      "label": "Planned cloud, computing and infrastructure obligations",
+      "label": "Planned cloud, computing and infrastructure obligations (press-reported; not in S-1)",
       "source": "reuters_cnbc_20260928",
-      "verification": "secondary"
+      "verification": "secondary",
+      "note": "Press-reported figure. Not found in the S-1: the S-1 leaves the aggregate committed spend blank and discloses fixed or minimum guaranteed compute commitments of about $265.6B as of 2026-06-30 (see compute_infra_min_commitments_2026_06_30). Prefer the S-1 figure."
     },
     {
       "id": "cash_equiv_and_st_investments_ye2025",
-      "value": 20280000000.0,
+      "value": 20277000000.0,
       "value_type": "exact",
       "period": "2025-12-31",
       "label": "Cash, cash equivalents and short-term investments",
-      "source": "reuters_cnbc_20260928",
-      "verification": "secondary"
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     },
     {
       "id": "top2_customer_revenue_share_fy2025",
-      "value": 0.25,
-      "value_type": "approx",
+      "value": 0.24,
+      "value_type": "exact",
       "unit": "fraction",
       "period": "FY2025",
-      "label": "Share of revenue from two customers (nearly a quarter)",
-      "source": "reuters_cnbc_20260928",
-      "verification": "secondary"
+      "label": "Revenue share of the two customers above 10% (Customer A 12%, Customer B 12%)",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     },
     {
       "id": "compute_spend_per_revenue_dollar_fy2025",
@@ -121,7 +122,7 @@
         "compute_infra_spend_fy2025",
         "revenue_fy2025"
       ],
-      "label": "Compute spend per revenue dollar (revenue is approx, so this is approx)",
+      "label": "Compute spend per revenue dollar",
       "verification": "derived",
       "unit": "USD of compute spend per USD of revenue"
     },
@@ -303,7 +304,29 @@
       "period": "H1 2026",
       "label": "Compute and infrastructure expense per revenue dollar",
       "formula": "compute_infra_spend_h1_2026 / revenue_h1_2026 (both S-1)",
-      "verification": "derived"
+      "verification": "derived",
+      "inherits_from": [
+        "compute_infra_spend_h1_2026",
+        "revenue_h1_2026"
+      ]
+    },
+    {
+      "id": "compute_infra_min_commitments_2026_06_30",
+      "value": 265600000000.0,
+      "value_type": "approx",
+      "period": "as of 2026-06-30 (unaudited), terms 1-20 years",
+      "label": "Fixed or minimum guaranteed compute and infrastructure commitments",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "noncancelable_commitments_ye2025",
+      "value": 54559000000.0,
+      "value_type": "exact",
+      "period": "as of 2025-12-31",
+      "label": "Total non-cancelable contractual commitments",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     }
   ],
   "sources": {
@@ -349,7 +372,7 @@
     },
     {
       "date": "2026-10-27",
-      "change": "v2.3: verified against Anthropic's public S-1 (filed 2026-10-26). Upgraded to primary: revenue_fy2025: 4,600,000,000 (secondary, reuters_cnbc_20260928) -> 4,585,000,000 (primary, S-1); opex_total_fy2025: 12,650,000,000 (secondary, reuters_cnbc_20260928) -> 12,645,000,000 (primary, S-1); operating_loss_fy2025: -8,000,000,000 (secondary, reuters_cnbc_20260928) -> -8,060,000,000 (primary, S-1); net_loss_fy2025: -42,000,000,000 (secondary, reuters_cnbc_20260928) -> -41,965,000,000 (primary, S-1); net_loss_accounting_charge_fy2025: -34,000,000,000 (secondary, reuters_cnbc_20260928) -> -34,308,000,000 (primary, S-1); compute_infra_spend_fy2025: 7,330,000,000 (secondary, reuters_cnbc_20260928) -> 7,326,000,000 (primary, S-1). Added FY2023-2024 revenue, H1 2025/2026 income statement lines and the 2026-06-30 balance sheet. Recomputed derived ratios from S-1 figures. S-1 is preliminary and may be amended. Not yet re-verified in this pass (kept secondary): compute_infra_obligations, cash_equiv_and_st_investments_ye2025, top2_customer_revenue_share_fy2025."
+      "change": "v2.3: verified against Anthropic's public S-1 (filed 2026-10-26). Upgraded to primary: revenue_fy2025: 4,600,000,000 (secondary, reuters_cnbc_20260928) -> 4,585,000,000 (primary, S-1); opex_total_fy2025: 12,650,000,000 (secondary, reuters_cnbc_20260928) -> 12,645,000,000 (primary, S-1); operating_loss_fy2025: -8,000,000,000 (secondary, reuters_cnbc_20260928) -> -8,060,000,000 (primary, S-1); net_loss_fy2025: -42,000,000,000 (secondary, reuters_cnbc_20260928) -> -41,965,000,000 (primary, S-1); net_loss_accounting_charge_fy2025: -34,000,000,000 (secondary, reuters_cnbc_20260928) -> -34,308,000,000 (primary, S-1); compute_infra_spend_fy2025: 7,330,000,000 (secondary, reuters_cnbc_20260928) -> 7,326,000,000 (primary, S-1). Added FY2023-2024 revenue, H1 2025/2026 income statement lines and the 2026-06-30 balance sheet. Recomputed derived ratios from S-1 figures. S-1 is preliminary and may be amended. Not yet re-verified in this pass (kept secondary): compute_infra_obligations, cash_equiv_and_st_investments_ye2025, top2_customer_revenue_share_fy2025. Independent re-extraction (separate Claude agent, 2026-10-27) matched all S-1 figures and found: cash_equiv_and_st_investments_ye2025: 20,280,000,000 (secondary) -> 20,277,000,000 (primary, S-1 balance sheet: cash 17,388 + short-term investments 2,889); top2_customer_revenue_share_fy2025: 0.25 approx (secondary) -> 0.24 exact (primary, S-1 Note 2: Customer A 12%, Customer B 12%); compute_infra_obligations ($518B, press) is not in the S-1, so a primary $265.6B minimum-commitment metric was added and the press figure is labelled accordingly."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
