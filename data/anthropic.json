@@ -1,8 +1,8 @@
 {
-  "schema": "preipo-card/v2.2",
+  "schema": "preipo-card/v2.3",
   "company": "Anthropic",
   "dataset": "financials",
-  "as_of": "2026-05-28/2026-09-28",
+  "as_of": "2026-10-26",
   "currency": "USD",
   "verification": "mixed",
   "verification_scale": {
@@ -20,14 +20,13 @@
   "metrics": [
     {
       "id": "revenue_fy2025",
-      "value": 4600000000.0,
-      "value_type": "approx",
+      "value": 4585000000.0,
+      "value_type": "exact",
       "period": "FY2025",
-      "label": "Revenue (nearly)",
-      "yoy_multiple": 12,
-      "source": "reuters_cnbc_20260928",
-      "verification": "secondary",
-      "yoy_multiple_note": "shares this metric's source and verification"
+      "label": "Revenue",
+      "yoy_multiple": 11.9,
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     },
     {
       "id": "run_rate_revenue_2026_05",
@@ -40,50 +39,49 @@
     },
     {
       "id": "opex_total_fy2025",
-      "value": 12650000000.0,
+      "value": 12645000000.0,
       "value_type": "exact",
       "period": "FY2025",
-      "label": "Total operating expenses; compute and infrastructure were more than half",
-      "source": "reuters_cnbc_20260928",
-      "verification": "secondary"
+      "label": "Total operating expenses",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     },
     {
       "id": "operating_loss_fy2025",
-      "value": -8000000000.0,
-      "value_type": "lower_bound",
+      "value": -8060000000.0,
+      "value_type": "exact",
       "period": "FY2025",
-      "label": "Operating loss, more than; excludes writedowns of liabilities tied to prior fundraising",
-      "source": "reuters_cnbc_20260928",
-      "verification": "secondary"
+      "label": "Operating loss",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     },
     {
       "id": "net_loss_fy2025",
-      "value": -42000000000.0,
-      "value_type": "approx",
+      "value": -41965000000.0,
+      "value_type": "exact",
       "period": "FY2025",
-      "label": "Net loss (near $42bn; includes a roughly $34bn accounting charge)",
-      "source": "reuters_cnbc_20260928",
-      "verification": "secondary"
+      "label": "Net loss",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     },
     {
       "id": "net_loss_accounting_charge_fy2025",
-      "value": -34000000000.0,
-      "value_type": "approx",
+      "value": -34308000000.0,
+      "value_type": "exact",
       "period": "FY2025",
-      "label": "Accounting charge included in net loss (roughly)",
-      "source": "reuters_cnbc_20260928",
-      "verification": "secondary"
+      "label": "Change in fair value of convertible notes, derivative liabilities, and SAFEs (non-cash)",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     },
     {
       "id": "compute_infra_spend_fy2025",
-      "value": 7330000000.0,
+      "value": 7326000000.0,
       "value_type": "exact",
       "period": "FY2025",
-      "label": "Compute and infrastructure spend",
+      "label": "Compute and infrastructure expense",
       "yoy_multiple": 3,
-      "source": "reuters_cnbc_20260928",
-      "verification": "secondary",
-      "yoy_multiple_note": "shares this metric's source and verification"
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     },
     {
       "id": "compute_infra_obligations",
@@ -115,10 +113,10 @@
     },
     {
       "id": "compute_spend_per_revenue_dollar_fy2025",
-      "value": 1.59,
+      "value": 1.6,
       "value_type": "derived",
       "period": "FY2025",
-      "formula": "compute_infra_spend_fy2025 / revenue_fy2025 = 7.33 / 4.6",
+      "formula": "compute_infra_spend_fy2025 / revenue_fy2025 (both S-1)",
       "inherits_from": [
         "compute_infra_spend_fy2025",
         "revenue_fy2025"
@@ -133,7 +131,7 @@
       "value_type": "derived",
       "unit": "fraction",
       "period": "FY2025",
-      "formula": "compute_infra_spend_fy2025 / opex_total_fy2025 = 7.33 / 12.65",
+      "formula": "compute_infra_spend_fy2025 / opex_total_fy2025 (both S-1)",
       "inherits_from": [
         "compute_infra_spend_fy2025",
         "opex_total_fy2025"
@@ -152,6 +150,159 @@
         "run_rate_revenue_2026_05"
       ],
       "label": "Series H post-money / May run-rate revenue; run-rate is a lower bound so the true multiple is at most this",
+      "verification": "derived"
+    },
+    {
+      "id": "revenue_fy2024",
+      "value": 386000000.0,
+      "value_type": "exact",
+      "period": "FY2024",
+      "label": "Revenue",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "revenue_fy2023",
+      "value": 41000000.0,
+      "value_type": "exact",
+      "period": "FY2023",
+      "label": "Revenue",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "revenue_h1_2026",
+      "value": 16286000000.0,
+      "value_type": "exact",
+      "period": "H1 2026 (six months ended 2026-06-30, unaudited)",
+      "label": "Revenue",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "revenue_h1_2025",
+      "value": 1163000000.0,
+      "value_type": "exact",
+      "period": "H1 2025 (unaudited)",
+      "label": "Revenue",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "compute_infra_spend_h1_2026",
+      "value": 8945000000.0,
+      "value_type": "exact",
+      "period": "H1 2026 (unaudited)",
+      "label": "Compute and infrastructure expense",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "opex_total_h1_2026",
+      "value": 16979000000.0,
+      "value_type": "exact",
+      "period": "H1 2026 (unaudited)",
+      "label": "Total operating expenses",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "operating_loss_h1_2026",
+      "value": -693000000.0,
+      "value_type": "exact",
+      "period": "H1 2026 (unaudited)",
+      "label": "Operating loss",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "fair_value_change_h1_2026",
+      "value": -72388000000.0,
+      "value_type": "exact",
+      "period": "H1 2026 (unaudited)",
+      "label": "Change in fair value of convertible notes, derivative liabilities, and SAFEs (non-cash)",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "net_loss_h1_2026",
+      "value": -80748000000.0,
+      "value_type": "exact",
+      "period": "H1 2026 (unaudited)",
+      "label": "Net loss",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "personnel_fy2025",
+      "value": 1839000000.0,
+      "value_type": "exact",
+      "period": "FY2025",
+      "label": "Personnel expense",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "bartz_settlement_fy2025",
+      "value": 1500000000.0,
+      "value_type": "exact",
+      "period": "FY2025",
+      "label": "Bartz settlement (one-time)",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "sales_marketing_partnerships_fy2025",
+      "value": 568000000.0,
+      "value_type": "exact",
+      "period": "FY2025",
+      "label": "Sales, marketing, and partnerships expense",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "cash_equiv_and_st_investments_2026_06_30",
+      "value": 131651000000.0,
+      "value_type": "exact",
+      "period": "2026-06-30 (unaudited)",
+      "label": "Cash, cash equivalents, and short-term investments",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "total_assets_2026_06_30",
+      "value": 147358000000.0,
+      "value_type": "exact",
+      "period": "2026-06-30 (unaudited)",
+      "label": "Total assets",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "total_liabilities_2026_06_30",
+      "value": 117467000000.0,
+      "value_type": "exact",
+      "period": "2026-06-30 (unaudited)",
+      "label": "Total liabilities",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "accumulated_deficit_2026_06_30",
+      "value": -132902000000.0,
+      "value_type": "exact",
+      "period": "2026-06-30 (unaudited)",
+      "label": "Accumulated deficit",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
+    },
+    {
+      "id": "compute_spend_per_revenue_dollar_h1_2026",
+      "value": 0.55,
+      "value_type": "derived",
+      "period": "H1 2026",
+      "label": "Compute and infrastructure expense per revenue dollar",
+      "formula": "compute_infra_spend_h1_2026 / revenue_h1_2026 (both S-1)",
       "verification": "derived"
     }
   ],
@@ -173,6 +324,14 @@
       "date": "2026-05-28",
       "type": "company announcement",
       "url": "https://www.anthropic.com/news/series-h"
+    },
+    "sec_s1_20261026": {
+      "publisher": "Anthropic, PBC (SEC Form S-1, initial public filing)",
+      "date": "2026-10-26",
+      "type": "registration statement; FY2023-2025 audited, H1 2025/2026 unaudited; preliminary, subject to amendment",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+      "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
+      "section": "Summary Consolidated Financial and Other Data"
     }
   },
   "changelog": [
@@ -187,6 +346,10 @@
     {
       "date": "2026-10-06",
       "change": "v2.2: added May 2026 run-rate revenue (>$47B, primary, anthropic.com) so buyers do not compute valuation multiples on FY2025 revenue alone; added FY2025 total opex ($12.65B) and compute share of opex; added Series H valuation / run-rate (at most 20.5x); link to IPO card."
+    },
+    {
+      "date": "2026-10-27",
+      "change": "v2.3: verified against Anthropic's public S-1 (filed 2026-10-26). Upgraded to primary: revenue_fy2025: 4,600,000,000 (secondary, reuters_cnbc_20260928) -> 4,585,000,000 (primary, S-1); opex_total_fy2025: 12,650,000,000 (secondary, reuters_cnbc_20260928) -> 12,645,000,000 (primary, S-1); operating_loss_fy2025: -8,000,000,000 (secondary, reuters_cnbc_20260928) -> -8,060,000,000 (primary, S-1); net_loss_fy2025: -42,000,000,000 (secondary, reuters_cnbc_20260928) -> -41,965,000,000 (primary, S-1); net_loss_accounting_charge_fy2025: -34,000,000,000 (secondary, reuters_cnbc_20260928) -> -34,308,000,000 (primary, S-1); compute_infra_spend_fy2025: 7,330,000,000 (secondary, reuters_cnbc_20260928) -> 7,326,000,000 (primary, S-1). Added FY2023-2024 revenue, H1 2025/2026 income statement lines and the 2026-06-30 balance sheet. Recomputed derived ratios from S-1 figures. S-1 is preliminary and may be amended. Not yet re-verified in this pass (kept secondary): compute_infra_obligations, cash_equiv_and_st_investments_ye2025, top2_customer_revenue_share_fy2025."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
@@ -198,5 +361,9 @@
     "maker": "Aaron Zhang, independent developer",
     "url": "https://farcaster.xyz/aaronzhang",
     "feed": "https://preipo-feed.vercel.app/llms.txt"
-  }
+  },
+  "notes": [
+    "Run-Rate Revenue as defined in the S-1: consumption-based fees for the trailing 28-day period multiplied by 13, plus aggregate monthly subscription fees multiplied by 12. The S-1 run-rate figure as of 2026-10-31 is blank in the initial filing; this card does not fill it from press reports.",
+    "Most of the FY2025 and H1 2026 net loss is a non-cash change in fair value of convertible notes, derivative liabilities and SAFEs, not operating cash burn: H1 2026 operating loss was $0.69B against a net loss of $80.7B."
+  ]
 }
