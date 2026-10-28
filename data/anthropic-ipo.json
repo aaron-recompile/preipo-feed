@@ -2,10 +2,10 @@
   "schema": "preipo-card/v2.1",
   "company": "Anthropic",
   "dataset": "ipo",
-  "as_of": "2026-10-01",
+  "as_of": "2026-10-26",
   "currency": "USD",
   "verification": "mixed",
-  "ipo_status": "Draft S-1 confidentially submitted to the SEC on 2026-06-01. No public S-1 on SEC EDGAR as of 2026-10-01. Shares offered and price not set.",
+  "ipo_status": "Public S-1 filed with the SEC on 2026-10-26 (accession 0001628280-26-067168). Applied to list Class A common stock on the Nasdaq Global Select Market under the symbol \"ANT\". Price range and share count are blank in the initial filing.",
   "verification_scale": {
     "primary": "company filing or company statement, checked directly",
     "secondary": "major outlet reporting a company statement or document",
@@ -55,7 +55,8 @@
       "period": "as of 2026-10-01",
       "label": "IPO valuation prospective investors expect, low end",
       "source": "bloomberg_via_pymnts_20261001",
-      "verification": "reported"
+      "verification": "reported",
+      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
     },
     {
       "id": "ipo_valuation_target_high",
@@ -64,7 +65,8 @@
       "period": "as of 2026-10-01",
       "label": "IPO valuation, high end ('more than $2 trillion' per Reuters 2026-09-28)",
       "source": "bloomberg_via_pymnts_20261001",
-      "verification": "reported"
+      "verification": "reported",
+      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
     },
     {
       "id": "ipo_proceeds_target_max",
@@ -73,7 +75,8 @@
       "period": "as of 2026-08-22",
       "label": "Proceeds bankers told investors the IPO could raise (up to/around); reported when timing was still October",
       "source": "nyt_via_aiweekly_20260822",
-      "verification": "reported"
+      "verification": "reported",
+      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
     },
     {
       "id": "run_rate_revenue_target_ye2026_low",
@@ -129,7 +132,20 @@
     ],
     "note": "Morgan Stanley, Goldman Sachs and JPMorgan lead the book, Citigroup added",
     "source": "nyt_via_aiweekly_20260822",
-    "verification": "reported"
+    "verification": "reported",
+    "s1_cover_2026_10_26": {
+      "listed_first": [
+        "Goldman Sachs & Co. LLC",
+        "Morgan Stanley"
+      ],
+      "lockup_representatives": [
+        "Goldman Sachs & Co. LLC",
+        "Morgan Stanley & Co. LLC"
+      ],
+      "source": "sec_s1_20261026",
+      "verification": "primary",
+      "note": "Full syndicate as listed on the S-1 cover, in order: Goldman Sachs, Morgan Stanley, J.P. Morgan, Citigroup, Barclays, Wells Fargo Securities, BofA Securities, Deutsche Bank Securities, RBC Capital Markets, UBS, BMO, BNP Paribas, Credit Agricole CIB, Jefferies, Mizuho, MUFG, Societe Generale, TD Securities, BTIG, Cantor and others."
+    }
   },
   "timeline": [
     {
@@ -168,6 +184,12 @@
       "event": "Formal marketing could start as soon as the week of Nov 9, trading before Thanksgiving (Nov 26); timing could change",
       "source": "bloomberg_via_pymnts_20261001",
       "verification": "reported"
+    },
+    {
+      "date": "2026-10-26",
+      "event": "Public S-1 filed on SEC EDGAR; Nasdaq symbol ANT",
+      "source": "sec_s1_20261026",
+      "verification": "primary"
     }
   ],
   "next_dates": [
@@ -220,12 +242,24 @@
       "date": "2026-10-01",
       "type": "absence check: no public S-1/F-1 for Anthropic found",
       "url": "https://efts.sec.gov/LATEST/search-index?q=%22Anthropic%22&forms=S-1,S-1/A,F-1&dateRange=custom&startdt=2026-06-01&enddt=2026-10-01"
+    },
+    "sec_s1_20261026": {
+      "publisher": "Anthropic, PBC (SEC Form S-1, initial public filing)",
+      "date": "2026-10-26",
+      "type": "registration statement; FY2023-2025 audited, H1 2025/2026 unaudited; preliminary, subject to amendment",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+      "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
+      "section": "Summary Consolidated Financial and Other Data"
     }
   },
   "changelog": [
     {
       "date": "2026-10-06",
       "change": "v1: IPO status, timeline, valuation range, proceeds, underwriters, run-rate revenue, derived multiples. Two primary sources from anthropic.com."
+    },
+    {
+      "date": "2026-10-27",
+      "change": "Status updated from confidential draft to public S-1 (2026-10-26), Nasdaq ANT; underwriter syndicate from the S-1 cover (primary). IPO valuation and proceeds targets remain press-reported because the price range is blank."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",

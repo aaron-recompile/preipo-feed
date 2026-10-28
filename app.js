@@ -104,7 +104,7 @@ const compareLabs = () => {
     ipo_valuation_target_high: null, compute_obligations: null, cash_and_investments_ye2025: null });
   const anthropic = side("Anthropic", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "run_rate_revenue_2026_05",
     last_private_post_money: "last_private_post_money_2026_05", last_private_round_size: "last_private_round_size_2026_05",
-    ipo_valuation_target_high: "ipo_valuation_target_high", compute_obligations: "compute_infra_obligations",
+    ipo_valuation_target_high: "ipo_valuation_target_high", compute_obligations: "compute_infra_min_commitments_2026_06_30",
     cash_and_investments_ye2025: "cash_equiv_and_st_investments_ye2025" });
   const card = (path) => PRODUCTS.find((p) => p.path === path)?.card;
   return {
