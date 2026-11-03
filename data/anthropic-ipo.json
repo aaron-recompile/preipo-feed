@@ -2,10 +2,10 @@
   "schema": "preipo-card/v2.1",
   "company": "Anthropic",
   "dataset": "ipo",
-  "as_of": "2026-10-26",
+  "as_of": "2026-11-02",
   "currency": "USD",
   "verification": "mixed",
-  "ipo_status": "Public S-1 filed with the SEC on 2026-10-26 (accession 0001628280-26-067168). Applied to list Class A common stock on the Nasdaq Global Select Market under the symbol \"ANT\". Price range and share count are blank in the initial filing.",
+  "ipo_status": "Public S-1 filed 2026-10-26 (accession 0001628280-26-067168); S-1/A Amendment No. 1 filed 2026-11-02 (accession 0001628280-26-068676) adds results through 2026-09-30. Applied to list Class A common stock on the Nasdaq Global Select Market under the symbol \"ANT\". Price range and share count are still blank.",
   "verification_scale": {
     "primary": "company filing or company statement, checked directly",
     "secondary": "major outlet reporting a company statement or document",
@@ -190,9 +190,19 @@
       "event": "Public S-1 filed on SEC EDGAR; Nasdaq symbol ANT",
       "source": "sec_s1_20261026",
       "verification": "primary"
+    },
+    {
+      "date": "2026-11-02",
+      "event": "S-1/A Amendment No. 1 filed: nine-month 2026 revenue $33.242B; price range still blank",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
     }
   ],
   "next_dates": [
+    {
+      "date": "next S-1/A",
+      "what": "Price range, share count and Run-Rate Revenue as of 2026-10-31 (blank in Amendment No. 1)"
+    },
     {
       "date": "2026-11-03",
       "what": "US midterm elections (listing reported to follow)"
@@ -250,6 +260,14 @@
       "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
       "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
       "section": "Summary Consolidated Financial and Other Data"
+    },
+    "sec_s1a_20261102": {
+      "publisher": "Anthropic, PBC (SEC Form S-1/A, Amendment No. 1)",
+      "date": "2026-11-02",
+      "type": "amended registration statement; adds nine months ended 2026-09-30 (unaudited); price range still blank; preliminary, subject to amendment",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm",
+      "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/0001628280-26-068676-index.htm",
+      "section": "Summary Consolidated Financial and Other Data; Consolidated Balance Sheets; Note on commitments; Business"
     }
   },
   "changelog": [
@@ -260,6 +278,10 @@
     {
       "date": "2026-10-27",
       "change": "Status updated from confidential draft to public S-1 (2026-10-26), Nasdaq ANT; underwriter syndicate from the S-1 cover (primary). IPO valuation and proceeds targets remain press-reported because the price range is blank."
+    },
+    {
+      "date": "2026-11-02",
+      "change": "Status: S-1/A Amendment No. 1 (2026-11-02) added; timeline event; next-filing watch item. Valuation and proceeds targets unchanged (still press-reported)."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",

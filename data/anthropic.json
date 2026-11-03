@@ -2,7 +2,7 @@
   "schema": "preipo-card/v2.3",
   "company": "Anthropic",
   "dataset": "financials",
-  "as_of": "2026-10-26",
+  "as_of": "2026-11-02",
   "currency": "USD",
   "verification": "mixed",
   "verification_scale": {
@@ -18,6 +18,207 @@
     "derived": "computed by this feed from other metrics"
   },
   "metrics": [
+    {
+      "id": "revenue_9m_2026",
+      "value": 33242000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Revenue",
+      "source": "sec_s1a_20261102",
+      "verification": "primary",
+      "yoy_multiple": 13.1
+    },
+    {
+      "id": "revenue_q3_2026",
+      "value": 16956000000.0,
+      "value_type": "derived",
+      "period": "Q3 2026 (three months ended 2026-09-30)",
+      "label": "Revenue, third quarter alone",
+      "formula": "revenue_9m_2026 (S-1/A) - revenue_h1_2026 (S-1)",
+      "inherits_from": [
+        "revenue_9m_2026",
+        "revenue_h1_2026"
+      ],
+      "verification": "derived"
+    },
+    {
+      "id": "revenue_9m_2025",
+      "value": 2545000000.0,
+      "value_type": "exact",
+      "period": "9M 2025 (unaudited)",
+      "label": "Revenue",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "compute_infra_spend_9m_2026",
+      "value": 18808000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Compute and infrastructure expense",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "personnel_9m_2026",
+      "value": 4863000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Personnel expense",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "sales_marketing_partnerships_9m_2026",
+      "value": 5529000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Sales, marketing, and partnerships expense",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "opex_total_9m_2026",
+      "value": 34502000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Total operating expenses",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "operating_loss_9m_2026",
+      "value": -1260000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Operating loss",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "adjusted_operating_income_9m_2026",
+      "value": 4081000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Adjusted Operating Income (non-GAAP, company definition; adjusted operating margin 12%)",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "fair_value_change_9m_2026",
+      "value": -94324000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Change in fair value of convertible notes, derivative liabilities, and SAFEs (non-cash)",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "net_loss_9m_2026",
+      "value": -104039000000.0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Net loss",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "compute_spend_per_revenue_dollar_9m_2026",
+      "value": 0.57,
+      "value_type": "derived",
+      "period": "9M 2026",
+      "label": "Compute and infrastructure expense per revenue dollar",
+      "formula": "compute_infra_spend_9m_2026 / revenue_9m_2026 (both S-1/A)",
+      "inherits_from": [
+        "compute_infra_spend_9m_2026",
+        "revenue_9m_2026"
+      ],
+      "verification": "derived"
+    },
+    {
+      "id": "cash_equiv_and_st_investments_2026_09_30",
+      "value": 131845000000.0,
+      "value_type": "exact",
+      "period": "2026-09-30 (unaudited)",
+      "label": "Cash, cash equivalents, and short-term investments (cash 95,562 + short-term investments 36,283, $M)",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "total_assets_2026_09_30",
+      "value": 154320000000.0,
+      "value_type": "exact",
+      "period": "2026-09-30 (unaudited)",
+      "label": "Total assets",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "total_liabilities_2026_09_30",
+      "value": 146683000000.0,
+      "value_type": "exact",
+      "period": "2026-09-30 (unaudited)",
+      "label": "Total liabilities",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "accumulated_deficit_2026_09_30",
+      "value": -156193000000.0,
+      "value_type": "exact",
+      "period": "2026-09-30 (unaudited)",
+      "label": "Accumulated deficit",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "compute_infra_min_commitments_2026_09_30",
+      "value": 313800000000.0,
+      "value_type": "approx",
+      "period": "as of 2026-09-30 (unaudited), terms 1-20 years",
+      "label": "Fixed or minimum guaranteed compute and infrastructure commitments",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "aggregate_committed_spend_2026_09_30",
+      "value": 895400000000.0,
+      "value_type": "approx",
+      "period": "as of and subsequent to 2026-09-30",
+      "label": "Aggregate committed spend under purchase commitments and leases, substantially all compute and infrastructure (about $447.5B expected before 2030-12-31)",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "customers_100k_ttm_2026_09_30",
+      "value": 11900,
+      "value_type": "lower_bound",
+      "period": "as of 2026-09-30",
+      "label": "Customers with $100,000+ revenue on a TTM basis (more than 950 a year earlier)",
+      "source": "sec_s1a_20261102",
+      "verification": "primary",
+      "unit": "count"
+    },
+    {
+      "id": "net_revenue_retention_2026_09_30",
+      "value": 9.0,
+      "value_type": "approx",
+      "period": "as of 2026-09-30",
+      "label": "Net Revenue Retention (company definition), approximately 900%",
+      "source": "sec_s1a_20261102",
+      "verification": "primary",
+      "unit": "fraction"
+    },
+    {
+      "id": "customers_above_10pct_revenue_9m_2026",
+      "value": 0,
+      "value_type": "exact",
+      "period": "9M 2026 (nine months ended 2026-09-30, unaudited)",
+      "label": "Customers at or above 10% of revenue (Customer A 11%, Customer B 14% in 9M 2025; none in 9M 2026)",
+      "source": "sec_s1a_20261102",
+      "verification": "primary",
+      "unit": "count"
+    },
     {
       "id": "revenue_fy2025",
       "value": 4585000000.0,
@@ -355,6 +556,14 @@
       "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
       "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
       "section": "Summary Consolidated Financial and Other Data"
+    },
+    "sec_s1a_20261102": {
+      "publisher": "Anthropic, PBC (SEC Form S-1/A, Amendment No. 1)",
+      "date": "2026-11-02",
+      "type": "amended registration statement; adds nine months ended 2026-09-30 (unaudited); price range still blank; preliminary, subject to amendment",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm",
+      "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/0001628280-26-068676-index.htm",
+      "section": "Summary Consolidated Financial and Other Data; Consolidated Balance Sheets; Note on commitments; Business"
     }
   },
   "changelog": [
@@ -373,6 +582,10 @@
     {
       "date": "2026-10-27",
       "change": "v2.3: verified against Anthropic's public S-1 (filed 2026-10-26). Upgraded to primary: revenue_fy2025: 4,600,000,000 (secondary, reuters_cnbc_20260928) -> 4,585,000,000 (primary, S-1); opex_total_fy2025: 12,650,000,000 (secondary, reuters_cnbc_20260928) -> 12,645,000,000 (primary, S-1); operating_loss_fy2025: -8,000,000,000 (secondary, reuters_cnbc_20260928) -> -8,060,000,000 (primary, S-1); net_loss_fy2025: -42,000,000,000 (secondary, reuters_cnbc_20260928) -> -41,965,000,000 (primary, S-1); net_loss_accounting_charge_fy2025: -34,000,000,000 (secondary, reuters_cnbc_20260928) -> -34,308,000,000 (primary, S-1); compute_infra_spend_fy2025: 7,330,000,000 (secondary, reuters_cnbc_20260928) -> 7,326,000,000 (primary, S-1). Added FY2023-2024 revenue, H1 2025/2026 income statement lines and the 2026-06-30 balance sheet. Recomputed derived ratios from S-1 figures. S-1 is preliminary and may be amended. Not yet re-verified in this pass (kept secondary): compute_infra_obligations, cash_equiv_and_st_investments_ye2025, top2_customer_revenue_share_fy2025. Independent re-extraction (separate Claude agent, 2026-10-27) matched all S-1 figures and found: cash_equiv_and_st_investments_ye2025: 20,280,000,000 (secondary) -> 20,277,000,000 (primary, S-1 balance sheet: cash 17,388 + short-term investments 2,889); top2_customer_revenue_share_fy2025: 0.25 approx (secondary) -> 0.24 exact (primary, S-1 Note 2: Customer A 12%, Customer B 12%); compute_infra_obligations ($518B, press) is not in the S-1, so a primary $265.6B minimum-commitment metric was added and the press figure is labelled accordingly."
+    },
+    {
+      "date": "2026-11-02",
+      "change": "S-1/A Amendment No. 1 (filed 2026-11-02): added nine months ended 2026-09-30 income statement (revenue $33.242B vs $2.545B; operating loss $1.26B; non-GAAP adjusted operating income $4.081B), derived Q3 2026 revenue ($16.956B), 2026-09-30 balance sheet, commitments ($313.8B minimum guaranteed; $895.4B aggregate committed spend), customers with $100k+ TTM revenue (>11,900) and NRR (~900%). No customer reached 10% of revenue in 9M 2026. Existing FY and H1 metrics unchanged."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
@@ -387,6 +600,7 @@
   },
   "notes": [
     "Run-Rate Revenue as defined in the S-1: consumption-based fees for the trailing 28-day period multiplied by 13, plus the monthly fees of all active subscriptions as of the measurement date multiplied by 12. The S-1 run-rate figure as of 2026-10-31 is blank in the initial filing; this card does not fill it from press reports.",
-    "Most of the FY2025 and H1 2026 net loss is a non-cash change in fair value of convertible notes, derivative liabilities and SAFEs, not operating cash burn: H1 2026 operating loss was $0.69B against a net loss of $80.7B."
+    "Most of the FY2025 and H1 2026 net loss is a non-cash change in fair value of convertible notes, derivative liabilities and SAFEs, not operating cash burn: H1 2026 operating loss was $0.69B against a net loss of $80.7B.",
+    "Nine-month 2026 figures come from S-1/A Amendment No. 1 (2026-11-02). H1 2026 figures remain from the initial S-1; Q3 2026 alone is derived as nine months minus H1. The S-1/A still leaves Run-Rate Revenue as of 2026-10-31, the price range and the share count blank."
   ]
 }
