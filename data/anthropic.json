@@ -96,11 +96,15 @@
     {
       "id": "cash_equiv_and_st_investments_ye2025",
       "value": 20277000000.0,
-      "value_type": "exact",
+      "value_type": "derived",
       "period": "2025-12-31",
-      "label": "Cash, cash equivalents and short-term investments",
-      "source": "sec_s1_20261026",
-      "verification": "primary"
+      "label": "Cash, cash equivalents and short-term investments (sum of two audited balance-sheet rows)",
+      "verification": "derived",
+      "formula": "cash_and_equivalents_ye2025 + short_term_investments_ye2025",
+      "inherits_from": [
+        "cash_and_equivalents_ye2025",
+        "short_term_investments_ye2025"
+      ]
     },
     {
       "id": "top2_customer_revenue_share_fy2025",
@@ -401,6 +405,24 @@
       "source": "sec_s1a_20261102",
       "verification": "primary",
       "note": "Includes short-term commitments and leases not yet commenced. Approximately $447.5B expected before December 31, 2030; substantially all remainder in 2031-2045. Not an expense or the same scope/date as historical $518B press obligations or Note 13 minimum purchase commitments."
+    },
+    {
+      "id": "cash_and_equivalents_ye2025",
+      "value": 17388000000,
+      "value_type": "exact",
+      "period": "2025-12-31 (audited)",
+      "label": "Cash and cash equivalents",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
+    },
+    {
+      "id": "short_term_investments_ye2025",
+      "value": 2889000000,
+      "value_type": "exact",
+      "period": "2025-12-31 (audited)",
+      "label": "Short-term investments",
+      "source": "sec_s1a_20261102",
+      "verification": "primary"
     }
   ],
   "sources": {
@@ -460,6 +482,10 @@
     {
       "date": "2026-11-05",
       "change": "Opened complete official November 2 S-1/A (accession 0001628280-26-068676). Rechecked every existing metric: no existing weaker-grade metric matched on amount, period and scope, so no forced upgrades. Preserved correct primary figures and all historical IDs/periods; retained derived values/formulas/inputs. Added six separately identified nine-month 2026 income statement figures and two distinct commitment disclosures as primary. Clarified historical $518B secondary figure versus new $895.4B aggregate and $313.8B minimum purchase commitments. Updated blank run-rate and historical absence-check wording."
+    },
+    {
+      "date": "2026-11-05",
+      "change": "Follow-up independent review: no directly disclosed $20,277m aggregate located in the amendment. Corrected cash_equiv_and_st_investments_ye2025 from primary/exact to derived/derived, preserving ID and value; added the two audited F-5 inputs ($17,388m cash and equivalents plus $2,889m short-term investments) with explicit formula and inherits_from. This supersedes the earlier preservation claim for this one metric."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
