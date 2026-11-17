@@ -2,7 +2,7 @@
   "schema": "preipo-card/v2.3",
   "company": "Anthropic",
   "dataset": "financials",
-  "as_of": "2026-10-26",
+  "as_of": "2026-11-17",
   "currency": "USD",
   "verification": "mixed",
   "verification_scale": {
@@ -88,29 +88,39 @@
       "value": 518000000000.0,
       "value_type": "exact",
       "period": "future years",
-      "label": "Planned cloud, computing and infrastructure obligations (press-reported; not in S-1)",
+      "label": "Planned cloud, computing and infrastructure obligations (historical press report; not verified on identical scope)",
       "source": "reuters_cnbc_20260928",
       "verification": "secondary",
-      "note": "Press-reported figure. Not found in the S-1: the S-1 leaves the aggregate committed spend blank and discloses fixed or minimum guaranteed compute commitments of about $265.6B as of 2026-06-30 (see compute_infra_min_commitments_2026_06_30). Prefer the S-1 figure."
+      "note": "Historical press-reported $518B retained at its original grade and scope. The new broad $900.9B purchase/lease aggregate is a different scope and cutoff, not an upgrade of this claim. The June 30 minimum commitment metric remains historical; see the separate September 30 minimum commitment and broad aggregate metrics."
     },
     {
       "id": "cash_equiv_and_st_investments_ye2025",
       "value": 20277000000.0,
-      "value_type": "exact",
+      "value_type": "derived",
       "period": "2025-12-31",
       "label": "Cash, cash equivalents and short-term investments",
-      "source": "sec_s1_20261026",
-      "verification": "primary"
+      "source": "sec_s1a_20261117",
+      "verification": "derived",
+      "formula": "cash_and_equivalents_ye2025 + short_term_investments_ye2025",
+      "inherits_from": [
+        "cash_and_equivalents_ye2025",
+        "short_term_investments_ye2025"
+      ]
     },
     {
       "id": "top2_customer_revenue_share_fy2025",
       "value": 0.24,
-      "value_type": "exact",
+      "value_type": "derived",
       "unit": "fraction",
       "period": "FY2025",
       "label": "Revenue share of the two customers above 10% (Customer A 12%, Customer B 12%)",
-      "source": "sec_s1_20261026",
-      "verification": "primary"
+      "source": "sec_s1a_20261117",
+      "verification": "derived",
+      "formula": "customer_a_revenue_share_fy2025 + customer_b_revenue_share_fy2025",
+      "inherits_from": [
+        "customer_a_revenue_share_fy2025",
+        "customer_b_revenue_share_fy2025"
+      ]
     },
     {
       "id": "compute_spend_per_revenue_dollar_fy2025",
@@ -327,6 +337,216 @@
       "label": "Total non-cancelable contractual commitments",
       "source": "sec_s1_20261026",
       "verification": "primary"
+    },
+    {
+      "id": "revenue_9m_2026",
+      "value": 33242000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Nine months ended 2026-09-30 (unaudited)",
+      "label": "Revenue",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "compute_infra_spend_9m_2026",
+      "value": 18808000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Nine months ended 2026-09-30 (unaudited)",
+      "label": "Compute and infrastructure expense",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "opex_total_9m_2026",
+      "value": 34502000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Nine months ended 2026-09-30 (unaudited)",
+      "label": "Total operating expenses",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "operating_loss_9m_2026",
+      "value": -1260000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Nine months ended 2026-09-30 (unaudited)",
+      "label": "Operating loss",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "fair_value_change_9m_2026",
+      "value": -94324000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Nine months ended 2026-09-30 (unaudited)",
+      "label": "Change in fair value of convertible notes, derivative liabilities, and SAFEs (non-cash)",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "net_loss_9m_2026",
+      "value": -104039000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Nine months ended 2026-09-30 (unaudited)",
+      "label": "Net loss",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "revenue_9m_2025",
+      "value": 2545000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Nine months ended 2025-09-30 (unaudited)",
+      "label": "Revenue",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "revenue_q3_2026",
+      "value": 16956000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Three months ended 2026-09-30 (unaudited)",
+      "label": "Revenue",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "cash_equiv_and_st_investments_2026_09_30",
+      "value": 131845000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "2026-09-30 (actual, unaudited)",
+      "label": "Cash, cash equivalents, and short-term investments",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "total_assets_2026_09_30",
+      "value": 154320000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "2026-09-30 (actual, unaudited)",
+      "label": "Total assets",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "total_liabilities_2026_09_30",
+      "value": 146683000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "2026-09-30 (actual, unaudited)",
+      "label": "Total liabilities",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "accumulated_deficit_2026_09_30",
+      "value": -156193000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "2026-09-30 (actual, unaudited)",
+      "label": "Accumulated deficit",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "run_rate_revenue_2026_10_31",
+      "value": 81000000000,
+      "value_type": "approx",
+      "unit": "USD",
+      "period": "2026-10-31",
+      "label": "Estimated annualized run-rate revenue; not GAAP revenue or a revenue forecast",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "compute_infra_min_commitments_2026_09_30",
+      "value": 313800000000,
+      "value_type": "approx",
+      "unit": "USD",
+      "period": "as of 2026-09-30 (unaudited), terms 1-20 years",
+      "label": "Fixed or minimum guaranteed compute and infrastructure commitments; excludes undeterminable amounts",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "aggregate_committed_spend_asof_and_subsequent_2026_09_30",
+      "value": 900900000000,
+      "value_type": "approx",
+      "unit": "USD",
+      "period": "as of and subsequent to 2026-09-30; disclosed 2026-11-17",
+      "label": "Purchase commitments and lease agreements, including short-term commitments and uncommenced leases; substantially all compute/infrastructure; not expense",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "aggregate_commitments_before_2030_12_31",
+      "value": 451600000000,
+      "value_type": "approx",
+      "unit": "USD",
+      "period": "as of and subsequent to 2026-09-30; expected before 2030-12-31",
+      "label": "Portion of broad purchase/lease commitments expected before December 31, 2030",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "aggregate_commitments_next12m_2026_09_30",
+      "value": 70700000000,
+      "value_type": "approx",
+      "unit": "USD",
+      "period": "12 months following 2026-09-30; disclosed 2026-11-17",
+      "label": "Portion of broad purchase/lease commitments due in next twelve months",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "cash_and_equivalents_ye2025",
+      "value": 17388000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "2025-12-31",
+      "label": "Cash and cash equivalents",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "short_term_investments_ye2025",
+      "value": 2889000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "2025-12-31",
+      "label": "Short-term investments",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "customer_a_revenue_share_fy2025",
+      "value": 0.12,
+      "value_type": "exact",
+      "unit": "fraction",
+      "period": "FY2025",
+      "label": "Customer A revenue share",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "customer_b_revenue_share_fy2025",
+      "value": 0.12,
+      "value_type": "exact",
+      "unit": "fraction",
+      "period": "FY2025",
+      "label": "Customer B revenue share",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
     }
   ],
   "sources": {
@@ -355,6 +575,13 @@
       "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
       "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
       "section": "Summary Consolidated Financial and Other Data"
+    },
+    "sec_s1a_20261117": {
+      "publisher": "Anthropic, PBC (SEC Form S-1/A, Amendment No. 3)",
+      "date": "2026-11-17",
+      "type": "preliminary registration statement; FY2023-2025 audited, nine months ended September 30, 2025/2026 unaudited; offering estimates subject to change",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074338/anthropicpbc-sx1ax3.htm",
+      "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074338/0001628280-26-074338-index.html"
     }
   },
   "changelog": [
@@ -373,6 +600,10 @@
     {
       "date": "2026-10-27",
       "change": "v2.3: verified against Anthropic's public S-1 (filed 2026-10-26). Upgraded to primary: revenue_fy2025: 4,600,000,000 (secondary, reuters_cnbc_20260928) -> 4,585,000,000 (primary, S-1); opex_total_fy2025: 12,650,000,000 (secondary, reuters_cnbc_20260928) -> 12,645,000,000 (primary, S-1); operating_loss_fy2025: -8,000,000,000 (secondary, reuters_cnbc_20260928) -> -8,060,000,000 (primary, S-1); net_loss_fy2025: -42,000,000,000 (secondary, reuters_cnbc_20260928) -> -41,965,000,000 (primary, S-1); net_loss_accounting_charge_fy2025: -34,000,000,000 (secondary, reuters_cnbc_20260928) -> -34,308,000,000 (primary, S-1); compute_infra_spend_fy2025: 7,330,000,000 (secondary, reuters_cnbc_20260928) -> 7,326,000,000 (primary, S-1). Added FY2023-2024 revenue, H1 2025/2026 income statement lines and the 2026-06-30 balance sheet. Recomputed derived ratios from S-1 figures. S-1 is preliminary and may be amended. Not yet re-verified in this pass (kept secondary): compute_infra_obligations, cash_equiv_and_st_investments_ye2025, top2_customer_revenue_share_fy2025. Independent re-extraction (separate Claude agent, 2026-10-27) matched all S-1 figures and found: cash_equiv_and_st_investments_ye2025: 20,280,000,000 (secondary) -> 20,277,000,000 (primary, S-1 balance sheet: cash 17,388 + short-term investments 2,889); top2_customer_revenue_share_fy2025: 0.25 approx (secondary) -> 0.24 exact (primary, S-1 Note 2: Customer A 12%, Customer B 12%); compute_infra_obligations ($518B, press) is not in the S-1, so a primary $265.6B minimum-commitment metric was added and the press figure is labelled accordingly."
+    },
+    {
+      "date": "2026-11-17",
+      "change": "Verified Amendment No. 3 in full locally (181 HTML tables). Added nine-month/Q3 results, September actual balance sheet, October run-rate, and separately scoped minimum/broad purchase-and-lease commitments. Preserved historical FY/H1 periods and sources; corrected year-end cash and customer-share sums from primary to derived with primary inputs. Historical $518B press claim not upgraded."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
@@ -386,7 +617,8 @@
     "feed": "https://preipo-feed.vercel.app/llms.txt"
   },
   "notes": [
-    "Run-Rate Revenue as defined in the S-1: consumption-based fees for the trailing 28-day period multiplied by 13, plus the monthly fees of all active subscriptions as of the measurement date multiplied by 12. The S-1 run-rate figure as of 2026-10-31 is blank in the initial filing; this card does not fill it from press reports.",
-    "Most of the FY2025 and H1 2026 net loss is a non-cash change in fair value of convertible notes, derivative liabilities and SAFEs, not operating cash burn: H1 2026 operating loss was $0.69B against a net loss of $80.7B."
+    "Run-Rate Revenue: consumption-based fees for the trailing 28 days multiplied by 13, plus monthly fees of active subscriptions multiplied by 12. November 17 S-1/A discloses approximately $81B as of October 31, 2026. Not GAAP revenue or a forecast; historical May run-rate and year-end targets are separate.",
+    "Most of the FY2025 and H1 2026 net loss is a non-cash change in fair value of convertible notes, derivative liabilities and SAFEs, not operating cash burn: H1 2026 operating loss was $0.69B against a net loss of $80.7B.",
+    "Historical FY2023-2025 figures were cross-checked against November 17 statements; unchanged correct primary metrics retain original sources. H1/June 30 figures retain the October 26 S-1 source. Cash and top-two customer aggregates are derived from separately disclosed primary inputs. September balance-sheet metrics use actual, not pro forma columns. Commitments are not expenses."
   ]
 }
