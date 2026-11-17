@@ -2,10 +2,10 @@
   "schema": "preipo-card/v2.1",
   "company": "Anthropic",
   "dataset": "ipo",
-  "as_of": "2026-10-26",
+  "as_of": "2026-11-17",
   "currency": "USD",
   "verification": "mixed",
-  "ipo_status": "Public S-1 filed with the SEC on 2026-10-26 (accession 0001628280-26-067168). Applied to list Class A common stock on the Nasdaq Global Select Market under the symbol \"ANT\". Price range and share count are blank in the initial filing.",
+  "ipo_status": "S-1/A Amendment No. 3 filed 2026-11-17 (0001628280-26-074338); preliminary, subject to completion. Approved to list Class A on Nasdaq Global Select Market as ANT. Estimated $70-$78 per share; 825,000,000 public-offering shares, including 23,648,646 secondary shares. No final price or trading commencement asserted.",
   "verification_scale": {
     "primary": "company filing or company statement, checked directly",
     "secondary": "major outlet reporting a company statement or document",
@@ -56,7 +56,7 @@
       "label": "IPO valuation prospective investors expect, low end",
       "source": "bloomberg_via_pymnts_20261001",
       "verification": "reported",
-      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
+      "note": "Historical press target retained with original period and grade; November 17 preliminary price/share terms do not verify this earlier target. See separate current offering metrics."
     },
     {
       "id": "ipo_valuation_target_high",
@@ -66,7 +66,7 @@
       "label": "IPO valuation, high end ('more than $2 trillion' per Reuters 2026-09-28)",
       "source": "bloomberg_via_pymnts_20261001",
       "verification": "reported",
-      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
+      "note": "Historical press target retained with original period and grade; November 17 preliminary price/share terms do not verify this earlier target. See separate current offering metrics."
     },
     {
       "id": "ipo_proceeds_target_max",
@@ -76,7 +76,7 @@
       "label": "Proceeds bankers told investors the IPO could raise (up to/around); reported when timing was still October",
       "source": "nyt_via_aiweekly_20260822",
       "verification": "reported",
-      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
+      "note": "Historical press target retained with original period and grade; November 17 preliminary price/share terms do not verify this earlier target. See separate current offering metrics."
     },
     {
       "id": "run_rate_revenue_target_ye2026_low",
@@ -121,6 +121,191 @@
       ],
       "label": "IPO target (high) / May run-rate revenue; run-rate is a lower bound so the true multiple is at most this",
       "verification": "derived"
+    },
+    {
+      "id": "run_rate_revenue_2026_10_31",
+      "value": 81000000000,
+      "value_type": "approx",
+      "unit": "USD",
+      "period": "2026-10-31",
+      "label": "Estimated annualized run-rate revenue; not GAAP revenue or a revenue forecast",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_price_range_low",
+      "value": 70,
+      "value_type": "range_low",
+      "unit": "USD/share",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Estimated IPO price range, low end",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_price_range_high",
+      "value": 78,
+      "value_type": "range_high",
+      "unit": "USD/share",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Estimated IPO price range, high end",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_assumed_midpoint_price",
+      "value": 74,
+      "value_type": "exact",
+      "unit": "USD/share",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Assumed IPO midpoint price for prospectus estimates",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_shares_total",
+      "value": 825000000,
+      "value_type": "exact",
+      "unit": "shares",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Total Class A shares offered, issuer plus selling stockholders; excludes option",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_shares_company",
+      "value": 801351354,
+      "value_type": "exact",
+      "unit": "shares",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Class A shares offered by company; excludes option",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_shares_selling_stockholders",
+      "value": 23648646,
+      "value_type": "exact",
+      "unit": "shares",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Class A shares offered by selling stockholders; no proceeds to company",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_underwriters_option_shares",
+      "value": 123750000,
+      "value_type": "exact",
+      "unit": "shares",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Additional Class A shares available from company under underwriters option",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "concurrent_private_placement_amount",
+      "value": 26000000000,
+      "value_type": "exact",
+      "unit": "USD",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Contingent concurrent Class N private placement; separate from public IPO",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_and_private_placement_net_proceeds_midpoint",
+      "value": 84600000000,
+      "value_type": "approx",
+      "unit": "USD",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Estimated net proceeds to company from IPO PLUS concurrent private placement at midpoint; no option",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_and_private_placement_net_proceeds_full_option_midpoint",
+      "value": 93700000000,
+      "value_type": "approx",
+      "unit": "USD",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Estimated net proceeds to company from IPO PLUS concurrent private placement at midpoint; full option",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_gross_offering_low",
+      "value": 57750000000,
+      "value_type": "derived",
+      "unit": "USD",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Calculated public IPO gross offering at low price; includes secondary shares, excludes option/private placement/fees",
+      "source": "sec_s1a_20261117",
+      "verification": "derived",
+      "formula": "ipo_shares_total * ipo_price_range_low",
+      "inherits_from": [
+        "ipo_shares_total",
+        "ipo_price_range_low"
+      ]
+    },
+    {
+      "id": "ipo_gross_offering_high",
+      "value": 64350000000,
+      "value_type": "derived",
+      "unit": "USD",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Calculated public IPO gross offering at high price; includes secondary shares, excludes option/private placement/fees",
+      "source": "sec_s1a_20261117",
+      "verification": "derived",
+      "formula": "ipo_shares_total * ipo_price_range_high",
+      "inherits_from": [
+        "ipo_shares_total",
+        "ipo_price_range_high"
+      ]
+    },
+    {
+      "id": "ipo_gross_offering_midpoint",
+      "value": 61050000000,
+      "value_type": "derived",
+      "unit": "USD",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Calculated public IPO gross offering at midpoint price; includes secondary shares, excludes option/private placement/fees",
+      "source": "sec_s1a_20261117",
+      "verification": "derived",
+      "formula": "ipo_shares_total * ipo_assumed_midpoint_price",
+      "inherits_from": [
+        "ipo_shares_total",
+        "ipo_assumed_midpoint_price"
+      ]
+    },
+    {
+      "id": "ipo_gross_company_midpoint",
+      "value": 59300000196,
+      "value_type": "derived",
+      "unit": "USD",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Calculated company gross proceeds at midpoint; before fees, excludes option/private placement",
+      "source": "sec_s1a_20261117",
+      "verification": "derived",
+      "formula": "ipo_shares_company * ipo_assumed_midpoint_price",
+      "inherits_from": [
+        "ipo_shares_company",
+        "ipo_assumed_midpoint_price"
+      ]
+    },
+    {
+      "id": "ipo_gross_selling_stockholders_midpoint",
+      "value": 1749999804,
+      "value_type": "derived",
+      "unit": "USD",
+      "period": "Preliminary IPO terms as of 2026-11-17; not completed",
+      "label": "Calculated selling stockholders gross proceeds at midpoint; before fees, excludes option/private placement",
+      "source": "sec_s1a_20261117",
+      "verification": "derived",
+      "formula": "ipo_shares_selling_stockholders * ipo_assumed_midpoint_price",
+      "inherits_from": [
+        "ipo_shares_selling_stockholders",
+        "ipo_assumed_midpoint_price"
+      ]
     }
   ],
   "underwriters": {
@@ -190,6 +375,12 @@
       "event": "Public S-1 filed on SEC EDGAR; Nasdaq symbol ANT",
       "source": "sec_s1_20261026",
       "verification": "primary"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "S-1/A Amendment No. 3: preliminary price/share terms and contingent concurrent private placement disclosed; Nasdaq listing approved, offering not completed",
+      "source": "sec_s1a_20261117",
+      "verification": "primary"
     }
   ],
   "next_dates": [
@@ -250,6 +441,13 @@
       "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
       "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
       "section": "Summary Consolidated Financial and Other Data"
+    },
+    "sec_s1a_20261117": {
+      "publisher": "Anthropic, PBC (SEC Form S-1/A, Amendment No. 3)",
+      "date": "2026-11-17",
+      "type": "preliminary registration statement; FY2023-2025 audited, nine months ended September 30, 2025/2026 unaudited; offering estimates subject to change",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074338/anthropicpbc-sx1ax3.htm",
+      "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074338/0001628280-26-074338-index.html"
     }
   },
   "changelog": [
@@ -260,6 +458,10 @@
     {
       "date": "2026-10-27",
       "change": "Status updated from confidential draft to public S-1 (2026-10-26), Nasdaq ANT; underwriter syndicate from the S-1 cover (primary). IPO valuation and proceeds targets remain press-reported because the price range is blank."
+    },
+    {
+      "date": "2026-11-17",
+      "change": "Added preliminary $70-$78 range, issuer/secondary/option share counts, $26B contingent private placement, combined company net-proceeds estimates and explicitly derived public gross proceeds. Updated approved Nasdaq status and October run-rate. Historical targets retained without false upgrades; no final pricing, valuation, or trading date asserted."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
@@ -268,5 +470,10 @@
     "maker": "Aaron Zhang, independent developer",
     "url": "https://farcaster.xyz/aaronzhang",
     "feed": "https://preipo-feed.vercel.app/llms.txt"
-  }
+  },
+  "notes": [
+    "Company net-proceeds estimates include the concurrent private placement; public IPO gross calculations include selling-stockholder shares and are not company net proceeds. All offering amounts remain preliminary.",
+    "Historical reported year-end run-rate targets and valuation/proceeds targets remain unchanged; October run-rate is not a year-end target.",
+    "No IPO valuation calculated: the filing presents differing Class N counts in The Offering and consolidated capitalization, and rollover notes, options, RSUs and public-benefit shares require an explicit dilution basis. Price times share counts would be derived, not primary."
+  ]
 }
