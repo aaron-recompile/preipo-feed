@@ -2,7 +2,7 @@
   "schema": "preipo-card/v2.1",
   "company": "OpenAI",
   "dataset": "financials",
-  "as_of": "2026-10-08",
+  "as_of": "2026-11-18",
   "currency": "USD",
   "verification": "mixed",
   "verification_scale": {
@@ -44,7 +44,9 @@
       "period": "as of 2026-03-31",
       "label": "ChatGPT weekly active users (more than)",
       "source": "quartz_20260331",
-      "verification": "secondary"
+      "verification": "secondary",
+      "superseded_by": "chatgpt_weekly_active_users_2026_11",
+      "note": "Superseded: Newer figure: about 1.2B weekly users."
     },
     {
       "id": "chatgpt_subscribers_2026_03",
@@ -81,7 +83,9 @@
       "period": "in talks as of 2026-09-29",
       "label": "New round size sought (at least); early-stage talks, terms could change",
       "source": "quartz_20260929",
-      "verification": "reported"
+      "verification": "reported",
+      "superseded_by": "new_round_raised_2026_11",
+      "note": "Superseded: The round closed smaller than the $30B+ target: $11B first close (2026-11-06), about $15B raised by 2026-11-12."
     },
     {
       "id": "new_round_valuation_2026_09",
@@ -90,7 +94,9 @@
       "period": "in talks as of 2026-09-29",
       "label": "Valuation sought for new round (around), per Bloomberg sources",
       "source": "quartz_20260929",
-      "verification": "reported"
+      "verification": "reported",
+      "superseded_by": "new_round_pre_money_2026_11",
+      "note": "Superseded: The round is at about $1.25T pre-money (CFO on record), below the $1.4T sought."
     },
     {
       "id": "softbank_hy_bond_2026_09",
@@ -118,7 +124,8 @@
       "period": "2026-09-24",
       "label": "SoftBank cumulative commitment to OpenAI",
       "source": "reuters_thestar_20260924",
-      "verification": "secondary"
+      "verification": "secondary",
+      "note": "Fully invested as of 2026-10-01 per SoftBank's Q2 FY2026 report."
     },
     {
       "id": "softbank_stake",
@@ -153,7 +160,9 @@
         "revenue_run_rate_annualized_2026_03"
       ],
       "label": "Sought valuation / March run-rate (reported-grade input, approx)",
-      "verification": "derived"
+      "verification": "derived",
+      "superseded_by": "new_round_pre_money_to_run_rate_2026_11",
+      "note": "Superseded: Recomputed on the actual round and September run-rate."
     },
     {
       "id": "valuation_step_up_vs_last_round",
@@ -166,7 +175,9 @@
         "last_round_post_money_2026_03"
       ],
       "label": "Step-up of sought valuation over March post-money",
-      "verification": "derived"
+      "verification": "derived",
+      "superseded_by": "valuation_step_up_vs_last_round_2026_11",
+      "note": "Superseded: Recomputed on the actual round."
     },
     {
       "id": "revenue_run_rate_annualized_reported_2026_08",
@@ -177,7 +188,9 @@
       "source": "bloomberg_run_rate_20260813",
       "verification": "reported",
       "measurement_basis": "annualized revenue run-rate",
-      "is_forecast": false
+      "is_forecast": false,
+      "superseded_by": "revenue_run_rate_annualized_2026_09",
+      "note": "Superseded: Newer figure: about $50B at end of September 2026."
     },
     {
       "id": "advertising_revenue_run_rate_annualized_2026_08",
@@ -189,6 +202,146 @@
       "verification": "primary",
       "measurement_basis": "annualized revenue run-rate",
       "is_forecast": false
+    },
+    {
+      "id": "new_round_pre_money_2026_11",
+      "value": 1250000000000.0,
+      "value_type": "approx",
+      "period": "round ongoing as of 2026-11-06",
+      "label": "Pre-money valuation of the new round (CFO on record; 'almost a 50 percent lift' over March)",
+      "source": "cnbc_friar_20261106",
+      "verification": "secondary",
+      "note": "The CNBC transcript reads '$1.25 billion pre-money', an evident transcription slip for trillion."
+    },
+    {
+      "id": "new_round_first_close_2026_11",
+      "value": 11000000000.0,
+      "value_type": "approx",
+      "period": "first close reported 2026-11-06",
+      "label": "First portion of the new round closed",
+      "source": "cnbc_20261106_first_close",
+      "verification": "reported"
+    },
+    {
+      "id": "new_round_raised_2026_11",
+      "value": 15000000000.0,
+      "value_type": "approx",
+      "period": "reported 2026-11-12",
+      "label": "Total raised so far in the new round (includes the first close; do not add the two)",
+      "source": "cnbc_20261112_raised",
+      "verification": "reported"
+    },
+    {
+      "id": "revenue_run_rate_annualized_2026_09",
+      "value": 50000000000.0,
+      "value_type": "approx",
+      "period": "end of September 2026",
+      "label": "Annualized revenue run-rate, net of partners' gross sales (as OpenAI told investors)",
+      "source": "cnbc_20261008_runrate",
+      "verification": "secondary"
+    },
+    {
+      "id": "revenue_q3_2026",
+      "value": 10000000000.0,
+      "value_type": "approx",
+      "period": "Q3 2026",
+      "label": "Quarterly revenue, first time above $10B (unconfirmed by OpenAI)",
+      "source": "techcrunch_20261111_q3",
+      "verification": "reported"
+    },
+    {
+      "id": "chatgpt_weekly_active_users_2026_11",
+      "value": 1200000000.0,
+      "value_type": "approx",
+      "period": "stated 2026-11-06",
+      "label": "ChatGPT weekly active users",
+      "source": "cnbc_friar_20261106",
+      "verification": "secondary",
+      "unit": "users"
+    },
+    {
+      "id": "revenue_mix_consumer_share_2026_11",
+      "value": 0.5,
+      "value_type": "approx",
+      "period": "stated 2026-11-06",
+      "label": "Share of revenue from consumers (about half; the rest enterprise)",
+      "source": "cnbc_friar_20261106",
+      "verification": "secondary",
+      "unit": "fraction"
+    },
+    {
+      "id": "microsoft_stake_as_converted",
+      "value": 0.24,
+      "value_type": "approx",
+      "period": "as of 2026-09-30",
+      "label": "Microsoft's equity-method interest in OpenAI, as-converted basis",
+      "source": "msft_10q_20261028",
+      "verification": "primary",
+      "unit": "fraction"
+    },
+    {
+      "id": "microsoft_revenue_from_openai_q3_2026",
+      "value": 10000000000.0,
+      "value_type": "exact",
+      "period": "three months ended 2026-09-30",
+      "label": "Revenue Microsoft recorded from commercial arrangements with OpenAI, incl. revenue sharing (a measure of OpenAI's spending with Microsoft)",
+      "source": "msft_10q_20261028",
+      "verification": "primary"
+    },
+    {
+      "id": "microsoft_funding_commitment_funded",
+      "value": 12000000000.0,
+      "value_type": "exact",
+      "period": "as of 2026-09-30",
+      "label": "Microsoft funding funded to date, of $13.0B committed",
+      "source": "msft_10q_20261028",
+      "verification": "primary"
+    },
+    {
+      "id": "amazon_series_c_invested_9m_2026",
+      "value": 50000000000.0,
+      "value_type": "exact",
+      "period": "nine months ended 2026-09-30",
+      "label": "Amazon investment in OpenAI Series C Preferred Stock (incl. $21.3B in Q3 2026)",
+      "source": "amzn_10q_20261030",
+      "verification": "primary"
+    },
+    {
+      "id": "softbank_openai_fair_value_2026_09",
+      "value": 99600000000.0,
+      "value_type": "exact",
+      "period": "as of 2026-09-30",
+      "label": "Fair value of SoftBank's OpenAI holding (new round not yet reflected)",
+      "source": "sbg_q2fy2026",
+      "verification": "primary"
+    },
+    {
+      "id": "new_round_pre_money_to_run_rate_2026_11",
+      "value": 25.0,
+      "value_type": "derived",
+      "unit": "x",
+      "period": "2026-11",
+      "label": "New-round pre-money / September run-rate",
+      "formula": "new_round_pre_money_2026_11 / revenue_run_rate_annualized_2026_09",
+      "verification": "derived",
+      "inherits_from": [
+        "new_round_pre_money_2026_11",
+        "revenue_run_rate_annualized_2026_09"
+      ]
+    },
+    {
+      "id": "valuation_step_up_vs_last_round_2026_11",
+      "value": 0.467,
+      "value_type": "derived",
+      "unit": "fraction",
+      "period": "2026-11",
+      "label": "New-round pre-money vs March 2026 post-money",
+      "formula": "new_round_pre_money_2026_11 / last_round_post_money_2026_03 - 1",
+      "verification": "derived",
+      "inherits_from": [
+        "new_round_pre_money_2026_11",
+        "last_round_post_money_2026_03"
+      ]
     }
   ],
   "events": [
@@ -235,6 +388,54 @@
       "date": "2026-03-31",
       "type": "company announcement; committed capital, not cash received",
       "url": "https://openai.com/index/accelerating-the-next-phase-ai/"
+    },
+    "cnbc_friar_20261106": {
+      "publisher": "CNBC (transcript of CFO Sarah Friar interview)",
+      "date": "2026-11-06",
+      "type": "on-record CFO interview",
+      "url": "https://www.cnbc.com/2026/11/06/cnbc-exclusive-transcript-openai-cfo-sarah-friar-speaks-with-cnbcs-sara-eisen-on-squawk-on-the-street-today.html"
+    },
+    "cnbc_20261106_first_close": {
+      "publisher": "CNBC (confirming Bloomberg)",
+      "date": "2026-11-06",
+      "type": "news report",
+      "url": "https://www.cnbc.com/2026/11/06/open-ai-data-centers-election.html"
+    },
+    "cnbc_20261112_raised": {
+      "publisher": "CNBC (people familiar)",
+      "date": "2026-11-12",
+      "type": "news report",
+      "url": "https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html"
+    },
+    "cnbc_20261008_runrate": {
+      "publisher": "CNBC (OpenAI investor presentation, per person familiar)",
+      "date": "2026-10-08",
+      "type": "news report",
+      "url": "https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html"
+    },
+    "techcrunch_20261111_q3": {
+      "publisher": "TechCrunch citing Bloomberg (people familiar)",
+      "date": "2026-11-11",
+      "type": "news report",
+      "url": "https://techcrunch.com/2026/11/11/openais-quarterly-revenue-reportedly-crosses-10b-for-the-first-time/"
+    },
+    "msft_10q_20261028": {
+      "publisher": "Microsoft Form 10-Q (quarter ended 2026-09-30)",
+      "date": "2026-10-28",
+      "type": "SEC filing by counterparty",
+      "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm"
+    },
+    "amzn_10q_20261030": {
+      "publisher": "Amazon Form 10-Q (quarter ended 2026-09-30)",
+      "date": "2026-10-30",
+      "type": "SEC filing by counterparty",
+      "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm"
+    },
+    "sbg_q2fy2026": {
+      "publisher": "SoftBank Group, Q2 FY2026 consolidated financial report",
+      "date": "2026-11-10",
+      "type": "company financial report of counterparty",
+      "url": "https://group.softbank/media/Project/sbg/sbg/pdf/ir/financials/financial_reports/financial-report_q2fy2026_01_en.pdf"
     }
   },
   "changelog": [
@@ -249,6 +450,10 @@
     {
       "date": "2026-10-08",
       "change": "Upgraded March committed capital ($122B) and post-money valuation ($852B) from secondary Quartz reporting to the directly checked OpenAI announcement, aligning financials with the IPO card. Values and IDs unchanged; committed capital is not cash received. Compute commitment total, latest cash balance and IPO target valuation remain omitted: accessible original wording was not verified in this review; research limitations detailed in PR."
+    },
+    {
+      "date": "2026-11-18",
+      "change": "New round: about $1.25T pre-money (CFO on record), $11B first close 2026-11-06, about $15B raised by 2026-11-12, replacing the $30B+/$1.4T target. Run-rate about $50B (end of September), ChatGPT about 1.2B weekly users. Primary counterparty data from Microsoft's and Amazon's 10-Qs (MSFT ~24% as-converted; $10.0B MSFT revenue from OpenAI in Q3; Amazon $50.0B Series C) and SoftBank's Q2 FY2026 report ($99.6B fair value). Older figures kept and marked superseded. No public OpenAI S-1 on EDGAR as of 2026-11-18."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",

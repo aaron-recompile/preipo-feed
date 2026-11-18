@@ -99,7 +99,7 @@ const ratio = (num, den, note) => (num && den ? { value: Math.round((num.value /
   value_type: "derived", note, inputs: [num, den].map((x) => x.from_card) } : null);
 const compareLabs = () => {
   const side = (company, ids) => Object.fromEntries(Object.entries(ids).map(([k, id]) => [k, id ? metric(company, id) : null]));
-  const openai = side("OpenAI", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "revenue_run_rate_annualized_reported_2026_08",
+  const openai = side("OpenAI", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "revenue_run_rate_annualized_2026_09",
     last_private_post_money: "last_private_post_money_2026_03", last_private_round_size: "last_private_round_size_2026_03",
     ipo_valuation_target_high: null, compute_obligations: null, cash_and_investments_ye2025: null });
   const anthropic = side("Anthropic", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "run_rate_revenue_2026_05",
@@ -238,6 +238,7 @@ app.get("/.well-known/x402", (req, res) => {
     resources: [
       { resource: `${o}/preipo/catalog`, method: "GET", description: "Free catalog: companies, datasets, as_of dates, verification grades, metric ids, prices.", priceUsd: 0, free: true },
       { resource: `${o}/preipo/sample`, method: "GET", description: "Free sample: two real metrics per card with source, grade and value type, plus funding-round rows.", priceUsd: 0, free: true },
+      { resource: `${o}/preipo/changelog`, method: "GET", description: "Free changelog: every dated update to every card, newest first.", priceUsd: 0, free: true },
       ...PRODUCTS.map((p) => ({
         resource: `${o}${p.path}`, method: "GET", description: p.description, priceUsd: Number(p.price), free: false,
         networks: NETWORKS, tags: p.tags, as_of: p.card.as_of, verification: p.card.verification, metricIds: p.card.metrics.map((m) => m.id),
@@ -315,6 +316,7 @@ ${SERVICE.maker} Contact: ${MAKER.url}
 ## Endpoints
 - [Catalog](${o}/preipo/catalog): free. Companies, datasets, as_of, verification, metric ids, prices.
 - [Sample](${o}/preipo/sample): free. Two real metrics per card, each with source URL, grade and value type; judge the data before paying.
+- [Changelog](${o}/preipo/changelog): free. Every dated update to every card, newest first.
 ${PRODUCTS.map((p) => `- [${p.card.company} ${p.card.dataset}](${o}${p.path}): ${p.price} USDC per call. as_of ${p.card.as_of}. ${p.card.metrics.length} metrics.`).join("\n")}
 
 ## How to pay
@@ -382,13 +384,19 @@ app.get("/", (req, res) =>
     what: "Fundamentals of private AI companies (revenue, costs, compute, cash, funding) as JSON. Each figure carries as_of, source and a verification grade, plus a live on-chain pre-IPO perp vs private valuation view. Not advice.",
     pay: { protocol: "x402", asset: "USDC", networks: NETWORKS },
     catalog: "/preipo/catalog",
-    free: ["/preipo/catalog", "/preipo/sample"],
+    free: ["/preipo/catalog", "/preipo/sample", "/preipo/changelog"],
     discovery: ["/llms.txt", "/.well-known/x402", "/openapi.json", "/agents.json"],
     paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }, { path: COMPARE_PATH, price_usdc: "0.05" }, { path: ONCHAIN_PATH, price_usdc: "0.02" }],
     more_from_this_developer: OTHERS,
   }),
 );
 app.get("/preipo/catalog", (req, res) => res.send(catalog()));
+// Free public track record: every dated change to every card, newest first, with the card it belongs to.
+app.get("/preipo/changelog", (req, res) => res.send({
+  note: "Every dated update to this feed's data cards, newest first. Each card also carries its own changelog and per-metric sources.",
+  entries: PRODUCTS.flatMap((p) => (p.card.changelog || []).map((c) => ({ date: c.date, path: p.path, company: p.card.company, dataset: p.card.dataset, change: c.change })))
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)),
+}));
 app.get("/preipo/sample", (req, res) => res.send(sample()));
 for (const p of PRODUCTS) app.get(p.path, (req, res) => res.send(p.card));
 app.get(FUNDING_PATH, (req, res) => res.send(fundingRounds()));

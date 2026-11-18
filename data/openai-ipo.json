@@ -2,7 +2,7 @@
   "schema": "preipo-card/v2.1",
   "company": "OpenAI",
   "dataset": "ipo",
-  "as_of": "2026-10-06",
+  "as_of": "2026-11-18",
   "currency": "USD",
   "verification": "mixed",
   "ipo_status": "OpenAI announced on 2026-06-08 that it had recently submitted a confidential draft S-1 to the SEC. The exact submission date was not disclosed in the announcement. A confidential submission is not a public prospectus or a commitment to list.",
@@ -129,6 +129,12 @@
       "event": "Fortune published its September 11 interview: Altman ruled out a 2026 IPO, citing safety and readiness; no firm 2027 commitment.",
       "source": "fortune_altman_20260912",
       "verification": "secondary"
+    },
+    {
+      "date": "2026-11-06",
+      "event": "CFO says the company will continue to look at 2027 for an IPO; new round at about $1.25T pre-money",
+      "source": "cnbc_friar_20261106",
+      "verification": "secondary"
     }
   ],
   "next_dates": [],
@@ -180,6 +186,18 @@
       "date": "2026-05-18",
       "type": "original courtroom reporting of advisory jury verdict and judge dismissal; not a court filing or a merits exoneration",
       "url": "https://www.theguardian.com/technology/2026/may/18/sam-altman-trial-victory-elon-musk-openai"
+    },
+    "cnbc_friar_20261106": {
+      "publisher": "CNBC (transcript of CFO Sarah Friar interview)",
+      "date": "2026-11-06",
+      "type": "on-record CFO interview",
+      "url": "https://www.cnbc.com/2026/11/06/cnbc-exclusive-transcript-openai-cfo-sarah-friar-speaks-with-cnbcs-sara-eisen-on-squawk-on-the-street-today.html"
+    },
+    "edgar_check_20261118": {
+      "publisher": "SEC EDGAR full-text search",
+      "date": "2026-11-18",
+      "type": "absence check: no public S-1/S-1/A/DRS for OpenAI",
+      "url": "https://efts.sec.gov/LATEST/search-index?q=%22OpenAI%22&forms=S-1,S-1/A,DRS&dateRange=custom&startdt=2026-10-06&enddt=2026-11-18"
     }
   },
   "changelog": [
@@ -190,6 +208,10 @@
     {
       "date": "2026-10-06",
       "change": "Added original Bloomberg reporting of employee tender size and valuation, separately from primary financing, and original Guardian reporting of May 18 time-bar verdict and judicial dismissal. Government 5% equity proposal and first investor-relations-head appointment omitted because the exact requested claims could not be verified from accessible originals; gaps detailed in PR. No listing-timing change or new route."
+    },
+    {
+      "date": "2026-11-18",
+      "change": "Re-checked EDGAR: still no public OpenAI registration statement. Added 2026-11-06 CFO statement pointing to 2027."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
