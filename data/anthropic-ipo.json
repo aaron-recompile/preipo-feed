@@ -2,10 +2,10 @@
   "schema": "preipo-card/v2.1",
   "company": "Anthropic",
   "dataset": "ipo",
-  "as_of": "2026-10-26",
+  "as_of": "2026-11-18",
   "currency": "USD",
   "verification": "mixed",
-  "ipo_status": "Public S-1 filed with the SEC on 2026-10-26 (accession 0001628280-26-067168). Applied to list Class A common stock on the Nasdaq Global Select Market under the symbol \"ANT\". Price range and share count are blank in the initial filing.",
+  "ipo_status": "Priced range set and listing approved: S-1/A Amendment No. 3 (2026-11-17) sets an estimated price range of $70.00-$78.00 per Class A share for 825,000,000 shares (801,351,354 new, 23,648,646 from selling stockholders); approved to list on the Nasdaq Global Select Market as \"ANT\"; Form 8-A12B filed 2026-11-17 and Nasdaq certification 2026-11-18. Final price not yet filed (no 424B4 as of 2026-11-18).",
   "verification_scale": {
     "primary": "company filing or company statement, checked directly",
     "secondary": "major outlet reporting a company statement or document",
@@ -56,7 +56,8 @@
       "label": "IPO valuation prospective investors expect, low end",
       "source": "bloomberg_via_pymnts_20261001",
       "verification": "reported",
-      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
+      "note": "Superseded by the S-1/A No. 3 price range (2026-11-17). Kept for history: earlier press reports pointed to a higher valuation than the filed range implies.",
+      "superseded_by": "implied_market_cap_at_range_low / implied_market_cap_at_range_high"
     },
     {
       "id": "ipo_valuation_target_high",
@@ -66,7 +67,8 @@
       "label": "IPO valuation, high end ('more than $2 trillion' per Reuters 2026-09-28)",
       "source": "bloomberg_via_pymnts_20261001",
       "verification": "reported",
-      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
+      "note": "Superseded by the S-1/A No. 3 price range (2026-11-17). Kept for history: earlier press reports pointed to a higher valuation than the filed range implies.",
+      "superseded_by": "implied_market_cap_at_range_low / implied_market_cap_at_range_high"
     },
     {
       "id": "ipo_proceeds_target_max",
@@ -76,7 +78,8 @@
       "label": "Proceeds bankers told investors the IPO could raise (up to/around); reported when timing was still October",
       "source": "nyt_via_aiweekly_20260822",
       "verification": "reported",
-      "note": "Still press-reported; the S-1 price range is blank as of 2026-10-26."
+      "note": "Superseded by the S-1/A No. 3 price range (2026-11-17). Kept for history: earlier press reports pointed to a higher valuation than the filed range implies.",
+      "superseded_by": "implied_market_cap_at_range_low / implied_market_cap_at_range_high"
     },
     {
       "id": "run_rate_revenue_target_ye2026_low",
@@ -121,6 +124,81 @@
       ],
       "label": "IPO target (high) / May run-rate revenue; run-rate is a lower bound so the true multiple is at most this",
       "verification": "derived"
+    },
+    {
+      "id": "ipo_price_range_low",
+      "value": 70.0,
+      "value_type": "exact",
+      "period": "S-1/A No. 3",
+      "label": "Estimated IPO price per Class A share, low",
+      "source": "sec_s1a3_20261117",
+      "verification": "primary",
+      "unit": "USD per share"
+    },
+    {
+      "id": "ipo_price_range_high",
+      "value": 78.0,
+      "value_type": "exact",
+      "period": "S-1/A No. 3",
+      "label": "Estimated IPO price per Class A share, high",
+      "source": "sec_s1a3_20261117",
+      "verification": "primary",
+      "unit": "USD per share"
+    },
+    {
+      "id": "ipo_shares_offered",
+      "value": 825000000,
+      "value_type": "exact",
+      "period": "S-1/A No. 3",
+      "label": "Class A shares offered (801,351,354 primary + 23,648,646 secondary), before underwriter option",
+      "source": "sec_s1a3_20261117",
+      "verification": "primary",
+      "unit": "shares"
+    },
+    {
+      "id": "shares_outstanding_post_offering",
+      "value": 13086672593,
+      "value_type": "exact",
+      "period": "after the offering and concurrent private placement",
+      "label": "Class A, N, T, E and F common stock outstanding (before underwriter option; excludes options/RSUs not counted in this line)",
+      "source": "sec_s1a3_20261117",
+      "verification": "primary",
+      "unit": "shares"
+    },
+    {
+      "id": "concurrent_private_placement",
+      "value": 26000000000.0,
+      "value_type": "approx",
+      "period": "at the IPO price",
+      "label": "Concurrent private placement of Class N stock: Google ~$10.0B, NVIDIA ~$10.0B, AMD ~$2.5B, Broadcom, Micron, Microsoft ~$1.0B each, TSMC ~$0.5B",
+      "source": "sec_s1a3_20261117",
+      "verification": "primary"
+    },
+    {
+      "id": "implied_market_cap_at_range_low",
+      "value": 916067081510,
+      "value_type": "derived",
+      "period": "S-1/A No. 3",
+      "label": "Implied market capitalization at $70 (price x shares outstanding after offering; not fully diluted)",
+      "formula": "ipo_price_range_low * shares_outstanding_post_offering",
+      "verification": "derived",
+      "inherits_from": [
+        "ipo_price_range_low",
+        "shares_outstanding_post_offering"
+      ]
+    },
+    {
+      "id": "implied_market_cap_at_range_high",
+      "value": 1020760462254,
+      "value_type": "derived",
+      "period": "S-1/A No. 3",
+      "label": "Implied market capitalization at $78 (price x shares outstanding after offering; not fully diluted)",
+      "formula": "ipo_price_range_high * shares_outstanding_post_offering",
+      "verification": "derived",
+      "inherits_from": [
+        "ipo_price_range_high",
+        "shares_outstanding_post_offering"
+      ]
     }
   ],
   "underwriters": {
@@ -190,6 +268,30 @@
       "event": "Public S-1 filed on SEC EDGAR; Nasdaq symbol ANT",
       "source": "sec_s1_20261026",
       "verification": "primary"
+    },
+    {
+      "date": "2026-11-02",
+      "event": "S-1/A Amendment No. 1",
+      "source": "sec_s1a3_20261117",
+      "verification": "primary"
+    },
+    {
+      "date": "2026-11-10",
+      "event": "S-1/A Amendment No. 2",
+      "source": "sec_s1a3_20261117",
+      "verification": "primary"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "S-1/A Amendment No. 3: price range $70-$78, 825M shares; Form 8-A12B",
+      "source": "sec_s1a3_20261117",
+      "verification": "primary"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "Nasdaq certification of listing (CERT) filed",
+      "source": "sec_8a12b_20261117",
+      "verification": "primary"
     }
   ],
   "next_dates": [
@@ -250,6 +352,19 @@
       "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
       "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/0001628280-26-067168-index.htm",
       "section": "Summary Consolidated Financial and Other Data"
+    },
+    "sec_s1a3_20261117": {
+      "publisher": "Anthropic, PBC (SEC Form S-1/A, Amendment No. 3)",
+      "date": "2026-11-17",
+      "type": "registration statement amendment; nine months ended 2026-09-30 unaudited; preliminary, subject to completion",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074338/anthropicpbc-sx1ax3.htm",
+      "filing_index": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074338/"
+    },
+    "sec_8a12b_20261117": {
+      "publisher": "Anthropic, PBC (Form 8-A12B)",
+      "date": "2026-11-17",
+      "type": "exchange registration of Class A common stock",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074342/anthropic-8xa12b.htm"
     }
   },
   "changelog": [
@@ -260,6 +375,10 @@
     {
       "date": "2026-10-27",
       "change": "Status updated from confidential draft to public S-1 (2026-10-26), Nasdaq ANT; underwriter syndicate from the S-1 cover (primary). IPO valuation and proceeds targets remain press-reported because the price range is blank."
+    },
+    {
+      "date": "2026-11-18",
+      "change": "Price range $70-$78 and 825M shares from S-1/A No. 3; implied market cap $916B-$1,021B (price x 13,086,672,593 shares outstanding after the offering and concurrent placement, not fully diluted); $26.0B concurrent private placement; listing approved. Press-reported $1.8-2.0T valuation target marked superseded."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
