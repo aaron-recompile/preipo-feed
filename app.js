@@ -24,9 +24,9 @@ const load = (f) => JSON.parse(readFileSync(new URL(`./data/${f}`, import.meta.u
 // One entry per paid dataset. The description is what Bazaar search matches on.
 const PRODUCTS = [
   {
-    card: load("anthropic.json"), price: "0.01", tags: ["anthropic", "pre-ipo", "revenue", "valuation", "fundamentals", "compute", "ai"],
+    card: load("anthropic.json"), price: "0.01", tags: ["anthropic", "ant", "ipo", "revenue", "s-1"],
     description:
-      "Anthropic pre-IPO fundamentals as JSON: FY2025 revenue and May 2026 run-rate revenue, operating expenses, operating and net loss, compute and infrastructure spend, compute obligations, cash and short-term investments, top-customer revenue share, compute cost per revenue dollar. Each number has its own source URL, verification grade and value type (approx, lower bound, exact, derived).",
+      "Anthropic (Nasdaq: ANT) financials from the SEC S-1 and S-1/A as JSON: revenue FY2023-2025 and nine months 2026 (Q3 2026 $17.0B), Run-Rate Revenue about $81B (Oct 31 2026), compute spend, operating and net loss (most is non-cash), cash $131.8B, compute commitments. Every figure has its SEC source, verification grade and value type; changelog of every update.",
   },
   {
     card: load("openai.json"), price: "0.01", tags: ["openai", "pre-ipo", "revenue", "valuation", "fundamentals", "funding", "ai"],
@@ -34,9 +34,9 @@ const PRODUCTS = [
       "OpenAI pre-IPO fundamentals as JSON: FY2025 revenue, monthly revenue, ChatGPT users and subscribers, March 2026 round size and post-money valuation, new round target and valuation in talks, SoftBank bond financing and stake, valuation-to-run-rate multiple. Each number has its own source URL, verification grade and value type.",
   },
   {
-    card: load("anthropic-ipo.json"), price: "0.01", tags: ["anthropic", "ipo", "pre-ipo", "valuation", "underwriters", "timeline", "ai"],
+    card: load("anthropic-ipo.json"), price: "0.01", tags: ["anthropic", "ant", "ipo", "nasdaq", "valuation"],
     description:
-      "Anthropic IPO data as JSON: filing status (confidential draft S-1), expected timing and listing window, target valuation range, expected proceeds, lead underwriters, last private round (Series H) size and valuation, run-rate revenue, valuation multiples, dated timeline. Each item has its own source URL and verification grade.",
+      "Anthropic IPO (Nasdaq: ANT) data as JSON from SEC filings: price range $70-$78, 825M shares, shares outstanding and implied market cap, final IPO price and first trade when filed, $26B concurrent private placement (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC), underwriters, dated timeline of S-1, S-1/A, 8-A and Nasdaq listing. Each item has its SEC source and verification grade.",
   },
   {
     card: load("openai-ipo.json"), price: "0.01", tags: ["openai", "ipo", "pre-ipo", "valuation", "funding", "timeline", "underwriters", "sam-altman", "chatgpt", "ai"],
@@ -126,7 +126,7 @@ const COMPARE_PATH = "/preipo/compare/openai-anthropic";
 const COMPARE_DESC = "OpenAI vs Anthropic side by side as JSON: full-year revenue, latest revenue run-rate, last private round and post-money valuation, IPO status and valuation target, compute obligations, cash, and valuation-to-run-rate multiples. Every value keeps its source URL, verification grade and value type; gaps are listed.";
 
 const ONCHAIN_PATH = "/preipo/onchain-vs-private";
-const ONCHAIN_DESC = "On-chain pre-IPO perps vs private valuation, live: OpenAI and Anthropic perpetuals on Hyperliquid HIP-3 (EntropyIO io:OAI, io:ANTH) converted to implied company valuation, set against the last private round post-money and the IPO valuation target. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
+const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the filed IPO price range market cap and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
 const ONCHAIN_TAGS = ["pre-ipo", "hyperliquid", "valuation", "perps", "anthropic"];
 
 const server = new x402ResourceServer(new RetryingFacilitatorClient(facilitatorConfig));
