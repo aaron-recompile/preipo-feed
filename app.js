@@ -99,7 +99,7 @@ const ratio = (num, den, note) => (num && den ? { value: Math.round((num.value /
   value_type: "derived", note, inputs: [num, den].map((x) => x.from_card) } : null);
 const compareLabs = () => {
   const side = (company, ids) => Object.fromEntries(Object.entries(ids).map(([k, id]) => [k, id ? metric(company, id) : null]));
-  const openai = side("OpenAI", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "revenue_run_rate_annualized_reported_2026_08",
+  const openai = side("OpenAI", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "revenue_run_rate_annualized_2026_09",
     last_private_post_money: "last_private_post_money_2026_03", last_private_round_size: "last_private_round_size_2026_03",
     ipo_valuation_target_high: null, compute_obligations: null, cash_and_investments_ye2025: null });
   const anthropic = side("Anthropic", { revenue_full_year_2025: "revenue_fy2025", latest_run_rate: "run_rate_revenue_2026_05",
