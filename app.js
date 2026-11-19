@@ -127,7 +127,7 @@ const COMPARE_PATH = "/preipo/compare/openai-anthropic";
 const COMPARE_DESC = "OpenAI vs Anthropic side by side as JSON: full-year revenue, latest revenue run-rate, last private round and post-money valuation, IPO status and valuation target, compute obligations, cash, and valuation-to-run-rate multiples. Every value keeps its source URL, verification grade and value type; gaps are listed.";
 
 const ONCHAIN_PATH = "/preipo/onchain-vs-private";
-const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the market cap at the $83 IPO price (Nov 18), the filed range and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
+const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the valuation at the $83 IPO price (Nov 18, fully diluted), the filed range and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
 const FILINGS_PATH = "/preipo/anthropic/filings";
 const FILINGS_DESC = "Anthropic (Nasdaq: ANT) SEC filings tracker, live from EDGAR: every S-1, S-1/A, S-1MEF, FWP, 8-A, CERT and, as they appear, the 424B4 final prospectus, 8-K, Form 3/4 insider trades, S-8 and 10-Q. Each filing has form, filed and accepted time, accession, direct document link and a one-line meaning; milestone summary and what to watch next.";
 const FILINGS_TAGS = ["anthropic", "ant", "sec", "edgar", "ipo"];

@@ -326,6 +326,16 @@
         "implied_market_cap_at_ipo_price",
         "last_private_post_money_2026_05"
       ]
+    },
+    {
+      "id": "valuation_fully_diluted_at_ipo_price_reported",
+      "value": 1500000000000.0,
+      "value_type": "approx",
+      "period": "At $83",
+      "label": "Fully diluted valuation at the IPO price, as reported (some outlets say ~$1.4T)",
+      "source": "techcrunch_pricing_20261118",
+      "verification": "reported",
+      "note": "Includes options, RSUs and other awards; not computable from the filings this card uses. Compare against $1-per-$1B perp quotes (e.g. Hyperliquid io:ANTH), which track valuation, not shares outstanding."
     }
   ],
   "underwriters": {
@@ -510,6 +520,18 @@
       "date": "2026-11-18",
       "type": "news report of the pricing press release",
       "url": "https://www.cnbc.com/2026/11/18/anthropic-ipo-ai-offering-price.html"
+    },
+    "techcrunch_pricing_20261118": {
+      "publisher": "TechCrunch",
+      "date": "2026-11-18",
+      "type": "news report (fully diluted valuation, people familiar)",
+      "url": "https://techcrunch.com/2026/11/18/anthropic-reportedly-prices-ipo-at-83-a-share-above-projected-range/"
+    },
+    "fortune_pricing_20261118": {
+      "publisher": "Fortune",
+      "date": "2026-11-18",
+      "type": "news report",
+      "url": "https://fortune.com/2026/11/18/anthropic-prices-ipo-83-per-share-1-5-trillion/"
     }
   },
   "changelog": [
@@ -527,7 +549,7 @@
     },
     {
       "date": "2026-11-18",
-      "change": "Priced: $83.00 per share, 980M shares (956.35M new + 23.65M selling stockholders), 147M underwriter option, from Anthropic's pricing press release (primary). Implied market cap at $83 ~= $1.096T on basic shares outstanding re-based to final terms; press $1.4-1.5T is fully diluted. Final prospectus and first trade pending."
+      "change": "Priced: $83.00 per share, 980M shares (956.35M new + 23.65M selling stockholders), 147M underwriter option, from Anthropic's pricing press release (primary). Implied market cap at $83 ~= $1.096T on basic shares outstanding re-based to final terms; press $1.4-1.5T is fully diluted. Final prospectus and first trade pending. Added reported fully diluted valuation (~$1.5T) as the like-for-like anchor for valuation-quoted perps."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
