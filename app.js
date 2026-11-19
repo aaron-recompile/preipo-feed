@@ -29,22 +29,22 @@ const PRODUCTS = [
   {
     card: load("anthropic.json"), price: "0.01", tags: ["anthropic", "ant", "ipo", "revenue", "s-1"],
     description:
-      "Anthropic (Nasdaq: ANT) financials from the SEC S-1 and S-1/A as JSON: revenue FY2023-2025 and nine months 2026 (Q3 2026 $17.0B), Run-Rate Revenue about $81B (Oct 31 2026), compute spend, operating and net loss (most is non-cash), cash $131.8B, compute commitments. Every figure has its SEC source, verification grade and value type; changelog of every update.",
+      "Use when you need Anthropic (Nasdaq: ANT) financials from the SEC S-1 and S-1/A as JSON: revenue FY2023-2025 and nine months 2026 (Q3 2026 $17.0B), Run-Rate Revenue about $81B (Oct 31 2026), compute spend, operating and net loss (most is non-cash), cash $131.8B, compute commitments. Every figure has its SEC source, verification grade and value type; changelog of every update.",
   },
   {
     card: load("openai.json"), price: "0.01", tags: ["openai", "pre-ipo", "revenue", "valuation", "fundamentals", "funding", "ai"],
     description:
-      "OpenAI pre-IPO fundamentals as JSON: FY2025 revenue, monthly revenue, ChatGPT users and subscribers, March 2026 round size and post-money valuation, new round target and valuation in talks, SoftBank bond financing and stake, valuation-to-run-rate multiple. Each number has its own source URL, verification grade and value type.",
+      "Use when you need OpenAI pre-IPO fundamentals as JSON: FY2025 revenue, monthly revenue, ChatGPT users and subscribers, March 2026 round size and post-money valuation, new round target and valuation in talks, SoftBank bond financing and stake, valuation-to-run-rate multiple. Each number has its own source URL, verification grade and value type.",
   },
   {
     card: load("anthropic-ipo.json"), price: "0.01", tags: ["anthropic", "ant", "ipo", "nasdaq", "valuation"],
     description:
-      "Anthropic IPO (Nasdaq: ANT) data as JSON: priced 2026-11-18 at $83 per share (above the $70-$78 range), upsized to 980M shares, 147M underwriter option, implied market cap at the IPO price, shares outstanding, first trade when it prints, $26B concurrent private placement (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC), underwriters, dated timeline of S-1, S-1/A, 8-A and Nasdaq listing. Each item has its SEC source and verification grade.",
+      "Use when you need Anthropic IPO (Nasdaq: ANT) terms as JSON: priced 2026-11-18 at $83 per share (above the $70-$78 range), upsized to 980M shares, 147M underwriter option, implied market cap at the IPO price, shares outstanding, first trade when it prints, $26B concurrent private placement (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC), underwriters, dated timeline of S-1, S-1/A, 8-A and Nasdaq listing. Each item has its SEC source and verification grade.",
   },
   {
     card: load("openai-ipo.json"), price: "0.01", tags: ["openai", "ipo", "pre-ipo", "valuation", "funding", "timeline", "underwriters", "sam-altman", "chatgpt", "ai"],
     description:
-      "OpenAI IPO data as JSON: confidential S-1 filing status and announcement date, reported 2027 listing expectations, Sam Altman ruling out a 2026 IPO, latest verified private funding round committed capital and post-money valuation, banks reported working on filing preparation (not confirmed underwriting mandates), and dated timeline. Each factual item has a source reference and verification grade; uncertain dates and unverified figures are omitted.",
+      "Use when you need OpenAI IPO status as JSON: confidential S-1 filing status and announcement date, reported 2027 listing expectations, Sam Altman ruling out a 2026 IPO, latest verified private funding round committed capital and post-money valuation, banks reported working on filing preparation (not confirmed underwriting mandates), and dated timeline. Each factual item has a source reference and verification grade; uncertain dates and unverified figures are omitted.",
   },
 ].map((p) => ({ ...p, path: `/preipo/${p.card.company.toLowerCase()}/${p.card.dataset}` }));
 
@@ -87,7 +87,7 @@ const fundingRounds = () => ({
   disclaimer: "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",
 });
 const FUNDING_PATH = "/preipo/funding-rounds";
-const FUNDING_DESC = "AI lab funding rounds and valuations as JSON (OpenAI, Anthropic): round size, post-money valuation, rounds in talks, employee tender offers, IPO valuation targets, strategic investor commitments. Each row keeps its source URL, verification grade (primary/secondary/reported) and value type.";
+const FUNDING_DESC = "Use when you need AI lab funding rounds and valuations as JSON (OpenAI, Anthropic): round size, post-money valuation, rounds in talks, employee tender offers, IPO valuation targets, strategic investor commitments. Each row keeps its source URL, verification grade (primary/secondary/reported) and value type.";
 
 // Derived premium route: OpenAI vs Anthropic side by side, built only from the verified cards.
 const metric = (company, id) => {
@@ -126,12 +126,12 @@ const compareLabs = () => {
   };
 };
 const COMPARE_PATH = "/preipo/compare/openai-anthropic";
-const COMPARE_DESC = "OpenAI vs Anthropic side by side as JSON: full-year revenue, latest revenue run-rate, last private round and post-money valuation, IPO status and valuation target, compute obligations, cash, and valuation-to-run-rate multiples. Every value keeps its source URL, verification grade and value type; gaps are listed.";
+const COMPARE_DESC = "Use when you need OpenAI vs Anthropic side by side as JSON: full-year revenue, latest revenue run-rate, last private round and post-money valuation, IPO status and valuation target, compute obligations, cash, and valuation-to-run-rate multiples. Every value keeps its source URL, verification grade and value type; gaps are listed.";
 
 const ONCHAIN_PATH = "/preipo/onchain-vs-private";
-const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the valuation at the $83 IPO price (Nov 18, fully diluted), the filed range and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
+const ONCHAIN_DESC = "Use when you need on-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the valuation at the $83 IPO price (Nov 18, fully diluted), the filed range and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
 const FILINGS_PATH = "/preipo/anthropic/filings";
-const FILINGS_DESC = "Anthropic (Nasdaq: ANT) SEC filings tracker, live from EDGAR: every S-1, S-1/A, S-1MEF, FWP, 8-A, CERT and, as they appear, the 424B4 final prospectus, 8-K, Form 3/4 insider trades, S-8 and 10-Q. Each filing has form, filed and accepted time, accession, direct document link and a one-line meaning; milestone summary and what to watch next.";
+const FILINGS_DESC = "Use when you need the Anthropic (Nasdaq: ANT) SEC filings tracker, live from EDGAR: every S-1, S-1/A, S-1MEF, FWP, 8-A, CERT and, as they appear, the 424B4 final prospectus, 8-K, Form 3/4 insider trades, S-8 and 10-Q. Each filing has form, filed and accepted time, accession, direct document link and a one-line meaning; milestone summary and what to watch next.";
 const FILINGS_TAGS = ["anthropic", "ant", "sec", "edgar", "ipo"];
 const CAPTABLE_PATH = "/preipo/anthropic/cap-table";
 const CAPTABLE_DESC = "Use when you need Anthropic (Nasdaq: ANT) returns by funding round or cap table detail: all 22 preferred series from the S-1/A (A through H, including convertible-note conversions such as the Amazon notes at $20.93), shares, original issue price, conversion ratio, cost per common share, liquidation preference, percent of post-IPO shares, multiple vs the $83 IPO price and vs the latest Nasdaq price (15-minute delayed), and IPO dilution. Every number cites the S-1/A table.";
@@ -260,8 +260,8 @@ app.use((req, res, next) => (req.method === "HEAD" && PAID_PATHS.has(req.path) ?
 const SERVICE = {
   name: "PreIPO metrics feed",
   maker: `Built and maintained by ${MAKER.name}, an ${MAKER.role}. Every number is checked against its cited source before it ships, and corrections are logged in each card's changelog.`,
-  summary: "Fundamentals of private AI companies (revenue, costs, compute, cash, users, funding) as JSON, priced per call over x402. Every figure carries its own source URL, verification grade and value type.",
-  notThis: "Not token quotes or IPO-filing trackers, not investment advice; the only market data is the clearly labelled on-chain pre-IPO perp comparison.",
+  summary: "Anthropic (Nasdaq: ANT) covered end to end, plus OpenAI, as JSON priced per call over x402: S-1 financials, IPO terms ($83, priced 2026-11-18), SEC filings live from EDGAR, cap table and returns by round, ANT perpetuals on seven venues vs Nasdaq, and trading hours. Every figure carries its own source URL, verification grade and value type.",
+  notThis: "Not a real-time price feed (market data is delayed at least 15 minutes), not token quotes, not investment advice.",
 };
 const origin = (req) => `${req.protocol}://${req.get("host")}`;
 const howToPay = "GET the endpoint; receive HTTP 402 with a PAYMENT-REQUIRED header; sign and retry with PAYMENT-SIGNATURE (x402 v2, scheme exact). No API key, no account.";
@@ -333,6 +333,20 @@ app.get("/openapi.json", (req, res) => {
       [CAPTABLE_PATH]: { get: { summary: "Anthropic (ANT) cap table and returns by round", description: CAPTABLE_DESC, tags: CAPTABLE_TAGS,
         "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.02, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
         responses: { 200: { description: "Preferred series and rounds with cost per common share, multiples and IPO dilution, cited to the S-1/A." }, 402: { description: "Payment required." } } } },
+      [PERPS_PATH]: { get: { summary: "ANT perpetuals on seven venues vs Nasdaq (15-minute delayed)", description: PERPS_DESC, tags: PERPS_TAGS,
+        "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.02, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
+        responses: { 200: { description: "Delayed cross-venue snapshot with 60-minute OHLC." }, 402: { description: "Payment required." } } } },
+      [WHERE_PATH]: { get: { summary: "Can ANT trade now, and where", description: WHERE_DESC, tags: WHERE_TAGS,
+        "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.01, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
+        responses: { 200: { description: "Nasdaq session and venue availability." }, 402: { description: "Payment required." } } } },
+      [FUNDING_PATH]: { get: { summary: "AI lab funding rounds", description: FUNDING_DESC, tags: ["funding", "valuation", "openai", "anthropic"],
+        "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.01, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
+        responses: { 200: { description: "Rounds with source and grade." }, 402: { description: "Payment required." } } } },
+      [COMPARE_PATH]: { get: { summary: "OpenAI vs Anthropic side by side", description: COMPARE_DESC, tags: ["openai", "anthropic", "compare"],
+        "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.05, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
+        responses: { 200: { description: "Side-by-side metrics with gaps listed." }, 402: { description: "Payment required." } } } },
+      [COVERAGE_PATH]: { get: { summary: "Anthropic coverage (free)", description: "Free: latest update time of every Anthropic route, so an agent pays only when data changed.", responses: { 200: { description: "Per-route update times." } } } },
+      "/preipo/changelog": { get: { summary: "Changelog (free)", description: "Every dated update to every card, newest first.", responses: { 200: { description: "Changelog entries." } } } },
     },
     components: { schemas: { Card: {
       type: "object",
@@ -363,16 +377,45 @@ ${SERVICE.notThis}
 
 ${SERVICE.maker} Contact: ${MAKER.url}
 
+## Which endpoint answers which question
+- Did anything change since I last paid? -> [coverage](${o}${COVERAGE_PATH}) (free), then buy only the route that changed.
+- Did Anthropic file something new with the SEC (424B4, 8-K, Form 4)? -> [filings](${o}${FILINGS_PATH})
+- What are the ANT IPO terms, share count, first trade? -> [Anthropic ipo](${o}/preipo/anthropic/ipo)
+- How much did each funding round make, who holds what, how much dilution? -> [cap-table](${o}${CAPTABLE_PATH})
+- Revenue, run-rate, losses, cash, compute commitments? -> [Anthropic financials](${o}/preipo/anthropic/financials)
+- Where do ANT perpetuals trade vs Nasdaq, funding, open interest? -> [perps-vs-nasdaq](${o}${PERPS_PATH})
+- Can ANT trade right now, and where? -> [where-trading](${o}${WHERE_PATH})
+- Implied company valuation from on-chain perps (ANT, OpenAI)? -> [onchain-vs-private](${o}${ONCHAIN_PATH})
+- OpenAI fundamentals or IPO status? -> [OpenAI financials](${o}/preipo/openai/financials), [OpenAI ipo](${o}/preipo/openai/ipo)
+- OpenAI vs Anthropic, or every AI lab round in one list? -> [compare](${o}${COMPARE_PATH}), [funding-rounds](${o}${FUNDING_PATH})
+
 ## Why use this instead of reading the news
-- One JSON per company, numbers already normalized (USD, fractions, units stated).
+- One JSON per question, numbers already normalized (USD, fractions, units stated).
 - Each metric has its own source URL, a verification grade and a value type, so an agent can decide what to trust without re-reading articles.
-- Cards are versioned; a changelog records every correction.
+- SEC-sourced numbers cite the filing and table; derived numbers show the method.
+- Cards are versioned; a changelog records every correction. Errors and upstream failures are not charged.
 
 ## Endpoints
-- [Catalog](${o}/preipo/catalog): free. Companies, datasets, as_of, verification, metric ids, prices.
-- [Sample](${o}/preipo/sample): free. Two real metrics per card, each with source URL, grade and value type; judge the data before paying.
-- [Changelog](${o}/preipo/changelog): free. Every dated update to every card, newest first.
-${PRODUCTS.map((p) => `- [${p.card.company} ${p.card.dataset}](${o}${p.path}): ${p.price} USDC per call. as_of ${p.card.as_of}. ${p.card.metrics.length} metrics.`).join("\n")}
+Free:
+- [Anthropic coverage](${o}${COVERAGE_PATH}): latest update time per Anthropic route; poll free, pay only when it changed.
+- [Catalog](${o}/preipo/catalog): companies, datasets, as_of, verification, metric ids, prices.
+- [Sample](${o}/preipo/sample): two real metrics per card, each with source URL, grade and value type; judge the data before paying.
+- [Changelog](${o}/preipo/changelog): every dated update to every card, newest first.
+
+Anthropic (Nasdaq: ANT):
+- [SEC filings tracker](${o}${FILINGS_PATH}): 0.01 USDC. Live EDGAR list with document link, plain meaning, milestones (S-1, S-1MEF, 424B4, 8-K, Form 4) and what to watch next.
+- [IPO](${o}/preipo/anthropic/ipo): 0.01 USDC. Priced at $83, 980M shares, underwriter option, market cap at IPO price, timeline. as_of ${PRODUCTS[2].card.as_of}.
+- [Cap table and returns by round](${o}${CAPTABLE_PATH}): 0.02 USDC. All 22 preferred series from the S-1/A with cost per common share, liquidation preference, multiple vs IPO price and vs latest Nasdaq price, and IPO dilution.
+- [Financials](${o}/preipo/anthropic/financials): 0.01 USDC. S-1 and S-1/A revenue, run-rate, losses, cash, compute. as_of ${PRODUCTS[0].card.as_of}.
+- [Perps vs Nasdaq, 7 venues](${o}${PERPS_PATH}): 0.02 USDC. Per-share mark, funding (annual %), OI, spread, premium vs $83 IPO and Nasdaq; delayed 15 minutes.
+- [Can ANT trade now, and where](${o}${WHERE_PATH}): 0.01 USDC. Nasdaq session and holidays plus which perp venues are reporting.
+
+OpenAI and cross-company:
+- [OpenAI financials](${o}/preipo/openai/financials): 0.01 USDC. as_of ${PRODUCTS[1].card.as_of}.
+- [OpenAI IPO](${o}/preipo/openai/ipo): 0.01 USDC. as_of ${PRODUCTS[3].card.as_of}.
+- [On-chain pre-IPO perps vs private valuation](${o}${ONCHAIN_PATH}): 0.02 USDC. Live Hyperliquid io:OAI / io:ANTH implied valuation vs last private round and IPO price; premium, funding, open interest.
+- [OpenAI vs Anthropic](${o}${COMPARE_PATH}): 0.05 USDC. Side-by-side revenue, run-rate, valuation, IPO status and multiples; gaps listed.
+- [AI lab funding rounds](${o}${FUNDING_PATH}): 0.01 USDC. Rounds and valuations from the cards above, each row with its source.
 
 ## How to pay
 ${howToPay}
@@ -386,15 +429,6 @@ Networks: ${NETWORKS.join(", ")} (USDC). Pay to ${PAY_TO}.
 
 ## Value types
 - approx (source says about/nearly), lower_bound (more than/at least), exact (as stated), derived (computed here)
-
-- [AI lab funding rounds](${o}${FUNDING_PATH}): 0.01 USDC. Rounds and valuations collected from the cards above, each row with its source.
-- [OpenAI vs Anthropic](${o}${COMPARE_PATH}): 0.05 USDC. Side-by-side revenue, run-rate, valuation, IPO status and multiples; gaps listed.
-- [On-chain pre-IPO perps vs private valuation](${o}${ONCHAIN_PATH}): 0.02 USDC. Live Hyperliquid io:OAI / io:ANTH implied valuation vs last private round and IPO target; premium, funding, open interest.
-- [Anthropic (ANT) SEC filings tracker](${o}${FILINGS_PATH}): 0.01 USDC. Live EDGAR list of every Anthropic filing with document link, plain meaning, milestones (S-1, S-1MEF, 424B4, 8-K, Form 4) and what to watch next.
-- [Anthropic (ANT) cap table and returns by round](${o}${CAPTABLE_PATH}): 0.02 USDC. All 22 preferred series from the S-1/A with cost per common share, liquidation preference, multiple vs IPO price and vs latest Nasdaq price, and IPO dilution.
-- [ANT perps vs Nasdaq, 7 venues](${o}${PERPS_PATH}): 0.02 USDC. Per-share mark, funding (annual %), OI, spread, premium vs $83 IPO and Nasdaq; delayed 15 minutes.
-- [Can ANT trade now, and where](${o}${WHERE_PATH}): 0.01 USDC. Nasdaq session and holidays plus which perp venues are reporting.
-- [Anthropic coverage (free)](${o}${COVERAGE_PATH}): latest update time per route; poll free, pay only when it changed.
 
 ## More from this developer
 ${OTHERS.map((r) => `- [${r.name}](${r.url}/llms.txt): ${r.what}`).join("\n")}
