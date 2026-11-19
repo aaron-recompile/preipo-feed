@@ -36,7 +36,7 @@ const PRODUCTS = [
   {
     card: load("anthropic-ipo.json"), price: "0.01", tags: ["anthropic", "ant", "ipo", "nasdaq", "valuation"],
     description:
-      "Anthropic IPO (Nasdaq: ANT) data as JSON from SEC filings: price range $70-$78, 825M shares, shares outstanding and implied market cap, final IPO price and first trade when filed, $26B concurrent private placement (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC), underwriters, dated timeline of S-1, S-1/A, 8-A and Nasdaq listing. Each item has its SEC source and verification grade.",
+      "Anthropic IPO (Nasdaq: ANT) data as JSON: priced 2026-11-18 at $83 per share (above the $70-$78 range), upsized to 980M shares, 147M underwriter option, implied market cap at the IPO price, shares outstanding, first trade when it prints, $26B concurrent private placement (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC), underwriters, dated timeline of S-1, S-1/A, 8-A and Nasdaq listing. Each item has its SEC source and verification grade.",
   },
   {
     card: load("openai-ipo.json"), price: "0.01", tags: ["openai", "ipo", "pre-ipo", "valuation", "funding", "timeline", "underwriters", "sam-altman", "chatgpt", "ai"],
@@ -126,7 +126,7 @@ const COMPARE_PATH = "/preipo/compare/openai-anthropic";
 const COMPARE_DESC = "OpenAI vs Anthropic side by side as JSON: full-year revenue, latest revenue run-rate, last private round and post-money valuation, IPO status and valuation target, compute obligations, cash, and valuation-to-run-rate multiples. Every value keeps its source URL, verification grade and value type; gaps are listed.";
 
 const ONCHAIN_PATH = "/preipo/onchain-vs-private";
-const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the filed IPO price range market cap and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
+const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the market cap at the $83 IPO price (Nov 18), the filed range and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
 const ONCHAIN_TAGS = ["pre-ipo", "hyperliquid", "valuation", "perps", "anthropic"];
 
 const server = new x402ResourceServer(new RetryingFacilitatorClient(facilitatorConfig));
