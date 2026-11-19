@@ -5,7 +5,7 @@
   "as_of": "2026-11-18",
   "currency": "USD",
   "verification": "mixed",
-  "ipo_status": "Priced range set and listing approved: S-1/A Amendment No. 3 (2026-11-17) sets an estimated price range of $70.00-$78.00 per Class A share for 825,000,000 shares (801,351,354 new, 23,648,646 from selling stockholders); approved to list on the Nasdaq Global Select Market as \"ANT\"; Form 8-A12B filed 2026-11-17 and Nasdaq certification 2026-11-18. Final price not yet filed (no 424B4 as of 2026-11-18).",
+  "ipo_status": "Priced: Anthropic priced its IPO on 2026-11-18 at $83.00 per Class A share (above the $70-$78 range), upsized to 980,000,000 shares (956,351,354 new, 23,648,646 from selling stockholders); registration statement declared effective by the SEC on 2026-11-18; trading expected to begin on the Nasdaq Global Select Market as \"ANT\" on 2026-11-19; closing expected 2026-11-20; underwriters hold a 30-day option for up to 147,000,000 additional shares. Source: Anthropic press release. Final prospectus (424B4) not yet on EDGAR as of 2026-11-18; first trade pending.",
   "verification_scale": {
     "primary": "company filing or company statement, checked directly",
     "secondary": "major outlet reporting a company statement or document",
@@ -199,6 +199,143 @@
         "ipo_price_range_high",
         "shares_outstanding_post_offering"
       ]
+    },
+    {
+      "id": "ipo_price_final",
+      "value": 83.0,
+      "value_type": "exact",
+      "period": "Priced 2026-11-18",
+      "label": "IPO price per Class A share",
+      "source": "anthropic_ipo_pricing_20261118",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_shares_offered_final",
+      "value": 980000000,
+      "value_type": "exact",
+      "period": "Priced 2026-11-18",
+      "label": "Class A shares offered (upsized from 825,000,000)",
+      "source": "anthropic_ipo_pricing_20261118",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_shares_offered_by_company_final",
+      "value": 956351354,
+      "value_type": "exact",
+      "period": "Priced 2026-11-18",
+      "label": "Class A shares sold by Anthropic",
+      "source": "anthropic_ipo_pricing_20261118",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_shares_offered_by_sellers_final",
+      "value": 23648646,
+      "value_type": "exact",
+      "period": "Priced 2026-11-18",
+      "label": "Class A shares sold by selling stockholders",
+      "source": "anthropic_ipo_pricing_20261118",
+      "verification": "primary"
+    },
+    {
+      "id": "underwriter_option_shares_final",
+      "value": 147000000,
+      "value_type": "exact",
+      "period": "30-day option",
+      "label": "Underwriters' option for additional Class A shares",
+      "source": "anthropic_ipo_pricing_20261118",
+      "verification": "primary"
+    },
+    {
+      "id": "ipo_gross_proceeds_final",
+      "value": 81340000000,
+      "value_type": "derived",
+      "period": "Priced 2026-11-18",
+      "label": "Gross offering size (980,000,000 x $83; includes selling stockholders, excludes option and concurrent placement)",
+      "formula": "ipo_price_final * ipo_shares_offered_final",
+      "verification": "derived",
+      "inherits_from": [
+        "ipo_price_final",
+        "ipo_shares_offered_final"
+      ]
+    },
+    {
+      "id": "ipo_gross_proceeds_to_company_final",
+      "value": 79377162382,
+      "value_type": "derived",
+      "period": "Priced 2026-11-18",
+      "label": "Gross proceeds to Anthropic from the offering (956,351,354 x $83)",
+      "formula": "ipo_price_final * ipo_shares_offered_by_company_final",
+      "verification": "derived",
+      "inherits_from": [
+        "ipo_price_final",
+        "ipo_shares_offered_by_company_final"
+      ]
+    },
+    {
+      "id": "shares_outstanding_post_offering_at_final_price",
+      "value": 13203574257,
+      "value_type": "approx",
+      "period": "After offering and concurrent placement, at $83",
+      "label": "Shares outstanding after the offering, re-based to the final terms (not fully diluted)",
+      "formula": "S-1/A No.3 base 13,086,672,593 + 155,000,000 extra company shares (956,351,354 - 801,351,354) - 38,098,336 fewer placement shares ($26.0B at $83 = ~313,253,012 vs 351,351,348 at the $74 midpoint)",
+      "verification": "derived",
+      "inherits_from": [
+        "shares_outstanding_post_offering",
+        "ipo_shares_offered_by_company_final",
+        "concurrent_private_placement",
+        "ipo_price_final"
+      ],
+      "note": "Approximate until the final prospectus states the count; placement shares are rounded per investor."
+    },
+    {
+      "id": "implied_market_cap_at_ipo_price",
+      "value": 1095896663331,
+      "value_type": "derived",
+      "period": "At $83",
+      "label": "Implied market capitalization at the IPO price (basic shares outstanding, not fully diluted)",
+      "formula": "ipo_price_final * shares_outstanding_post_offering_at_final_price",
+      "verification": "derived",
+      "inherits_from": [
+        "ipo_price_final",
+        "shares_outstanding_post_offering_at_final_price"
+      ],
+      "note": "Press figures of ~$1.4-1.5T are on a fully diluted basis (options, RSUs and other equity awards) and are not computed here."
+    },
+    {
+      "id": "ipo_price_vs_range_high_pct",
+      "value": 6.4,
+      "value_type": "derived",
+      "period": "Priced 2026-11-18",
+      "label": "Final price vs top of filed range, %",
+      "formula": "(83 / 78 - 1) * 100",
+      "verification": "derived",
+      "inherits_from": [
+        "ipo_price_final",
+        "ipo_price_range_high"
+      ]
+    },
+    {
+      "id": "ipo_step_up_vs_series_h_final",
+      "value": 1.14,
+      "value_type": "derived",
+      "period": "At $83",
+      "label": "Implied market cap at IPO price / Series H post-money ($965B)",
+      "formula": "implied_market_cap_at_ipo_price / last_private_post_money_2026_05",
+      "verification": "derived",
+      "inherits_from": [
+        "implied_market_cap_at_ipo_price",
+        "last_private_post_money_2026_05"
+      ]
+    },
+    {
+      "id": "valuation_fully_diluted_at_ipo_price_reported",
+      "value": 1500000000000.0,
+      "value_type": "approx",
+      "period": "At $83",
+      "label": "Fully diluted valuation at the IPO price, as reported (some outlets say ~$1.4T)",
+      "source": "techcrunch_pricing_20261118",
+      "verification": "reported",
+      "note": "Includes options, RSUs and other awards; not computable from the filings this card uses. Compare against $1-per-$1B perp quotes (e.g. Hyperliquid io:ANTH), which track valuation, not shares outstanding."
     }
   ],
   "underwriters": {
@@ -292,20 +429,26 @@
       "event": "Nasdaq certification of listing (CERT) filed",
       "source": "sec_8a12b_20261117",
       "verification": "primary"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "IPO priced at $83.00 (above $70-$78 range), upsized to 980M shares; registration declared effective; Nasdaq ANT trading expected 2026-11-19",
+      "source": "anthropic_ipo_pricing_20261118",
+      "verification": "primary"
     }
   ],
   "next_dates": [
     {
-      "date": "2026-11-03",
-      "what": "US midterm elections (listing reported to follow)"
+      "date": "2026-11-19",
+      "what": "First trade on Nasdaq (ANT)"
     },
     {
-      "date": "2026-11-09",
-      "what": "Earliest reported start of IPO marketing (week of)"
+      "date": "2026-11-20",
+      "what": "Expected closing of the offering"
     },
     {
-      "date": "2026-11-26",
-      "what": "Thanksgiving; reported target to begin trading before"
+      "date": "2026-12-18",
+      "what": "Approximate end of the 30-day underwriter option"
     }
   ],
   "sources": {
@@ -365,6 +508,30 @@
       "date": "2026-11-17",
       "type": "exchange registration of Class A common stock",
       "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026074342/anthropic-8xa12b.htm"
+    },
+    "anthropic_ipo_pricing_20261118": {
+      "publisher": "Anthropic",
+      "date": "2026-11-18",
+      "type": "company press release (pricing announcement)",
+      "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering"
+    },
+    "cnbc_pricing_20261118": {
+      "publisher": "CNBC",
+      "date": "2026-11-18",
+      "type": "news report of the pricing press release",
+      "url": "https://www.cnbc.com/2026/11/18/anthropic-ipo-ai-offering-price.html"
+    },
+    "techcrunch_pricing_20261118": {
+      "publisher": "TechCrunch",
+      "date": "2026-11-18",
+      "type": "news report (fully diluted valuation, people familiar)",
+      "url": "https://techcrunch.com/2026/11/18/anthropic-reportedly-prices-ipo-at-83-a-share-above-projected-range/"
+    },
+    "fortune_pricing_20261118": {
+      "publisher": "Fortune",
+      "date": "2026-11-18",
+      "type": "news report",
+      "url": "https://fortune.com/2026/11/18/anthropic-prices-ipo-83-per-share-1-5-trillion/"
     }
   },
   "changelog": [
@@ -379,6 +546,10 @@
     {
       "date": "2026-11-18",
       "change": "Price range $70-$78 and 825M shares from S-1/A No. 3; implied market cap $916B-$1,021B (price x 13,086,672,593 shares outstanding after the offering and concurrent placement, not fully diluted); $26.0B concurrent private placement; listing approved. Press-reported $1.8-2.0T valuation target marked superseded."
+    },
+    {
+      "date": "2026-11-18",
+      "change": "Priced: $83.00 per share, 980M shares (956.35M new + 23.65M selling stockholders), 147M underwriter option, from Anthropic's pricing press release (primary). Implied market cap at $83 ~= $1.096T on basic shares outstanding re-based to final terms; press $1.4-1.5T is fully diluted. Final prospectus and first trade pending. Added reported fully diluted valuation (~$1.5T) as the like-for-like anchor for valuation-quoted perps."
     }
   ],
   "disclaimer": "Factual figures compiled from public reporting, each with source and verification grade. Not investment advice.",

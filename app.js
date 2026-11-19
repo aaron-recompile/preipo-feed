@@ -9,6 +9,8 @@ import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/
 import { facilitator } from "@coinbase/x402"; // reads CDP_API_KEY_ID / CDP_API_KEY_SECRET
 import { RELATED } from "./lib/related.js";
 import { onchainVsPrivate } from "./lib/onchain.js";
+import { anthropicFilings } from "./lib/filings.js";
+import { antPerpsVsNasdaq, antWhereTrading } from "./lib/antmarket.js";
 const OTHERS = RELATED.filter((r) => !r.url.includes("preipo-feed"));
 
 const PAY_TO = "0x4b5887B6E399C2E104becd01f7c406229c15891d";
@@ -36,7 +38,7 @@ const PRODUCTS = [
   {
     card: load("anthropic-ipo.json"), price: "0.01", tags: ["anthropic", "ant", "ipo", "nasdaq", "valuation"],
     description:
-      "Anthropic IPO (Nasdaq: ANT) data as JSON from SEC filings: price range $70-$78, 825M shares, shares outstanding and implied market cap, final IPO price and first trade when filed, $26B concurrent private placement (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC), underwriters, dated timeline of S-1, S-1/A, 8-A and Nasdaq listing. Each item has its SEC source and verification grade.",
+      "Anthropic IPO (Nasdaq: ANT) data as JSON: priced 2026-11-18 at $83 per share (above the $70-$78 range), upsized to 980M shares, 147M underwriter option, implied market cap at the IPO price, shares outstanding, first trade when it prints, $26B concurrent private placement (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC), underwriters, dated timeline of S-1, S-1/A, 8-A and Nasdaq listing. Each item has its SEC source and verification grade.",
   },
   {
     card: load("openai-ipo.json"), price: "0.01", tags: ["openai", "ipo", "pre-ipo", "valuation", "funding", "timeline", "underwriters", "sam-altman", "chatgpt", "ai"],
@@ -126,7 +128,17 @@ const COMPARE_PATH = "/preipo/compare/openai-anthropic";
 const COMPARE_DESC = "OpenAI vs Anthropic side by side as JSON: full-year revenue, latest revenue run-rate, last private round and post-money valuation, IPO status and valuation target, compute obligations, cash, and valuation-to-run-rate multiples. Every value keeps its source URL, verification grade and value type; gaps are listed.";
 
 const ONCHAIN_PATH = "/preipo/onchain-vs-private";
-const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the filed IPO price range market cap and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
+const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the valuation at the $83 IPO price (Nov 18, fully diluted), the filed range and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
+const FILINGS_PATH = "/preipo/anthropic/filings";
+const FILINGS_DESC = "Anthropic (Nasdaq: ANT) SEC filings tracker, live from EDGAR: every S-1, S-1/A, S-1MEF, FWP, 8-A, CERT and, as they appear, the 424B4 final prospectus, 8-K, Form 3/4 insider trades, S-8 and 10-Q. Each filing has form, filed and accepted time, accession, direct document link and a one-line meaning; milestone summary and what to watch next.";
+const FILINGS_TAGS = ["anthropic", "ant", "sec", "edgar", "ipo"];
+const PERPS_PATH = "/preipo/anthropic/perps-vs-nasdaq";
+const PERPS_DESC = "Use when you need where Anthropic (ANT) perpetuals trade versus the $83 IPO price and Nasdaq spot: seven venues (Binance, Hyperliquid xyz:ANT and para:ANTH, Kraken, Gate, Bitget, KuCoin), per-share mark, index, bid/ask spread, funding normalized to annual %, open interest, 24h volume, premium vs IPO and vs Nasdaq, cross-venue dispersion, and 60-minute OHLC. Snapshot delayed 15 minutes; open-source collector.";
+const PERPS_TAGS = ["anthropic", "ant", "perps", "funding", "basis"];
+const WHERE_PATH = "/preipo/anthropic/where-trading";
+const WHERE_DESC = "Use when you need to know if Anthropic (ANT) can trade right now and where: Nasdaq session by US/Eastern clock (pre-market, regular, after-hours, closed, holidays and early closes), listing status, and which of seven ANT perpetual venues (24/7) reported in the last delayed window.";
+const WHERE_TAGS = ["anthropic", "ant", "market-hours", "nasdaq", "is-open"];
+const COVERAGE_PATH = "/preipo/anthropic/coverage";
 const ONCHAIN_TAGS = ["pre-ipo", "hyperliquid", "valuation", "perps", "anthropic"];
 
 const server = new x402ResourceServer(new RetryingFacilitatorClient(facilitatorConfig));
@@ -186,6 +198,27 @@ routes[`GET ${ONCHAIN_PATH}`] = {
   extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "onchain-preipo-vs-private", companies: [{ company: "Anthropic", asset: "io:ANTH", perp: { implied_valuation_usd: 2.08e12 }, derived: { perp_vs_last_private_pct: 115.6 } }] } } }) },
 };
 
+routes[`GET ${FILINGS_PATH}`] = {
+  accepts: NETWORKS.map((network) => ({ scheme: "exact", price: "$0.01", network, payTo: PAY_TO })),
+  description: FILINGS_DESC, mimeType: "application/json", serviceName: SERVICE_NAME,
+  tags: FILINGS_TAGS, iconUrl: "https://preipo-feed.vercel.app/icon.svg",
+  extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "anthropic-sec-filings", ticker: "ANT", latest: { form: "S-1MEF", filed: "2026-11-18", meaning: "Short registration adding shares to an effective S-1 (used when an offering is upsized)" }, milestones: { final_prospectus: null } } } }) },
+};
+
+routes[`GET ${PERPS_PATH}`] = {
+  accepts: NETWORKS.map((network) => ({ scheme: "exact", price: "$0.02", network, payTo: PAY_TO })),
+  description: PERPS_DESC, mimeType: "application/json", serviceName: SERVICE_NAME,
+  tags: PERPS_TAGS, iconUrl: "https://preipo-feed.vercel.app/icon.svg",
+  extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "anthropic-perps-vs-nasdaq", snapshot_at: "2026-11-19T00:00:16Z", cross_venue: { venues_reporting: 7, median_mark_px: 98.52, dispersion_bps: 38, median_premium_vs_ipo_price_pct: 18.69, median_funding_apr_pct: 5.48 } } } }) },
+};
+
+routes[`GET ${WHERE_PATH}`] = {
+  accepts: NETWORKS.map((network) => ({ scheme: "exact", price: "$0.01", network, payTo: PAY_TO })),
+  description: WHERE_DESC, mimeType: "application/json", serviceName: SERVICE_NAME,
+  tags: WHERE_TAGS, iconUrl: "https://preipo-feed.vercel.app/icon.svg",
+  extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "anthropic-where-trading", nasdaq: { listed: true, session: "regular" }, can_trade_now: { nasdaq_shares: "yes (regular session)", perpetuals: "7 of 7 venues reported in the last delayed window" } } } }) },
+};
+
 // Free sample: two real metrics per card (with source, grade, value type) and two funding rows, so a buyer can judge before paying.
 const sample = () => ({
   note: "Free sample: the first two metrics of each paid card and two funding-round rows, unchanged. Paid endpoints return the full cards.",
@@ -209,7 +242,7 @@ app.set("trust proxy", true); // Vercel terminates TLS; use X-Forwarded-Proto so
 
 // HEAD on a paid route would fall through to the GET handler and return 200 (no body), so HEAD-only checkers
 // think the route is free. Answer 402 instead.
-const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH, COMPARE_PATH, ONCHAIN_PATH]);
+const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH, COMPARE_PATH, ONCHAIN_PATH, FILINGS_PATH, PERPS_PATH, WHERE_PATH]);
 app.use((req, res, next) => (req.method === "HEAD" && PAID_PATHS.has(req.path) ? res.status(402).end() : next()));
 
 // ---- Discovery files for agents and crawlers ("AI SEO"). All generated from PRODUCTS so they never drift. ----
@@ -246,6 +279,10 @@ app.get("/.well-known/x402", (req, res) => {
       { resource: `${o}${FUNDING_PATH}`, method: "GET", description: FUNDING_DESC, priceUsd: 0.01, free: false, networks: NETWORKS, tags: ["ai-lab", "funding-round", "valuation", "pre-ipo", "openai"] },
       { resource: `${o}${COMPARE_PATH}`, method: "GET", description: COMPARE_DESC, priceUsd: 0.05, free: false, networks: NETWORKS, tags: ["openai", "anthropic", "comparison", "valuation", "revenue"] },
       { resource: `${o}${ONCHAIN_PATH}`, method: "GET", description: ONCHAIN_DESC, priceUsd: 0.02, free: false, networks: NETWORKS, tags: ONCHAIN_TAGS },
+      { resource: `${o}${FILINGS_PATH}`, method: "GET", description: FILINGS_DESC, priceUsd: 0.01, free: false, networks: NETWORKS, tags: FILINGS_TAGS },
+      { resource: `${o}${PERPS_PATH}`, method: "GET", description: PERPS_DESC, priceUsd: 0.02, free: false, networks: NETWORKS, tags: PERPS_TAGS },
+      { resource: `${o}${WHERE_PATH}`, method: "GET", description: WHERE_DESC, priceUsd: 0.01, free: false, networks: NETWORKS, tags: WHERE_TAGS },
+      { resource: `${o}${COVERAGE_PATH}`, method: "GET", description: "Free: latest update time of every Anthropic route, so an agent pays only when something changed.", priceUsd: 0, free: true },
     ],
     related_services: OTHERS,
   });
@@ -278,6 +315,9 @@ app.get("/openapi.json", (req, res) => {
       [ONCHAIN_PATH]: { get: { summary: "On-chain pre-IPO perps vs private valuation", description: ONCHAIN_DESC, tags: ONCHAIN_TAGS,
         "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.02, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
         responses: { 200: { description: "Live perp-implied valuation vs private anchors." }, 402: { description: "Payment required." } } } },
+      [FILINGS_PATH]: { get: { summary: "Anthropic (ANT) SEC filings tracker", description: FILINGS_DESC, tags: FILINGS_TAGS,
+        "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.01, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
+        responses: { 200: { description: "Live EDGAR filing list with meanings and milestones." }, 402: { description: "Payment required." } } } },
     },
     components: { schemas: { Card: {
       type: "object",
@@ -335,6 +375,10 @@ Networks: ${NETWORKS.join(", ")} (USDC). Pay to ${PAY_TO}.
 - [AI lab funding rounds](${o}${FUNDING_PATH}): 0.01 USDC. Rounds and valuations collected from the cards above, each row with its source.
 - [OpenAI vs Anthropic](${o}${COMPARE_PATH}): 0.05 USDC. Side-by-side revenue, run-rate, valuation, IPO status and multiples; gaps listed.
 - [On-chain pre-IPO perps vs private valuation](${o}${ONCHAIN_PATH}): 0.02 USDC. Live Hyperliquid io:OAI / io:ANTH implied valuation vs last private round and IPO target; premium, funding, open interest.
+- [Anthropic (ANT) SEC filings tracker](${o}${FILINGS_PATH}): 0.01 USDC. Live EDGAR list of every Anthropic filing with document link, plain meaning, milestones (S-1, S-1MEF, 424B4, 8-K, Form 4) and what to watch next.
+- [ANT perps vs Nasdaq, 7 venues](${o}${PERPS_PATH}): 0.02 USDC. Per-share mark, funding (annual %), OI, spread, premium vs $83 IPO and Nasdaq; delayed 15 minutes.
+- [Can ANT trade now, and where](${o}${WHERE_PATH}): 0.01 USDC. Nasdaq session and holidays plus which perp venues are reporting.
+- [Anthropic coverage (free)](${o}${COVERAGE_PATH}): latest update time per route; poll free, pay only when it changed.
 
 ## More from this developer
 ${OTHERS.map((r) => `- [${r.name}](${r.url}/llms.txt): ${r.what}`).join("\n")}
@@ -362,7 +406,10 @@ app.get("/agents.json", (req, res) => {
       method: "GET", url: `${o}${p.path}`, priceUsd: Number(p.price), tags: p.tags,
     })).concat([{ id: "ai_lab_funding_rounds", description: FUNDING_DESC, method: "GET", url: `${o}${FUNDING_PATH}`, priceUsd: 0.01 },
       { id: "openai_vs_anthropic", description: COMPARE_DESC, method: "GET", url: `${o}${COMPARE_PATH}`, priceUsd: 0.05 },
-      { id: "onchain_preipo_vs_private", description: ONCHAIN_DESC, method: "GET", url: `${o}${ONCHAIN_PATH}`, priceUsd: 0.02 }]),
+      { id: "onchain_preipo_vs_private", description: ONCHAIN_DESC, method: "GET", url: `${o}${ONCHAIN_PATH}`, priceUsd: 0.02 },
+      { id: "anthropic_sec_filings", description: FILINGS_DESC, method: "GET", url: `${o}${FILINGS_PATH}`, priceUsd: 0.01 },
+      { id: "anthropic_perps_vs_nasdaq", description: PERPS_DESC, method: "GET", url: `${o}${PERPS_PATH}`, priceUsd: 0.02 },
+      { id: "anthropic_where_trading", description: WHERE_DESC, method: "GET", url: `${o}${WHERE_PATH}`, priceUsd: 0.01 }]),
     docs: { llms: `${o}/llms.txt`, openapi: `${o}/openapi.json`, x402: `${o}/.well-known/x402` },
     related_services: OTHERS,
   });
@@ -384,9 +431,9 @@ app.get("/", (req, res) =>
     what: "Fundamentals of private AI companies (revenue, costs, compute, cash, funding) as JSON. Each figure carries as_of, source and a verification grade, plus a live on-chain pre-IPO perp vs private valuation view. Not advice.",
     pay: { protocol: "x402", asset: "USDC", networks: NETWORKS },
     catalog: "/preipo/catalog",
-    free: ["/preipo/catalog", "/preipo/sample", "/preipo/changelog"],
+    free: ["/preipo/catalog", "/preipo/sample", "/preipo/changelog", COVERAGE_PATH],
     discovery: ["/llms.txt", "/.well-known/x402", "/openapi.json", "/agents.json"],
-    paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }, { path: COMPARE_PATH, price_usdc: "0.05" }, { path: ONCHAIN_PATH, price_usdc: "0.02" }],
+    paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }, { path: COMPARE_PATH, price_usdc: "0.05" }, { path: ONCHAIN_PATH, price_usdc: "0.02" }, { path: FILINGS_PATH, price_usdc: "0.01" }, { path: PERPS_PATH, price_usdc: "0.02" }, { path: WHERE_PATH, price_usdc: "0.01" }],
     more_from_this_developer: OTHERS,
   }),
 );
@@ -401,6 +448,39 @@ app.get("/preipo/sample", (req, res) => res.send(sample()));
 for (const p of PRODUCTS) app.get(p.path, (req, res) => res.send(p.card));
 app.get(FUNDING_PATH, (req, res) => res.send(fundingRounds()));
 app.get(COMPARE_PATH, (req, res) => res.send(compareLabs()));
+app.get(PERPS_PATH, async (req, res) => {
+  try { res.send({ ...(await antPerpsVsNasdaq(metric)), publisher: PRODUCTS[0].card.publisher }); }
+  catch (e) { res.status(503).send({ error: "upstream unavailable", detail: String(e.message).slice(0, 160) }); }
+});
+
+app.get(WHERE_PATH, async (req, res) => {
+  try { res.send({ ...(await antWhereTrading(metric)), publisher: PRODUCTS[0].card.publisher }); }
+  catch (e) { res.status(503).send({ error: "upstream unavailable", detail: String(e.message).slice(0, 160) }); }
+});
+
+// Free coverage: when each Anthropic route last changed, so agents can poll for free and pay only on change.
+app.get(COVERAGE_PATH, async (req, res) => {
+  const cardDate = (path) => { const p = PRODUCTS.find((x) => x.path === path); const c = p?.card.changelog || []; return p ? { as_of: p.card.as_of, last_change: c.length ? c[c.length - 1].date : null, price_usdc: p.price } : null; };
+  const [f, pv] = await Promise.allSettled([anthropicFilings(), antPerpsVsNasdaq(metric)]);
+  res.send({
+    company: "Anthropic", ticker: "ANT", generated_at: new Date().toISOString(),
+    routes: {
+      "/preipo/anthropic/financials": cardDate("/preipo/anthropic/financials"),
+      "/preipo/anthropic/ipo": cardDate("/preipo/anthropic/ipo"),
+      [FILINGS_PATH]: { latest_filing: f.status === "fulfilled" ? { form: f.value.latest?.form, accepted_at: f.value.latest?.accepted_at } : null, price_usdc: "0.01" },
+      [PERPS_PATH]: { snapshot_at: pv.status === "fulfilled" ? pv.value.snapshot_at : null, refresh: "continuous, delayed 15 minutes", price_usdc: "0.02" },
+      [WHERE_PATH]: { refresh: "every request", price_usdc: "0.01" },
+      [ONCHAIN_PATH]: { refresh: "live", price_usdc: "0.02" },
+    },
+    note: "Free. 402 responses cost nothing; upstream errors return 503 and are not charged.",
+  });
+});
+
+app.get(FILINGS_PATH, async (req, res) => {
+  try { res.send({ ...(await anthropicFilings()), publisher: PRODUCTS[0].card.publisher }); }
+  catch (e) { res.status(503).send({ error: "upstream unavailable", detail: String(e.message).slice(0, 160) }); }
+});
+
 app.get(ONCHAIN_PATH, async (req, res) => {
   try { res.send({ ...(await onchainVsPrivate(metric)), publisher: PRODUCTS[0].card.publisher }); }
   catch (e) { res.status(503).send({ error: "upstream unavailable", detail: String(e.message).slice(0, 160) }); }
