@@ -9,6 +9,7 @@ import { declareDiscoveryExtension, bazaarResourceServerExtension } from "@x402/
 import { facilitator } from "@coinbase/x402"; // reads CDP_API_KEY_ID / CDP_API_KEY_SECRET
 import { RELATED } from "./lib/related.js";
 import { onchainVsPrivate } from "./lib/onchain.js";
+import { anthropicFilings } from "./lib/filings.js";
 const OTHERS = RELATED.filter((r) => !r.url.includes("preipo-feed"));
 
 const PAY_TO = "0x4b5887B6E399C2E104becd01f7c406229c15891d";
@@ -127,6 +128,9 @@ const COMPARE_DESC = "OpenAI vs Anthropic side by side as JSON: full-year revenu
 
 const ONCHAIN_PATH = "/preipo/onchain-vs-private";
 const ONCHAIN_DESC = "On-chain pre-IPO perps vs IPO valuation, live: Anthropic (ANT) and OpenAI perpetuals on Hyperliquid HIP-3 (io:ANTH, io:OAI) converted to implied company valuation, set against the market cap at the $83 IPO price (Nov 18), the filed range and the last private round. Premium/discount, funding, open interest, 24h volume; each private anchor keeps source and grade.";
+const FILINGS_PATH = "/preipo/anthropic/filings";
+const FILINGS_DESC = "Anthropic (Nasdaq: ANT) SEC filings tracker, live from EDGAR: every S-1, S-1/A, S-1MEF, FWP, 8-A, CERT and, as they appear, the 424B4 final prospectus, 8-K, Form 3/4 insider trades, S-8 and 10-Q. Each filing has form, filed and accepted time, accession, direct document link and a one-line meaning; milestone summary and what to watch next.";
+const FILINGS_TAGS = ["anthropic", "ant", "sec", "edgar", "ipo"];
 const ONCHAIN_TAGS = ["pre-ipo", "hyperliquid", "valuation", "perps", "anthropic"];
 
 const server = new x402ResourceServer(new RetryingFacilitatorClient(facilitatorConfig));
@@ -186,6 +190,13 @@ routes[`GET ${ONCHAIN_PATH}`] = {
   extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "onchain-preipo-vs-private", companies: [{ company: "Anthropic", asset: "io:ANTH", perp: { implied_valuation_usd: 2.08e12 }, derived: { perp_vs_last_private_pct: 115.6 } }] } } }) },
 };
 
+routes[`GET ${FILINGS_PATH}`] = {
+  accepts: NETWORKS.map((network) => ({ scheme: "exact", price: "$0.01", network, payTo: PAY_TO })),
+  description: FILINGS_DESC, mimeType: "application/json", serviceName: SERVICE_NAME,
+  tags: FILINGS_TAGS, iconUrl: "https://preipo-feed.vercel.app/icon.svg",
+  extensions: { ...declareDiscoveryExtension({ output: { example: { dataset: "anthropic-sec-filings", ticker: "ANT", latest: { form: "S-1MEF", filed: "2026-11-18", meaning: "Short registration adding shares to an effective S-1 (used when an offering is upsized)" }, milestones: { final_prospectus: null } } } }) },
+};
+
 // Free sample: two real metrics per card (with source, grade, value type) and two funding rows, so a buyer can judge before paying.
 const sample = () => ({
   note: "Free sample: the first two metrics of each paid card and two funding-round rows, unchanged. Paid endpoints return the full cards.",
@@ -209,7 +220,7 @@ app.set("trust proxy", true); // Vercel terminates TLS; use X-Forwarded-Proto so
 
 // HEAD on a paid route would fall through to the GET handler and return 200 (no body), so HEAD-only checkers
 // think the route is free. Answer 402 instead.
-const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH, COMPARE_PATH, ONCHAIN_PATH]);
+const PAID_PATHS = new Set([...PRODUCTS.map((p) => p.path), FUNDING_PATH, COMPARE_PATH, ONCHAIN_PATH, FILINGS_PATH]);
 app.use((req, res, next) => (req.method === "HEAD" && PAID_PATHS.has(req.path) ? res.status(402).end() : next()));
 
 // ---- Discovery files for agents and crawlers ("AI SEO"). All generated from PRODUCTS so they never drift. ----
@@ -246,6 +257,7 @@ app.get("/.well-known/x402", (req, res) => {
       { resource: `${o}${FUNDING_PATH}`, method: "GET", description: FUNDING_DESC, priceUsd: 0.01, free: false, networks: NETWORKS, tags: ["ai-lab", "funding-round", "valuation", "pre-ipo", "openai"] },
       { resource: `${o}${COMPARE_PATH}`, method: "GET", description: COMPARE_DESC, priceUsd: 0.05, free: false, networks: NETWORKS, tags: ["openai", "anthropic", "comparison", "valuation", "revenue"] },
       { resource: `${o}${ONCHAIN_PATH}`, method: "GET", description: ONCHAIN_DESC, priceUsd: 0.02, free: false, networks: NETWORKS, tags: ONCHAIN_TAGS },
+      { resource: `${o}${FILINGS_PATH}`, method: "GET", description: FILINGS_DESC, priceUsd: 0.01, free: false, networks: NETWORKS, tags: FILINGS_TAGS },
     ],
     related_services: OTHERS,
   });
@@ -278,6 +290,9 @@ app.get("/openapi.json", (req, res) => {
       [ONCHAIN_PATH]: { get: { summary: "On-chain pre-IPO perps vs private valuation", description: ONCHAIN_DESC, tags: ONCHAIN_TAGS,
         "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.02, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
         responses: { 200: { description: "Live perp-implied valuation vs private anchors." }, 402: { description: "Payment required." } } } },
+      [FILINGS_PATH]: { get: { summary: "Anthropic (ANT) SEC filings tracker", description: FILINGS_DESC, tags: FILINGS_TAGS,
+        "x-payment-info": { protocol: "x402", version: 2, scheme: "exact", priceUsd: 0.01, asset: "USDC", networks: NETWORKS, payTo: PAY_TO },
+        responses: { 200: { description: "Live EDGAR filing list with meanings and milestones." }, 402: { description: "Payment required." } } } },
     },
     components: { schemas: { Card: {
       type: "object",
@@ -335,6 +350,7 @@ Networks: ${NETWORKS.join(", ")} (USDC). Pay to ${PAY_TO}.
 - [AI lab funding rounds](${o}${FUNDING_PATH}): 0.01 USDC. Rounds and valuations collected from the cards above, each row with its source.
 - [OpenAI vs Anthropic](${o}${COMPARE_PATH}): 0.05 USDC. Side-by-side revenue, run-rate, valuation, IPO status and multiples; gaps listed.
 - [On-chain pre-IPO perps vs private valuation](${o}${ONCHAIN_PATH}): 0.02 USDC. Live Hyperliquid io:OAI / io:ANTH implied valuation vs last private round and IPO target; premium, funding, open interest.
+- [Anthropic (ANT) SEC filings tracker](${o}${FILINGS_PATH}): 0.01 USDC. Live EDGAR list of every Anthropic filing with document link, plain meaning, milestones (S-1, S-1MEF, 424B4, 8-K, Form 4) and what to watch next.
 
 ## More from this developer
 ${OTHERS.map((r) => `- [${r.name}](${r.url}/llms.txt): ${r.what}`).join("\n")}
@@ -362,7 +378,8 @@ app.get("/agents.json", (req, res) => {
       method: "GET", url: `${o}${p.path}`, priceUsd: Number(p.price), tags: p.tags,
     })).concat([{ id: "ai_lab_funding_rounds", description: FUNDING_DESC, method: "GET", url: `${o}${FUNDING_PATH}`, priceUsd: 0.01 },
       { id: "openai_vs_anthropic", description: COMPARE_DESC, method: "GET", url: `${o}${COMPARE_PATH}`, priceUsd: 0.05 },
-      { id: "onchain_preipo_vs_private", description: ONCHAIN_DESC, method: "GET", url: `${o}${ONCHAIN_PATH}`, priceUsd: 0.02 }]),
+      { id: "onchain_preipo_vs_private", description: ONCHAIN_DESC, method: "GET", url: `${o}${ONCHAIN_PATH}`, priceUsd: 0.02 },
+      { id: "anthropic_sec_filings", description: FILINGS_DESC, method: "GET", url: `${o}${FILINGS_PATH}`, priceUsd: 0.01 }]),
     docs: { llms: `${o}/llms.txt`, openapi: `${o}/openapi.json`, x402: `${o}/.well-known/x402` },
     related_services: OTHERS,
   });
@@ -386,7 +403,7 @@ app.get("/", (req, res) =>
     catalog: "/preipo/catalog",
     free: ["/preipo/catalog", "/preipo/sample", "/preipo/changelog"],
     discovery: ["/llms.txt", "/.well-known/x402", "/openapi.json", "/agents.json"],
-    paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }, { path: COMPARE_PATH, price_usdc: "0.05" }, { path: ONCHAIN_PATH, price_usdc: "0.02" }],
+    paid: [...catalog().map(({ path, price_usdc }) => ({ path, price_usdc })), { path: FUNDING_PATH, price_usdc: "0.01" }, { path: COMPARE_PATH, price_usdc: "0.05" }, { path: ONCHAIN_PATH, price_usdc: "0.02" }, { path: FILINGS_PATH, price_usdc: "0.01" }],
     more_from_this_developer: OTHERS,
   }),
 );
@@ -401,6 +418,11 @@ app.get("/preipo/sample", (req, res) => res.send(sample()));
 for (const p of PRODUCTS) app.get(p.path, (req, res) => res.send(p.card));
 app.get(FUNDING_PATH, (req, res) => res.send(fundingRounds()));
 app.get(COMPARE_PATH, (req, res) => res.send(compareLabs()));
+app.get(FILINGS_PATH, async (req, res) => {
+  try { res.send({ ...(await anthropicFilings()), publisher: PRODUCTS[0].card.publisher }); }
+  catch (e) { res.status(503).send({ error: "upstream unavailable", detail: String(e.message).slice(0, 160) }); }
+});
+
 app.get(ONCHAIN_PATH, async (req, res) => {
   try { res.send({ ...(await onchainVsPrivate(metric)), publisher: PRODUCTS[0].card.publisher }); }
   catch (e) { res.status(503).send({ error: "upstream unavailable", detail: String(e.message).slice(0, 160) }); }
